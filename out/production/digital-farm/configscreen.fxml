@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="369.0" prefWidth="425.0" spacing="5" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+    <children>
+        <HBox id="name" alignment="CENTER">
+            <Label>name</Label>
+            <TextField></TextField>
+        </HBox>
+        <HBox id="difficulty" alignment="CENTER">
+            <Button>Easy</Button>
+            <Button>Medium</Button>
+            <Button>Difficult</Button>
+        </HBox>
+        <HBox id="seed" alignment="CENTER">
+            <Button>seed1</Button>
+            <Button>seed2</Button>
+            <Button>seed3</Button>
+        </HBox>
+        <HBox id="season" alignment="CENTER">
+            <Button>spring</Button>
+            <Button>summer</Button>
+            <Button>fall</Button>
+            <Button>winter</Button>
+        </HBox>
+        <Button>Next</Button>
+    </children>
+</VBox>

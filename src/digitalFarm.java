@@ -1,15 +1,15 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.IOException;
 
 public class digitalFarm extends Application {
 
@@ -18,7 +18,7 @@ public class digitalFarm extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Digital Farm");
 
         //Creating start menu with start button
@@ -32,8 +32,7 @@ public class digitalFarm extends Application {
         iv.fitHeightProperty().bind(primaryStage.heightProperty());
 
         //Create Initial Menu
-        StackPane config = new StackPane();
-
+        VBox config = FXMLLoader.load(getClass().getResource("configscreen.fxml"));
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -49,5 +48,6 @@ public class digitalFarm extends Application {
         startMenu.getChildren().add(btn);
         primaryStage.setScene(new Scene(startMenu, 1080, 720));
         primaryStage.show();
+
     }
 }
