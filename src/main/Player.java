@@ -1,3 +1,5 @@
+package main;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -7,7 +9,7 @@ public class Player {
     private int maxInventorySpace;
 
     /**
-     * Constructor to create a new Player
+     * Constructor to create a new main.Player
      * @param n String representing the player's name
      * @param m int representing the player's money
      * @param i ArrayList representing the player's inventory
@@ -21,7 +23,7 @@ public class Player {
     }
 
     /**
-     * Constructor to create a new Player
+     * Constructor to create a new main.Player
      * @param n String representing the player's name
      * @param m int representing the player's money
      */
@@ -30,7 +32,7 @@ public class Player {
     }
 
     /**
-     * Setter for the Player's name
+     * Setter for the main.Player's name
      * @param n String representing the player's name
      */
     public void setName(String n) {
@@ -38,7 +40,7 @@ public class Player {
     }
 
     /**
-     * Getter for the Player's name
+     * Getter for the main.Player's name
      * @return a string representing the player's name
      */
     public String getName() {
@@ -46,7 +48,7 @@ public class Player {
     }
 
     /**
-     * Setter for the Player's money
+     * Setter for the main.Player's money
      * @param m int representing the player's money
      */
     public void setMoney(int m) {
@@ -54,7 +56,7 @@ public class Player {
     }
 
     /**
-     * Getter for the Player's money
+     * Getter for the main.Player's money
      * @return int representing the player's money
      */
     public int getMoney() {
@@ -62,23 +64,23 @@ public class Player {
     }
 
     /**
-     * Setter for the Player's maxInventorySpace
-     * @param space int representing the Player's max inventory space
+     * Setter for the main.Player's maxInventorySpace
+     * @param space int representing the main.Player's max inventory space
      */
     public void setMaxInventorySpace(int space) {
         maxInventorySpace = space;
     }
 
     /**
-     * Getter for the Player's maxInventorySpace
-     * @return int representing the Player's max inventory space
+     * Getter for the main.Player's maxInventorySpace
+     * @return int representing the main.Player's max inventory space
      */
     public int getMaxInventorySpace() {
         return maxInventorySpace;
     }
 
     /**
-     * Setter for the Player's inventory
+     * Setter for the main.Player's inventory
      * @param i ArrayList representing the player's inventory
      */
     public void setInventory(ArrayList<Object> i) {
@@ -86,7 +88,7 @@ public class Player {
     }
 
     /**
-     * Getter for the Player's inventory
+     * Getter for the main.Player's inventory
      * @return ArrayList representing the player's inventory
      */
     public ArrayList<Object> getInventory() {
@@ -94,7 +96,7 @@ public class Player {
     }
 
     /**
-     * Adds an item to the Player's inventory
+     * Adds an item to the main.Player's inventory
      * @param o Object representing an item to be added
      */
     public void addItem(Object o) {
@@ -103,7 +105,7 @@ public class Player {
     }
 
     /**
-     * Removes an item from the Player's inventory
+     * Removes an item from the main.Player's inventory
      * @param o Object representing an item to be added
      */
     public void removeItem(Object o) {
