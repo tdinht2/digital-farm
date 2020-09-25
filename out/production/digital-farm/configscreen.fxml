@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="369.0" prefWidth="425.0" spacing="5" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+<VBox alignment="CENTER" prefHeight="369.0" prefWidth="425.0" spacing="15" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="configController">
     <children>
         <HBox id="name" alignment="CENTER">
             <Label>name</Label>
@@ -34,6 +34,6 @@
             <Button>fall</Button>
             <Button>winter</Button>
         </HBox>
-        <Button>Next</Button>
+        <Button fx:id="nextpage" onAction="#handleNext">Next</Button>
     </children>
 </VBox>
