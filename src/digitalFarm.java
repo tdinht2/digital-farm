@@ -31,6 +31,7 @@ public class digitalFarm extends Application {
         iv.fitWidthProperty().bind(primaryStage.widthProperty());
         iv.fitHeightProperty().bind(primaryStage.heightProperty());
 
+
         //Create Initial Menu
         StackPane config = new StackPane();
 
@@ -49,5 +50,6 @@ public class digitalFarm extends Application {
         startMenu.getChildren().add(btn);
         primaryStage.setScene(new Scene(startMenu, 1080, 720));
         primaryStage.show();
+        //Implement configuration
     }
 }
