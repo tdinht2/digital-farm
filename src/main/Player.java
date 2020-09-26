@@ -139,4 +139,12 @@ public class Player {
         int count = inventory.get(o);
         inventory.put(o, Math.max(count - n, 0));
     }
+
+    /**
+     * getter for the Farm attribute
+     * @return the Player's farm
+     */
+    public Farm getFarm() {
+        return this.farm;
+    }
 }
