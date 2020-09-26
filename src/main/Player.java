@@ -7,19 +7,22 @@ public class Player {
     private int money;
     private ArrayList<Object> inventory;
     private int maxInventorySpace;
+    private Farm farm;
 
     /**
      * Constructor to create a new main.Player
      * @param n String representing the player's name
-     * @param m int representing the player's money
+     * @param m int representing the player's money in addition to initial money (handicap)
      * @param i ArrayList representing the player's inventory
      * @param space int representing the player's maximum inventory space
+     * @param difficulty the difficulty of the farm
      */
-    public Player(String n, int m, ArrayList<Object> i, int space) {
+    public Player(String n, int m, ArrayList<Object> i, int space, int difficulty) {
         name = n;
-        money = m;
+        money = setMoneyOnDifficulty(difficulty) + m;
         inventory = i;
         maxInventorySpace = space;
+        farm = new Farm(difficulty);
     }
 
     /**
@@ -28,7 +31,7 @@ public class Player {
      * @param m int representing the player's money
      */
     public Player(String n, int m) {
-        this(n, m, new ArrayList<Object>(), 20);
+        this(n, m, new ArrayList<Object>(), 20, 1);
     }
 
     /**
@@ -63,6 +66,21 @@ public class Player {
         return money;
     }
 
+    /**
+     * a private helper method to set the money of the player based on the difficulty
+     * @param difficulty the difficulty of the farm
+     * @return int the initial money of the player
+     */
+    private int setMoneyOnDifficulty(int difficulty) {
+        if (difficulty == 3) {
+            this.money = 500;
+        } else if (difficulty == 2) {
+            this.money = 1000;
+        } else { //defaults to difficulty 1 if not 3 or 2
+            this.money = 1500;
+        }
+        return this.money;
+    }
     /**
      * Setter for the main.Player's maxInventorySpace
      * @param space int representing the main.Player's max inventory space
