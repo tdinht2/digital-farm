@@ -129,4 +129,12 @@ public class Player {
     public void removeItem(Object o) {
         inventory.remove(o);
     }
+
+    /**
+     * getter for the Farm attribute
+     * @return the Player's farm
+     */
+    public Farm getFarm() {
+        return this.farm;
+    }
 }
