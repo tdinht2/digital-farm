@@ -24,7 +24,15 @@ public class Player {
         maxInventorySpace = space;
         farm = new Farm(difficulty);
     }
-
+    /**
+     * Constructor to create a new main.Player
+     * @param n String representing the player's name
+     * @param m int representing the player's money
+     * @param difficulty int representing the difficulty
+     */
+    public Player(String n, int m, int difficulty) {
+        this(n, m, new HashMap<Object, Integer>(), 20, difficulty);
+    }
     /**
      * Constructor to create a new main.Player
      * @param n String representing the player's name
