@@ -15,8 +15,8 @@
 <VBox alignment="CENTER" prefHeight="369.0" prefWidth="425.0" spacing="15" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="configController">
     <children>
         <HBox id="name" alignment="CENTER">
-            <Label>name</Label>
-            <TextField></TextField>
+            <Button fx:id="namebtn" onAction="#handleButon"></Button>
+            <TextField fx:id="name" promptText="Name"></TextField>
         </HBox>
         <HBox id="difficulty" alignment="CENTER">
             <Button>Easy</Button>
@@ -34,6 +34,6 @@
             <Button>fall</Button>
             <Button>winter</Button>
         </HBox>
-        <Button fx:id="nextpage" onAction="#handleNext">Next</Button>
+        <Button fx:id="nextpageBtn" onAction="#handleNext">Next</Button>
     </children>
 </VBox>
