@@ -36,7 +36,7 @@ public class Player {
      * @param n String representing the player's name
      */
     public void setName(String n) {
-        name = n;
+            name = n;
     }
 
     /**

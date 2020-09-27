@@ -1,3 +1,4 @@
+import main.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,10 +9,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
 public class configController {
+    //name field
     @FXML
     private TextField name;
 
+    //next button
     @FXML
     private void handleNext(ActionEvent event) {
         Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -19,9 +23,9 @@ public class configController {
         s.setScene(new Scene(new Pane()));
     }
 
+    //name button
     @FXML
     private void handleButon(ActionEvent event) {
-
         System.out.println(name.getText());
 
 
