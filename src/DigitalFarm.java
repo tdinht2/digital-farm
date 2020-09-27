@@ -14,14 +14,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
-
-import javax.swing.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.FontPosture;
 import java.io.IOException;
+import main.Player;
+import main.Farm;
 
 public class DigitalFarm extends Application {
 
     private int difficulty = 0;
     private String playerName;
+    private Player player;
+    private Farm farm;
+
 
     public static void main(String[] args) {
         launch(args);
@@ -32,7 +38,6 @@ public class DigitalFarm extends Application {
         primaryStage.setTitle("Digital Farm");
 
         //Creating start menu with start button
-        main.Player player = new main.Player();
         StackPane startMenu = new StackPane();
         Button btn = new Button();
         btn.setText("Start");
@@ -131,12 +136,6 @@ public class DigitalFarm extends Application {
 
         });
 
-        nextBtn.setOnAction(e -> {
-            String inputName = nameField.getText();
-            if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {    //finish this line
-                //store data in player and farm and go to next scene
-            }
-        });
 
         //Load configuration menu and transition
         btn.setOnAction(new EventHandler<ActionEvent>() {
@@ -146,6 +145,43 @@ public class DigitalFarm extends Application {
             }
         });
 
+
+        // Config screen's next button handler
+        nextBtn.setOnAction(e -> {
+            String inputName = nameField.getText();
+            if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {    //finish this line
+                //store data in player and farm and go to next scene
+                player = new Player(playerName, 0, difficulty);
+                farm = new Farm(difficulty);
+
+                //Create initial farm UI
+                VBox initialFarm = new VBox();
+                HBox plotRow1 = new HBox();
+                HBox plotRow2 = new HBox();
+                Text money = new Text("Money: " + player.getMoney());
+                money.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.REGULAR, 30));
+                Text day = new Text("Day: " + farm.getDay());
+                day.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.REGULAR, 30));
+                Image dirt = new Image("dirt_plot.png");
+                //Create plots
+                ImageView[] plots = new ImageView[10];
+                for (int i = 0; i < 10; i++) {
+                    plots[i] = new ImageView(dirt);
+                    plots[i].setFitHeight(210);
+                    plots[i].setFitWidth(216);
+                    if (i < 5) {
+                        plotRow1.getChildren().add(plots[i]);
+                    } else {
+                        plotRow2.getChildren().add(plots[i]);
+                    }
+                }
+                initialFarm.getChildren().add(money);
+                initialFarm.getChildren().add(day);
+                initialFarm.getChildren().add(plotRow1);
+                initialFarm.getChildren().add(plotRow2);
+                primaryStage.setScene(new Scene(initialFarm, 1080, 720));
+            }
+        });
 
     }
 }
