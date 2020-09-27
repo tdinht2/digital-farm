@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class digitalFarm extends Application {
+public class DigitalFarm extends Application {
 
     public static void main(String[] args) {
         launch(args);
