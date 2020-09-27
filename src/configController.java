@@ -1,3 +1,7 @@
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import main.*;
 
 import javafx.event.ActionEvent;
@@ -9,18 +13,24 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 
 public class configController {
     //name field
     @FXML
     private TextField name;
 
+    @FXML
+    private Button nextpageBtn;
+
     //next button
     @FXML
-    private void handleNext(ActionEvent event) {
-        Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        s.setScene(new Scene(new Pane()));
+    private void handleNext(ActionEvent event) throws IOException {
+        Stage stage = (Stage) nextpageBtn.getScene().getWindow();
+        Parent farmUI = FXMLLoader.load(getClass().getResource("initialFarmUI.fxml"));
+        stage.setScene(new Scene(farmUI, 1080, 720));
+        stage.show();
     }
 
     //name button

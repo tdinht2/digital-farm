@@ -34,6 +34,6 @@
             <Button>fall</Button>
             <Button>winter</Button>
         </HBox>
-        <Button fx:id="nextpage" onAction="#handleNext">Next</Button>
+        <Button fx:id="nextpageBtn" onAction="#handleNext">Next</Button>
     </children>
 </VBox>
