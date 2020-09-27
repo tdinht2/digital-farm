@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -51,38 +52,42 @@ public class DigitalFarm extends Application {
 
         //Create Initial Menu
 
+        Text nameFieldText = new Text("Name:");
         TextField nameField = new TextField();
         nameField.setPromptText("Name");
-        HBox nameBox = new HBox(nameField);
+        HBox nameBox = new HBox(5, nameFieldText, nameField);
         nameBox.setAlignment(Pos.CENTER);
 
         // Difficulty buttons / HBox
+        Text difficultyText = new Text("Difficulty: ");
         Button easyBtn = new Button("Easy");
         Button mediumBtn = new Button("Medium");
         Button difficultBtn = new Button("Difficult");
-        HBox difficultyBox = new HBox(5, easyBtn, mediumBtn, difficultBtn);
+        HBox difficultyBox = new HBox(5, difficultyText, easyBtn, mediumBtn, difficultBtn);
         difficultyBox.setAlignment(Pos.CENTER);
 
         // Starting seed buttons / HBox
-        Button seed1Btn = new Button("seed1");
-        Button seed2Btn = new Button("seed2");
-        Button seed3Btn = new Button("seed3");
-        HBox seedsBox = new HBox(5, seed1Btn, seed2Btn, seed3Btn);
+        Text seedText = new Text("Starting Seed:");
+        Button riceBtn = new Button("Rice");
+        Button cornBtn = new Button("Corn");
+        Button potatoBtn = new Button("Potato");
+        HBox seedsBox = new HBox(5, seedText, riceBtn, cornBtn, potatoBtn);
         seedsBox.setAlignment(Pos.CENTER);
 
         // Starting season buttons / HBox
+        Text seasonText = new Text("Starting Season:");
         Button springBtn = new Button("Spring");
         Button summerBtn = new Button("Summer");
         Button fallBtn = new Button("Fall");
         Button winterBtn = new Button("Winter");
-        HBox seasonsBox = new HBox(5, springBtn, summerBtn, fallBtn, winterBtn);
+        HBox seasonsBox = new HBox(5, seasonText, springBtn, summerBtn, fallBtn, winterBtn);
         seasonsBox.setAlignment(Pos.CENTER);
 
         // Next button to go to initial farm UI
         Button nextBtn = new Button("Next");
 
         // VBox for the config screen
-        VBox configBox = new VBox(15, nameBox, difficultyBox, seedsBox, seasonsBox);
+        VBox configBox = new VBox(15, nameBox, difficultyBox, seedsBox, seasonsBox, nextBtn);
         configBox.setPrefSize(600, 450);
         configBox.setAlignment(Pos.CENTER);
 
@@ -98,15 +103,15 @@ public class DigitalFarm extends Application {
             difficulty = 3;
         });
 
-        seed1Btn.setOnAction(e -> {
+        riceBtn.setOnAction(e -> {
 
         });
 
-        seed2Btn.setOnAction(e -> {
+        cornBtn.setOnAction(e -> {
 
         });
 
-        seed3Btn.setOnAction(e -> {
+        potatoBtn.setOnAction(e -> {
 
         });
 
@@ -128,9 +133,9 @@ public class DigitalFarm extends Application {
 
         nextBtn.setOnAction(e -> {
             String inputName = nameField.getText();
-//            if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {    //finish this line
-//                //store data in player and farm and go to next scene
-//            }
+            if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {    //finish this line
+                //store data in player and farm and go to next scene
+            }
         });
 
         //Load configuration menu and transition
