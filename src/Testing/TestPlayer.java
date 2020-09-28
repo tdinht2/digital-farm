@@ -53,4 +53,18 @@ public class TestPlayer {
         farm1.setDifficulty(3);
         Assert.assertEquals(farm1.getDifficulty(), 3);
     }
+
+    @Test //Austin
+    public void testSetName() {
+        Player player = new Player();
+        player.setName("Austin");
+        Assert.assertEquals(player.getName(), "Austin");
+    }
+
+    @Test //Austin
+    public void testSetMaxInventorySpace() {
+        Player player = new Player();
+        player.setMaxInventorySpace(9999999);
+        Assert.assertEquals(9999999, player.getMaxInventorySpace());
+    }
 }
