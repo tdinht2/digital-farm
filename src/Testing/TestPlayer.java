@@ -4,6 +4,7 @@ import main.Farm;
 import org.junit.Assert;
 import org.junit.Test;
 import main.Player;
+import java.util.HashMap;
 
 public class TestPlayer {
 
@@ -17,7 +18,26 @@ public class TestPlayer {
     public void testInvalidDiffDefault() {
         Player player1 = new Player("player", 0, 4);
         Assert.assertEquals(player1.getMoney(), 1500);
+    }
 
+    @Test //Alec
+    public void testFullConstructor() {
+        HashMap<Object, Integer> inv = new HashMap<>();
+        Player player = new Player("Player", 200, inv, 10, 2);
+        Assert.assertEquals(player.getName(), "Player");
+        Assert.assertEquals(player.getMoney(), 1200);
+        Assert.assertEquals(player.getInventory(), new HashMap<Object, Integer>());
+        Assert.assertEquals(player.getMaxInventorySpace(), 10);
+    }
+
+    @Test //Alec
+    public void testAddItem() {
+        HashMap<Object, Integer> inv = new HashMap<>();
+        Object o = new Object();
+        Player player = new Player("Player", 0, inv, 10, 1);
+        player.getInventory().put(o, 0);
+        player.addItem(o, 3);
+        Assert.assertEquals((int) player.getInventory().get(o), 3);
     }
 
     @Test //Robert
