@@ -1,8 +1,6 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -52,7 +50,6 @@ public class DigitalFarm extends Application {
         startMenu.getChildren().add(btn);
         primaryStage.setScene(new Scene(startMenu, 1080, 720));
         primaryStage.show();
-
 
 
         //Create Initial Menu
@@ -149,7 +146,8 @@ public class DigitalFarm extends Application {
         // Config screen's next button handler
         nextBtn.setOnAction(e -> {
             String inputName = nameField.getText();
-            if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {    //finish this line
+            // unfinished
+            if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {
                 //store data in player and farm and go to next scene
                 player = new Player(playerName, 0, difficulty);
                 farm = new Farm(difficulty);
