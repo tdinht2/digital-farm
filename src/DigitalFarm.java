@@ -66,8 +66,6 @@ public class DigitalFarm extends Application {
         initialFarm.getChildren().add(money);
         initialFarm.getChildren().add(day);
 
-
-
         initialFarm.getChildren().add(plotRow1);
         initialFarm.getChildren().add(plotRow2);
 
