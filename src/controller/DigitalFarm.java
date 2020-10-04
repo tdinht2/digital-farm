@@ -15,8 +15,8 @@ public class DigitalFarm extends Application {
     private Stage mainWindow;
     private Player player;
     private Farm farm;
-    private final int WIDTH = 1080;
-    private final int HEIGHT = 720;
+    private final int width = 1080;
+    private final int height = 720;
     private int difficulty;
 
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class DigitalFarm extends Application {
     }
 
     private void showStartScreen() {
-        StartScreen startScreen = new StartScreen(WIDTH, HEIGHT);
+        StartScreen startScreen = new StartScreen(width, height);
         Button startButton = startScreen.getStartButton();
         startButton.setOnAction(e -> {
             goToConfigScreen();
@@ -42,7 +42,7 @@ public class DigitalFarm extends Application {
     }
 
     private void goToConfigScreen() {
-        ConfigScreen configScreen = new ConfigScreen(WIDTH, HEIGHT);
+        ConfigScreen configScreen = new ConfigScreen(width, height);
         TextField nameField = configScreen.getNameField();
 
         Button easyBtn = configScreen.getEasyBtn();
@@ -112,7 +112,8 @@ public class DigitalFarm extends Application {
     }
 
     private void goToInitialUIScreen() {
-        InitialUIScreen initUIScreen = new InitialUIScreen(WIDTH, HEIGHT, player.getMoney(), farm.getDay());
+        InitialUIScreen initUIScreen = new InitialUIScreen(width, height, player.getMoney(),
+                farm.getDay());
         Scene scene = initUIScreen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();

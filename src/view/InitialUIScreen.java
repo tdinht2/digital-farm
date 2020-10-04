@@ -16,7 +16,7 @@ public class InitialUIScreen {
     private int money;
     private int day;
 
-    private InitialUIScreen() {}
+    private InitialUIScreen() { }
     public InitialUIScreen(int w, int h, int m, int d) {
         width = w;
         height = h;

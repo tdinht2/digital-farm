@@ -26,7 +26,7 @@ public class ConfigScreen {
     private Button winterBtn;
     private Button nextBtn;
 
-    private ConfigScreen() {}
+    private ConfigScreen() { }
     public ConfigScreen(int w, int h) {
         width = w;
         height = h;
@@ -45,29 +45,53 @@ public class ConfigScreen {
         nextBtn = new Button("Next");
     }
 
-    public TextField getNameField() { return nameField; }
+    public TextField getNameField() {
+        return nameField;
+    }
 
-    public Button getEasyBtn() { return  easyBtn; }
+    public Button getEasyBtn() {
+        return  easyBtn;
+    }
 
-    public Button getMediumBtn() { return mediumBtn; }
+    public Button getMediumBtn() {
+        return mediumBtn;
+    }
 
-    public Button getDifficultBtn() { return difficultBtn; }
+    public Button getDifficultBtn() {
+        return difficultBtn;
+    }
 
-    public Button getRiceBtn() { return riceBtn; }
+    public Button getRiceBtn() {
+        return riceBtn;
+    }
 
-    public Button getCornBtn() { return cornBtn; }
+    public Button getCornBtn() {
+        return cornBtn;
+    }
 
-    public Button getPotatoBtn() { return potatoBtn; }
+    public Button getPotatoBtn() {
+        return potatoBtn;
+    }
 
-    public Button getSpringBtn() { return springBtn; }
+    public Button getSpringBtn() {
+        return springBtn;
+    }
 
-    public Button getSummerBtn() { return summerBtn; }
+    public Button getSummerBtn() {
+        return summerBtn;
+    }
 
-    public Button getFallBtn() { return fallBtn; }
+    public Button getFallBtn() {
+        return fallBtn;
+    }
 
-    public Button getWinterBtn() { return winterBtn; }
+    public Button getWinterBtn() {
+        return winterBtn;
+    }
 
-    public Button getNextBtn() { return nextBtn; }
+    public Button getNextBtn() {
+        return nextBtn;
+    }
 
     public Scene getScene() {
         // Field for user to enter name / HBox

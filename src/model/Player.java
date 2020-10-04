@@ -1,7 +1,5 @@
 package model;
 
-import model.Farm;
-
 import java.util.HashMap;
 
 public class Player {

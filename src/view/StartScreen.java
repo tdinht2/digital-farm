@@ -11,7 +11,7 @@ public class StartScreen {
     private int height;
     private Button startButton;
 
-    private StartScreen() {}
+    private StartScreen() { }
     public StartScreen(int w, int h) {
         width = w;
         height = h;
