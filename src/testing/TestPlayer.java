@@ -85,14 +85,3 @@ public class TestPlayer {
         Assert.assertEquals((int) player.getInventory().get(test), 0);
     }
 }
-||||||| 28d7e3d
-=======
-package testing;
-
-import main.Farm;
-import org.junit.Assert;
-import org.junit.Test;
-import main.Player;
-import java.util.HashMap;
-
->>>>>>> 9f08da352706c8b1fe585dd35df786ad49a5a84c
