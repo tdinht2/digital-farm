@@ -1,11 +1,14 @@
-package main;
+package model;
+
+import model.Farm;
 
 import java.util.HashMap;
 
 public class Player {
     private String name;
     private int money;
-    private HashMap<Object, Integer> inventory; // will probably initialize with each item having a value of 0
+    //will probably initialize with each item having a value of 0
+    private HashMap<Object, Integer> inventory;
     private int maxInventorySpace;
     private Farm farm;
 
@@ -54,7 +57,7 @@ public class Player {
      * @param n String representing the player's name
      */
     public void setName(String n) {
-            name = n;
+        name = n;
     }
 
     /**
