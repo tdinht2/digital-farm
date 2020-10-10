@@ -35,7 +35,7 @@ public class Market {
      * @return the price of the crop
      */
     private Integer calculatePrice(int basePrice, int variance) {
-        return basePrice * difficulty + variance;
+        return basePrice * (4 - difficulty) + variance;
     }
 
     /**
