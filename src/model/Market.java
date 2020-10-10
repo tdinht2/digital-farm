@@ -24,7 +24,7 @@ public class Market {
         Crop.Type[] crops = Crop.Type.values();
         int variance = rand.nextInt(10);
         for (int i = 0; i < crops.length; i++) {//iterate over all crop types, calculate price, and enter into stock
-            stock.put(new Crop(4, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
+            stock.put(new Crop(1, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
         }
     }
 
@@ -40,19 +40,24 @@ public class Market {
 
     /**
      * calculates the selling price of the quanitity of crops given
-     * @param crop the crop to sell
+     * @param crop the crop to sell ( from player inventory)
      * @param quantity the amount to sell
      * @return the total selling price
      */
     public int sell(Crop crop, int quantity) {
         int income = this.stock.get(crop);
-        return income * quantity;
+        if(crop.getStage() == 3) {
+            // make 2 times the buying price for growing the crop
+            return income * quantity * 2;
+        }
+        return (int) (income * quantity * 0.5); //only get half for selling back a non mature plant
+
     }
 
     /**
      * allows the player to buy an amount of crop
      * @param currMoney current money of the player
-     * @param crop Crop to buy
+     * @param crop Crop to buy (from stock)
      * @param quantity amount of buy
      * @param inventorySpaceLeft current inventory space left of player
      * @return if the purchase is legal

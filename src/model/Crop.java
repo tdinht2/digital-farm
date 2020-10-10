@@ -58,7 +58,7 @@ public class Crop {
      */
     public Crop(Type species) {
         Random rand = new Random();
-        this.stage = rand.nextInt(4) + 1;
+        this.stage = rand.nextInt(3) + 1;
         this.species = species;
 
     }
@@ -111,7 +111,7 @@ public class Crop {
      * @param stage int stage of growth
      */
     public void setStage(int stage) {
-        if (stage <= 4 && stage > 0) {
+        if (stage <= 3 && stage > 0) {
             this.stage = stage;
         }
     }
@@ -121,7 +121,7 @@ public class Crop {
      * @return if the crop can be harvested
      */
     public boolean canHarvest() {
-        return this.stage == 4;
+        return this.stage == 3;
     }
 
     /**
@@ -134,11 +134,14 @@ public class Crop {
 
     /**
      * advance the stage of this crop
+     * @return if the crop successfully grew a stage
      */
-    public void grow() {
-        if (stage < 4) {
+    public boolean grow() {
+        if (stage < 3) {
             stage++;
+            return true;
         }
+        return false;
     }
 
     /**
