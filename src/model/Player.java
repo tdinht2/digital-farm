@@ -15,42 +15,33 @@ public class Player {
      * Full constructor to create a new main.Player
      * @param n String representing the player's name
      * @param m int representing the player's money in addition to initial money (handicap)
-     * @param i ArrayList representing the player's inventory
      * @param space int representing the player's maximum inventory space
      * @param difficulty the difficulty of the farm
      * @param market the market object the player can buy and sell at
      */
-    public Player(String n, int m, HashMap<Object, Integer> i, int space, int difficulty, Market market) {
+    public Player(String n, int m, int space, int difficulty, Market market) {
         name = n;
         money = setMoneyOnDifficulty(difficulty) + m;
-        inventory = i;
+        inventory = new HashMap<Object, Integer>();
         maxInventorySpace = space;
         farm = new Farm(difficulty);
         this.market = market;
+        initInventory();
     }
-    /**
-     * Constructor to create a new main.Player
-     * @param n String representing the player's name
-     * @param m int representing the player's money
-     * @param difficulty int representing the difficulty
-     */
+
     public Player(String n, int m, int difficulty) {
-        this(n, m, new HashMap<Object, Integer>(), 20, difficulty, new Market(difficulty));
+        this(n, m,20, difficulty, new Market(difficulty));
     }
-    /**
-     * Constructor to create a new main.Player
-     * @param n String representing the player's name
-     * @param m int representing the player's money
-     */
+
     public Player(String n, int m) {
-        this(n, m, new HashMap<Object, Integer>(), 20, 1, new Market(1));
+        this(n, m,20, 1, new Market(1));
     }
 
     /**
      * Default constructor to create a new main.Player
      */
     public Player() {
-        this("Player", 0, new HashMap<Object, Integer>(), 20, 1, new Market(1));
+        this("Player", 0, 20, 1, new Market(1));
     }
 
     /**
@@ -108,6 +99,12 @@ public class Player {
         maxInventorySpace = space;
     }
 
+    public void initInventory() {
+        inventory.put(Crop.Type.Potato, 0);
+        inventory.put(Crop.Type.Corn, 0);
+        inventory.put(Crop.Type.Rice, 0);
+    }
+
     /**
      * Getter for the main.Player's maxInventorySpace
      * @return int representing the main.Player's max inventory space
@@ -136,10 +133,18 @@ public class Player {
      * Adds a number of a specific item to the main.Player's inventory
      * @param o Object representing an item to be added
      * @param n int representing the number of the item to be added
+     * @return boolean depending on whether the item was successfully added
      */
-    public void addItem(Object o, int n) {
-        // need to account for inventory limit later
-        inventory.put(o, inventory.get(o) + n);
+    public boolean addItem(Object o, int n) {
+        if (getInventoryCount() + n < maxInventorySpace) {
+            if (inventory.containsKey(o)) {
+                inventory.put(o, inventory.get(o) + n);
+            } else {
+                inventory.put(o, n);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -150,6 +155,14 @@ public class Player {
     public void subtractItem(Object o, int n) {
         int count = inventory.get(o);
         inventory.put(o, Math.max(count - n, 0));
+    }
+
+    public int getInventoryCount() {
+        int sum = 0;
+        for (Integer n : inventory.values()) {
+            sum += n;
+        }
+        return sum;
     }
 
     /**
