@@ -1,13 +1,15 @@
-package main;
+package model;
 
 import java.util.HashMap;
 
 public class Player {
     private String name;
     private int money;
-    private HashMap<Object, Integer> inventory; // will probably initialize with each item having a value of 0
+    //will probably initialize with each item having a value of 0
+    private HashMap<Object, Integer> inventory;
     private int maxInventorySpace;
     private Farm farm;
+    private Market market;
 
     /**
      * Full constructor to create a new main.Player
@@ -16,29 +18,39 @@ public class Player {
      * @param i ArrayList representing the player's inventory
      * @param space int representing the player's maximum inventory space
      * @param difficulty the difficulty of the farm
+     * @param market the market object the player can buy and sell at
      */
-    public Player(String n, int m, HashMap<Object, Integer> i, int space, int difficulty) {
+    public Player(String n, int m, HashMap<Object, Integer> i, int space, int difficulty, Market market) {
         name = n;
         money = setMoneyOnDifficulty(difficulty) + m;
         inventory = i;
         maxInventorySpace = space;
         farm = new Farm(difficulty);
+        this.market = market;
     }
-
+    /**
+     * Constructor to create a new main.Player
+     * @param n String representing the player's name
+     * @param m int representing the player's money
+     * @param difficulty int representing the difficulty
+     */
+    public Player(String n, int m, int difficulty) {
+        this(n, m, new HashMap<Object, Integer>(), 20, difficulty, new Market(difficulty));
+    }
     /**
      * Constructor to create a new main.Player
      * @param n String representing the player's name
      * @param m int representing the player's money
      */
     public Player(String n, int m) {
-        this(n, m, new HashMap<Object, Integer>(), 20, 1);
+        this(n, m, new HashMap<Object, Integer>(), 20, 1, new Market(1));
     }
 
     /**
      * Default constructor to create a new main.Player
      */
     public Player() {
-        this("Player", 0, new HashMap<Object, Integer>(), 20, 1);
+        this("Player", 0, new HashMap<Object, Integer>(), 20, 1, new Market(1));
     }
 
     /**
@@ -46,7 +58,7 @@ public class Player {
      * @param n String representing the player's name
      */
     public void setName(String n) {
-            name = n;
+        name = n;
     }
 
     /**
@@ -146,5 +158,9 @@ public class Player {
      */
     public Farm getFarm() {
         return this.farm;
+    }
+
+    public Market getMarket() {
+        return this.market;
     }
 }
