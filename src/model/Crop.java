@@ -174,5 +174,21 @@ public class Crop {
         return this.fertilized;
     }
 
+    @Override
+    public int hashCode(){
+        return 7 * this.getBasePrice() * this.stage;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Crop newO = (Crop)o;
+        return this.species == newO.getSpecies() && this.stage == newO.getStage() &&
+                this.watered == newO.isWatered() && this.fertilized == newO.isFertilized();
+    }
 }
