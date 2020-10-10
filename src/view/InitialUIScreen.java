@@ -20,6 +20,7 @@ public class InitialUIScreen {
     private int money;
     private int day;
     private HashMap<Object, Integer> inventory;
+    private Button marketBtn;
 
     private InitialUIScreen() { }
     public InitialUIScreen(int w, int h, int m, int d, HashMap<Object, Integer> inv) {
@@ -28,6 +29,11 @@ public class InitialUIScreen {
         money = m;
         day = d;
         inventory = inv;
+        marketBtn = new Button("go to market");
+    }
+
+    public Button getMarketBtn() {
+        return marketBtn;
     }
 
     public Scene getScene() {
@@ -65,7 +71,7 @@ public class InitialUIScreen {
             }
         }
 
-        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2, inventoryDisplay);
+        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2, inventoryDisplay, marketBtn);
         return new Scene(initialFarm, width, height);
     }
 }

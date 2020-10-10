@@ -6,8 +6,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Crop;
+import model.Market;
 import model.Player;
 import model.Farm;
+import view.MarketScreen;
 import view.StartScreen;
 import view.ConfigScreen;
 import view.InitialUIScreen;
@@ -119,7 +121,21 @@ public class DigitalFarm extends Application {
         InitialUIScreen initUIScreen = new InitialUIScreen(width, height, player.getMoney(),
                 farm.getDay(), player.getInventory());
 
+        Button marketBtn = initUIScreen.getMarketBtn();
+        marketBtn.setOnAction(e -> {
+            goToMarketScreen();
+        });
+
         Scene scene = initUIScreen.getScene();
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private void goToMarketScreen() {
+        Market market = new Market(difficulty);
+        MarketScreen marketScreen = new MarketScreen(width, height, player, market);
+
+        Scene scene = marketScreen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
     }
