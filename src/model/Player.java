@@ -117,9 +117,7 @@ public class Player {
      * Setter for the main.Player's inventory
      * @param i ArrayList representing the player's inventory
      */
-    public void setInventory(HashMap<Object, Integer> i) {
-        inventory = i;
-    }
+    public void setInventory(HashMap<Object, Integer> i) { inventory = i; }
 
     /**
      * Getter for the main.Player's inventory

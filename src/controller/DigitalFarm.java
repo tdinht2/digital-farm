@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.Crop;
 import model.Player;
 import model.Farm;
 import view.StartScreen;
@@ -18,6 +19,7 @@ public class DigitalFarm extends Application {
     private final int width = 1080;
     private final int height = 720;
     private int difficulty;
+    private Crop startCrop;
 
     public static void main(String[] args) {
         launch(args);
@@ -45,6 +47,7 @@ public class DigitalFarm extends Application {
         ConfigScreen configScreen = new ConfigScreen(width, height);
         TextField nameField = configScreen.getNameField();
 
+
         Button easyBtn = configScreen.getEasyBtn();
         easyBtn.setOnAction(e -> {
             difficulty = 1;
@@ -62,17 +65,17 @@ public class DigitalFarm extends Application {
 
         Button riceBtn = configScreen.getRiceBtn();
         riceBtn.setOnAction(e -> {
-
+            startCrop = new Crop(Crop.Type.Rice);
         });
 
         Button cornBtn = configScreen.getCornBtn();
         cornBtn.setOnAction(e -> {
-
+            startCrop = new Crop(Crop.Type.Corn);
         });
 
         Button potatoBtn = configScreen.getPotatoBtn();
         potatoBtn.setOnAction(e -> {
-
+            startCrop = new Crop(Crop.Type.Potato);
         });
 
         Button springBtn = configScreen.getSpringBtn();
@@ -101,6 +104,7 @@ public class DigitalFarm extends Application {
             //unfinished, account for season and seed
             if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {
                 player = new Player(inputName, 0, difficulty);
+                player.addItem(startCrop, 1);
                 farm = new Farm(difficulty);
                 goToInitialUIScreen();
             }
@@ -113,9 +117,11 @@ public class DigitalFarm extends Application {
 
     private void goToInitialUIScreen() {
         InitialUIScreen initUIScreen = new InitialUIScreen(width, height, player.getMoney(),
-                farm.getDay());
+                farm.getDay(), player.getInventory());
+
         Scene scene = initUIScreen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
     }
+
 }
