@@ -3,21 +3,25 @@ import java.util.Random;
 public class Crop {
     private static Random rand = new Random();
     public enum Type {
-        Potato(rand.nextInt(15) + 5),
-        Rice(rand.nextInt(15) + 5),
-        Corn(rand.nextInt(15) + 5)
+        Potato("Potato", rand.nextInt(15) + 5),
+        Rice("Rice", rand.nextInt(15) + 5),
+        Corn("Corn", rand.nextInt(15) + 5)
         ;
 
+        private String name;
         private int basePrice;
         private int growTime;//will need to implement at some point
         /**
          * constructor for the enum
          * @param basePrice the base price of the crop
          */
-        Type(int basePrice) {
+        Type(String name, int basePrice) {
+            this.name = name;
             this.basePrice = basePrice;
             this.growTime = 20;
         }
+
+        public String getName() { return this.name; }
 
         /**
          * getter for the base price of the enum
@@ -54,7 +58,7 @@ public class Crop {
      */
     public Crop(Type species) {
         Random rand = new Random();
-        this.stage = rand.nextInt(4) + 1;
+        this.stage = rand.nextInt(3) + 1;
         this.species = species;
 
     }
@@ -107,7 +111,7 @@ public class Crop {
      * @param stage int stage of growth
      */
     public void setStage(int stage) {
-        if (stage <= 4 && stage > 0) {
+        if (stage <= 3 && stage > 0) {
             this.stage = stage;
         }
     }
@@ -117,7 +121,7 @@ public class Crop {
      * @return if the crop can be harvested
      */
     public boolean canHarvest() {
-        return this.stage == 4;
+        return this.stage == 3;
     }
 
     /**
@@ -130,11 +134,14 @@ public class Crop {
 
     /**
      * advance the stage of this crop
+     * @return if the crop successfully grew a stage
      */
-    public void grow() {
-        if (stage < 4) {
+    public boolean grow() {
+        if (stage < 3) {
             stage++;
+            return true;
         }
+        return false;
     }
 
     /**
@@ -167,5 +174,21 @@ public class Crop {
         return this.fertilized;
     }
 
+    @Override
+    public int hashCode(){
+        return 7 * this.getBasePrice() * this.stage;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Crop newO = (Crop)o;
+        return this.species == newO.getSpecies() && this.stage == newO.getStage() &&
+                this.watered == newO.isWatered() && this.fertilized == newO.isFertilized();
+    }
 }

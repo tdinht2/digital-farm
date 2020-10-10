@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -9,19 +10,30 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import model.Crop;
+
+import java.util.HashMap;
 
 public class InitialUIScreen {
     private int width;
     private int height;
     private int money;
     private int day;
+    private HashMap<Object, Integer> inventory;
+    private Button marketBtn;
 
     private InitialUIScreen() { }
-    public InitialUIScreen(int w, int h, int m, int d) {
+    public InitialUIScreen(int w, int h, int m, int d, HashMap<Object, Integer> inv) {
         width = w;
         height = h;
         money = m;
         day = d;
+        inventory = inv;
+        marketBtn = new Button("go to market");
+    }
+
+    public Button getMarketBtn() {
+        return marketBtn;
     }
 
     public Scene getScene() {
@@ -46,7 +58,20 @@ public class InitialUIScreen {
             }
         }
 
-        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2);
+        //create inventory
+        VBox inventoryDisplay = new VBox();
+        inventoryDisplay.getChildren().add(new Text("Inventory"));
+
+        for (Object key : inventory.keySet()) {
+            if (key.getClass() == Crop.class) {
+                Crop c = (Crop) key;
+                String cropName = c.getSpecies().getName();
+                Text crop = new Text(cropName + ": " + inventory.get(key));
+                inventoryDisplay.getChildren().add(crop);
+            }
+        }
+
+        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2, inventoryDisplay, marketBtn);
         return new Scene(initialFarm, width, height);
     }
 }
