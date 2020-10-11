@@ -19,8 +19,9 @@ public class MarketScreen {
     private Button buyPotatoBtn;
     private Button buyCornBtn;
     private Button buyRiceBtn;
+    private Button backBtn;
 
-    private MarketScreen() {}
+    private MarketScreen() { }
 
     public MarketScreen(int w, int h, Player p, Market m) {
         width = w;
@@ -30,27 +31,64 @@ public class MarketScreen {
         buyPotatoBtn = new Button("Click to Buy");
         buyCornBtn = new Button("Click to Buy");
         buyRiceBtn = new Button("Click to Buy");
+        backBtn = new Button("Back");
     }
 
-    public Button getBuyPotatoBtn() { return buyPotatoBtn; }
-    public Button getBuyCornBtn() { return buyCornBtn; }
-    public Button getBuyRiceBtn() { return buyRiceBtn; }
+    public Button getBuyPotatoBtn() {
+        return buyPotatoBtn;
+    }
+    public Button getBuyCornBtn() {
+        return buyCornBtn;
+    }
+    public Button getBuyRiceBtn() {
+        return buyRiceBtn;
+    }
+    public Button getBackBtn() {
+        return backBtn;
+    }
 
     public Scene getScene() {
         Text marketTitle = new Text("Market");
-        Text playerMoney = new Text("Money: " + String.valueOf(player.getMoney()));
+        Text playerMoney = new Text("Player Money: " + player.getMoney());
+
+        //inventory
+        VBox inventoryDisplay = new VBox();
+        inventoryDisplay.getChildren().add(new Text("Inventory"));
+        HashMap<Object, Integer> inventory = player.getInventory();
+
+        for (Object key : inventory.keySet()) {
+            String cropName;
+            if (key.getClass() == Crop.class) {
+                Crop c = (Crop) key;
+                if (c.getStage() == 3) {
+                    cropName = c.getSpecies().getName();
+                } else {
+                    cropName = c.getSpecies().getName() + " Seed";
+                }
+                Text crop = new Text(cropName + ": " + inventory.get(key));
+                inventoryDisplay.getChildren().add(crop);
+            }
+        }
 
         //Buy section for crops
         VBox buyBox = new VBox(new Text("Buy Here"));
         HashMap<Crop, Integer> stock = market.getStock();
         for (Crop key : stock.keySet()) {
-            Text cropLabel = new Text(key.getSpecies().getName() + ": " + stock.get(key) + " in stock!");
-            //need to assign button depending on what crop it is
-            HBox oneCrop = new HBox(buyPotatoBtn, cropLabel);
-            buyBox.getChildren().add(oneCrop);
+            String cropName = key.getSpecies().getName();
+            Text cropLabel = new Text(cropName + " Cost: " + stock.get(key));
+
+            HBox crop;
+            if (cropName.equals("Potato")) {
+                crop = new HBox(buyPotatoBtn, cropLabel);
+            } else if (cropName.equals("Corn")) {
+                crop = new HBox(buyCornBtn, cropLabel);
+            } else {
+                crop = new HBox(buyRiceBtn, cropLabel);
+            }
+            buyBox.getChildren().add(crop);
         }
 
-        VBox market = new VBox(marketTitle, playerMoney, buyBox);
+        VBox market = new VBox(marketTitle, playerMoney, inventoryDisplay, buyBox, backBtn);
         return new Scene(market, width, height);
     }
 }
