@@ -66,9 +66,8 @@ public class Market {
         if (quantity > inventorySpaceLeft) {
             return false;
         }
-        int income = this.stock.get(crop);
-        int cost = income * quantity;
-        if (cost > currMoney) {
+        int totalCost = this.stock.get(crop) * quantity;
+        if (totalCost > currMoney) {
             return false;
         }
         return true;

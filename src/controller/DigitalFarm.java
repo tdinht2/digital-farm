@@ -14,6 +14,8 @@ import view.StartScreen;
 import view.ConfigScreen;
 import view.InitialUIScreen;
 
+import java.util.HashMap;
+
 public class DigitalFarm extends Application {
     private Stage mainWindow;
     private Player player;
@@ -161,7 +163,39 @@ public class DigitalFarm extends Application {
 
     private void goToMarketScreen() {
         Market market = new Market(difficulty);
+        HashMap<Crop, Integer> stock = market.getStock();
         MarketScreen marketScreen = new MarketScreen(width, height, player, market);
+
+        for (Crop key : stock.keySet()) {
+            if (key.getSpecies().getName().equals("Potato")) {
+                Button buyPotatoBtn = marketScreen.getBuyPotatoBtn();
+                buyPotatoBtn.setOnAction(e -> {
+                    if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {
+                        player.setMoney(player.getMoney() - stock.get(key));
+                        player.addItem(key, 1);
+                        mainWindow.setScene(marketScreen.getScene());
+                    }
+                });
+            } else if (key.getSpecies().getName().equals("Corn")){
+                Button buyCornBtn = marketScreen.getBuyCornBtn();
+                buyCornBtn.setOnAction(e -> {
+                    if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {
+                        player.setMoney(player.getMoney() - stock.get(key));
+                        player.addItem(key, 1);
+                        mainWindow.setScene(marketScreen.getScene());
+                    }
+                });
+            } else if (key.getSpecies().getName().equals("Rice")){
+                Button buyRiceBtn = marketScreen.getBuyRiceBtn();
+                buyRiceBtn.setOnAction(e -> {
+                    if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {
+                        player.setMoney(player.getMoney() - stock.get(key));
+                        player.addItem(key, 1);
+                        mainWindow.setScene(marketScreen.getScene());
+                    }
+                });
+            }
+        }
 
         Scene scene = marketScreen.getScene();
         mainWindow.setScene(scene);
