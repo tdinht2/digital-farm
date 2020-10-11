@@ -19,6 +19,7 @@ public class MarketScreen {
     private Button buyPotatoBtn;
     private Button buyCornBtn;
     private Button buyRiceBtn;
+    private Button backBtn;
 
     private MarketScreen() { }
 
@@ -30,6 +31,7 @@ public class MarketScreen {
         buyPotatoBtn = new Button("Click to Buy");
         buyCornBtn = new Button("Click to Buy");
         buyRiceBtn = new Button("Click to Buy");
+        backBtn = new Button("Back");
     }
 
     public Button getBuyPotatoBtn() {
@@ -40,6 +42,9 @@ public class MarketScreen {
     }
     public Button getBuyRiceBtn() {
         return buyRiceBtn;
+    }
+    public Button getBackBtn() {
+        return backBtn;
     }
 
     public Scene getScene() {
@@ -83,7 +88,7 @@ public class MarketScreen {
             buyBox.getChildren().add(crop);
         }
 
-        VBox market = new VBox(marketTitle, playerMoney, inventoryDisplay, buyBox);
+        VBox market = new VBox(marketTitle, playerMoney, inventoryDisplay, buyBox, backBtn);
         return new Scene(market, width, height);
     }
 }

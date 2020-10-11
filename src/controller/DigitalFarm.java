@@ -169,6 +169,11 @@ public class DigitalFarm extends Application {
         HashMap<Crop, Integer> stock = market.getStock();
         MarketScreen marketScreen = new MarketScreen(width, height, player, market);
 
+        Button backBtn = marketScreen.getBackBtn();
+        backBtn.setOnAction(e -> {
+            goToInitialUIScreen();
+        });
+
         for (Crop key : stock.keySet()) {
             if (key.getSpecies().getName().equals("Potato")) {
                 Button buyPotatoBtn = marketScreen.getBuyPotatoBtn();
