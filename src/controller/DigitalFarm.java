@@ -105,8 +105,9 @@ public class DigitalFarm extends Application {
         Button nextBtn = configScreen.getNextBtn();
         nextBtn.setOnAction(e -> {
             String inputName = nameField.getText();
-            //unfinished, account for season and seed
-            if (inputName != null && !inputName.trim().equals("") && difficulty != 0) {
+            //unfinished, account for season
+            if (inputName != null && !inputName.trim().equals("") && difficulty != 0
+                    && startCrop != null) {
                 player = new Player(inputName, 0, difficulty);
                 player.addItem(startCrop, 1);
                 farm = new Farm(difficulty);
@@ -138,21 +139,23 @@ public class DigitalFarm extends Application {
             int finalI = i;
             plotsBtn[i].setOnAction(e -> {
                 switch (plotsBtn[finalI].getText()) {
-                    case "Potato":
-                        player.addItem(new Crop(3, Crop.Type.Potato), 1);
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        mainWindow.setScene(initUIScreen.getScene());
-                        break;
-                    case "Corn":
-                        player.addItem(new Crop(3, Crop.Type.Corn), 1);
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        mainWindow.setScene(initUIScreen.getScene());
-                        break;
-                    case "Rice":
-                        player.addItem(new Crop(3, Crop.Type.Rice), 1);
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        mainWindow.setScene(initUIScreen.getScene());
-                        break;
+                case "Potato":
+                    player.addItem(new Crop(3, Crop.Type.Potato), 1);
+                    initUIScreen.setDirt(plotsBtn[finalI]);
+                    mainWindow.setScene(initUIScreen.getScene());
+                    break;
+                case "Corn":
+                    player.addItem(new Crop(3, Crop.Type.Corn), 1);
+                    initUIScreen.setDirt(plotsBtn[finalI]);
+                    mainWindow.setScene(initUIScreen.getScene());
+                    break;
+                case "Rice":
+                    player.addItem(new Crop(3, Crop.Type.Rice), 1);
+                    initUIScreen.setDirt(plotsBtn[finalI]);
+                    mainWindow.setScene(initUIScreen.getScene());
+                    break;
+                default:
+                    break;
                 }
             });
             Scene scene = initUIScreen.getScene();
@@ -176,7 +179,7 @@ public class DigitalFarm extends Application {
                         mainWindow.setScene(marketScreen.getScene());
                     }
                 });
-            } else if (key.getSpecies().getName().equals("Corn")){
+            } else if (key.getSpecies().getName().equals("Corn")) {
                 Button buyCornBtn = marketScreen.getBuyCornBtn();
                 buyCornBtn.setOnAction(e -> {
                     if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {
@@ -185,7 +188,7 @@ public class DigitalFarm extends Application {
                         mainWindow.setScene(marketScreen.getScene());
                     }
                 });
-            } else if (key.getSpecies().getName().equals("Rice")){
+            } else if (key.getSpecies().getName().equals("Rice")) {
                 Button buyRiceBtn = marketScreen.getBuyRiceBtn();
                 buyRiceBtn.setOnAction(e -> {
                     if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {

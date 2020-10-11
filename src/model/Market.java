@@ -23,7 +23,9 @@ public class Market {
         this.stock = new HashMap<Crop, Integer>();
         Crop.Type[] crops = Crop.Type.values();
         int variance = rand.nextInt(10);
-        for (int i = 0; i < crops.length; i++) {//iterate over all crop types, calculate price, and enter into stock
+
+        //iterate over all crop types, calculate price, and enter into stock
+        for (int i = 0; i < crops.length; i++) {
             stock.put(new Crop(1, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
         }
     }
@@ -46,7 +48,7 @@ public class Market {
      */
     public int sell(Crop crop, int quantity) {
         int income = this.stock.get(crop);
-        if(crop.getStage() == 3) {
+        if (crop.getStage() == 3) {
             // make 2 times the buying price for growing the crop
             return income * quantity * 2;
         }

@@ -20,7 +20,7 @@ public class MarketScreen {
     private Button buyCornBtn;
     private Button buyRiceBtn;
 
-    private MarketScreen() {}
+    private MarketScreen() { }
 
     public MarketScreen(int w, int h, Player p, Market m) {
         width = w;
@@ -32,9 +32,15 @@ public class MarketScreen {
         buyRiceBtn = new Button("Click to Buy");
     }
 
-    public Button getBuyPotatoBtn() { return buyPotatoBtn; }
-    public Button getBuyCornBtn() { return buyCornBtn; }
-    public Button getBuyRiceBtn() { return buyRiceBtn; }
+    public Button getBuyPotatoBtn() {
+        return buyPotatoBtn;
+    }
+    public Button getBuyCornBtn() {
+        return buyCornBtn;
+    }
+    public Button getBuyRiceBtn() {
+        return buyRiceBtn;
+    }
 
     public Scene getScene() {
         Text marketTitle = new Text("Market");
@@ -69,7 +75,7 @@ public class MarketScreen {
             HBox crop;
             if (cropName.equals("Potato")) {
                 crop = new HBox(buyPotatoBtn, cropLabel);
-            } else if (cropName.equals("Corn")){
+            } else if (cropName.equals("Corn")) {
                 crop = new HBox(buyCornBtn, cropLabel);
             } else {
                 crop = new HBox(buyRiceBtn, cropLabel);

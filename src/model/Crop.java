@@ -5,15 +5,15 @@ public class Crop {
     public enum Type {
         Potato("Potato", rand.nextInt(15) + 5),
         Rice("Rice", rand.nextInt(15) + 5),
-        Corn("Corn", rand.nextInt(15) + 5)
-        ;
+        Corn("Corn", rand.nextInt(15) + 5);
 
         private String name;
         private int basePrice;
-        private int growTime;//will need to implement at some point
+        private int growTime; //will need to implement at some point
         /**
          * constructor for the enum
          * @param basePrice the base price of the crop
+         * @param name string representing the name of the crop
          */
         Type(String name, int basePrice) {
             this.name = name;
@@ -21,7 +21,9 @@ public class Crop {
             this.growTime = 20;
         }
 
-        public String getName() { return this.name; }
+        public String getName() {
+            return this.name;
+        }
 
         /**
          * getter for the base price of the enum
@@ -175,7 +177,7 @@ public class Crop {
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return 7 * this.getBasePrice() * this.stage;
     }
 
@@ -187,8 +189,8 @@ public class Crop {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Crop newO = (Crop)o;
-        return this.species == newO.getSpecies() && this.stage == newO.getStage() &&
-                this.watered == newO.isWatered() && this.fertilized == newO.isFertilized();
+        Crop newO = (Crop) o;
+        return this.species == newO.getSpecies() && this.stage == newO.getStage()
+                && this.watered == newO.isWatered() && this.fertilized == newO.isFertilized();
     }
 }
