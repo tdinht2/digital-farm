@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public class TestPlayer {
 
+    /**
     @Test //Saagar
     public void testDefaultConstructorSetMoney() {
         Player player1 = new Player();
@@ -109,7 +110,7 @@ public class TestPlayer {
         player.addItem(Crop.Type.Corn, 20);
         Assert.assertEquals(130, player.getInventoryCount());
     }
-
+    
     @Test
     public void testHarvest() {
         Player player = new Player("Player", 0, 99999,
@@ -141,4 +142,7 @@ public class TestPlayer {
                 player.getMaxInventorySpace() - player.getInventoryCount());
         Assert.assertEquals(canBuy, false);
     }
+
+    **/
+
 }

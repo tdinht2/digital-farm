@@ -14,6 +14,8 @@ import view.StartScreen;
 import view.ConfigScreen;
 import view.InitialUIScreen;
 
+import java.util.HashMap;
+
 public class DigitalFarm extends Application {
     private Stage mainWindow;
     private Player player;
@@ -67,17 +69,17 @@ public class DigitalFarm extends Application {
 
         Button riceBtn = configScreen.getRiceBtn();
         riceBtn.setOnAction(e -> {
-            startCrop = new Crop(Crop.Type.Rice);
+            startCrop = new Crop(1, Crop.Type.Rice);
         });
 
         Button cornBtn = configScreen.getCornBtn();
         cornBtn.setOnAction(e -> {
-            startCrop = new Crop(Crop.Type.Corn);
+            startCrop = new Crop(1, Crop.Type.Corn);
         });
 
         Button potatoBtn = configScreen.getPotatoBtn();
         potatoBtn.setOnAction(e -> {
-            startCrop = new Crop(Crop.Type.Potato);
+            startCrop = new Crop(1, Crop.Type.Potato);
         });
 
         Button springBtn = configScreen.getSpringBtn();
@@ -117,23 +119,83 @@ public class DigitalFarm extends Application {
         mainWindow.show();
     }
 
+    private Crop randomCrop() {
+        return new Crop(startCrop.getSpecies());
+    }
     private void goToInitialUIScreen() {
         InitialUIScreen initUIScreen = new InitialUIScreen(width, height, player.getMoney(),
                 farm.getDay(), player.getInventory());
-
         Button marketBtn = initUIScreen.getMarketBtn();
         marketBtn.setOnAction(e -> {
             goToMarketScreen();
         });
-
-        Scene scene = initUIScreen.getScene();
-        mainWindow.setScene(scene);
-        mainWindow.show();
+        Button[] plotsBtn = initUIScreen.getPlotsBtn();
+        for (int i = 0; i < plotsBtn.length; i++) {
+            plotsBtn[i] = new Button();
+            initUIScreen.setPlant(plotsBtn[i], randomCrop());
+        }
+        for (int i = 0; i < plotsBtn.length; i++) {
+            int finalI = i;
+            plotsBtn[i].setOnAction(e -> {
+                switch (plotsBtn[finalI].getText()) {
+                    case "Potato":
+                        player.addItem(new Crop(3, Crop.Type.Potato), 1);
+                        initUIScreen.setDirt(plotsBtn[finalI]);
+                        mainWindow.setScene(initUIScreen.getScene());
+                        break;
+                    case "Corn":
+                        player.addItem(new Crop(3, Crop.Type.Corn), 1);
+                        initUIScreen.setDirt(plotsBtn[finalI]);
+                        mainWindow.setScene(initUIScreen.getScene());
+                        break;
+                    case "Rice":
+                        player.addItem(new Crop(3, Crop.Type.Rice), 1);
+                        initUIScreen.setDirt(plotsBtn[finalI]);
+                        mainWindow.setScene(initUIScreen.getScene());
+                        break;
+                }
+            });
+            Scene scene = initUIScreen.getScene();
+            mainWindow.setScene(scene);
+            mainWindow.show();
+        }
     }
 
     private void goToMarketScreen() {
         Market market = new Market(difficulty);
+        HashMap<Crop, Integer> stock = market.getStock();
         MarketScreen marketScreen = new MarketScreen(width, height, player, market);
+
+        for (Crop key : stock.keySet()) {
+            if (key.getSpecies().getName().equals("Potato")) {
+                Button buyPotatoBtn = marketScreen.getBuyPotatoBtn();
+                buyPotatoBtn.setOnAction(e -> {
+                    if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {
+                        player.setMoney(player.getMoney() - stock.get(key));
+                        player.addItem(key, 1);
+                        mainWindow.setScene(marketScreen.getScene());
+                    }
+                });
+            } else if (key.getSpecies().getName().equals("Corn")){
+                Button buyCornBtn = marketScreen.getBuyCornBtn();
+                buyCornBtn.setOnAction(e -> {
+                    if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {
+                        player.setMoney(player.getMoney() - stock.get(key));
+                        player.addItem(key, 1);
+                        mainWindow.setScene(marketScreen.getScene());
+                    }
+                });
+            } else if (key.getSpecies().getName().equals("Rice")){
+                Button buyRiceBtn = marketScreen.getBuyRiceBtn();
+                buyRiceBtn.setOnAction(e -> {
+                    if (market.buy(player.getMoney(), key, 1, player.getInventoryCount())) {
+                        player.setMoney(player.getMoney() - stock.get(key));
+                        player.addItem(key, 1);
+                        mainWindow.setScene(marketScreen.getScene());
+                    }
+                });
+            }
+        }
 
         Scene scene = marketScreen.getScene();
         mainWindow.setScene(scene);

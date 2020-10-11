@@ -66,12 +66,12 @@ public class Market {
         if (quantity > inventorySpaceLeft) {
             return false;
         }
+
         if (crop.getStage() != 1) { //we only sell seeds here
             return false;
         }
-        int income = this.stock.get(crop);
-        int cost = income * quantity;
-        if (cost > currMoney) {
+        int totalCost = this.stock.get(crop) * quantity;
+        if (totalCost > currMoney) {
             return false;
         }
         return true;
