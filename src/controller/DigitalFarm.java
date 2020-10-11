@@ -140,17 +140,19 @@ public class DigitalFarm extends Application {
                     case "Potato":
                         player.addItem(new Crop(3, Crop.Type.Potato), 1);
                         initUIScreen.setDirt(plotsBtn[finalI]);
+                        mainWindow.setScene(initUIScreen.getScene());
                         break;
                     case "Corn":
                         player.addItem(new Crop(3, Crop.Type.Corn), 1);
                         initUIScreen.setDirt(plotsBtn[finalI]);
+                        mainWindow.setScene(initUIScreen.getScene());
                         break;
                     case "Rice":
                         player.addItem(new Crop(3, Crop.Type.Rice), 1);
                         initUIScreen.setDirt(plotsBtn[finalI]);
+                        mainWindow.setScene(initUIScreen.getScene());
                         break;
                 }
-
             });
             Scene scene = initUIScreen.getScene();
             mainWindow.setScene(scene);

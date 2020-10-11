@@ -102,6 +102,7 @@ public class InitialUIScreen {
         btn.setText("dirt");
     }
 
+
     public Scene getScene() {
         HBox plotRow1 = new HBox();
         HBox plotRow2 = new HBox();
@@ -109,7 +110,6 @@ public class InitialUIScreen {
         moneyText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.REGULAR, 30));
         Text dayText = new Text("Day: " + day);
         dayText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.REGULAR, 30));
-
 
         //Create plots
         for (int i = 0; i < 10; i++) {
@@ -123,7 +123,6 @@ public class InitialUIScreen {
                 plotRow2.getChildren().add(plotsBtn[i]);
             }
         }
-
         //create inventory
         VBox inventoryDisplay = new VBox();
         inventoryDisplay.getChildren().add(new Text("Inventory"));
@@ -136,6 +135,7 @@ public class InitialUIScreen {
                 inventoryDisplay.getChildren().add(crop);
             }
         }
+
 
         VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2, inventoryDisplay, marketBtn);
         return new Scene(initialFarm, width, height);
