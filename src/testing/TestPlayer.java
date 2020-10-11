@@ -110,5 +110,39 @@ public class TestPlayer {
         player.addItem(Crop.Type.Corn, 20);
         Assert.assertEquals(130, player.getInventoryCount());
     }
+    
+    @Test
+    public void testHarvest() {
+        Player player = new Player("Player", 0, 99999,
+                1, new Market(1));
+        Crop nonHarvest = new Crop(1, Crop.Type.Corn);
+        Crop harvest = new Crop(3, Crop.Type.Corn);
+        Assert.assertEquals(false, nonHarvest.canHarvest());
+        Assert.assertEquals(true, harvest.canHarvest());
+    }
+
+    @Test
+    public void testNoBuy() {
+        Player player = new Player("Player", 0, 10,
+                1, new Market(1));
+        Market market = player.getMarket();
+        Crop crop = new Crop(1, Crop.Type.Corn);
+        boolean canBuy = market.buy(player.getMoney(), crop, 11,
+                player.getMaxInventorySpace() - player.getInventoryCount());
+        Assert.assertEquals(canBuy, false);
+    }
+
+    @Test
+    public void testNoMoneyBuy() {
+        Player player = new Player("Player", 0, 10000,
+                3, new Market(3));
+        Market market = player.getMarket();
+        Crop crop = new Crop(1, Crop.Type.Corn);
+        boolean canBuy = market.buy(player.getMoney(), crop, 1100,
+                player.getMaxInventorySpace() - player.getInventoryCount());
+        Assert.assertEquals(canBuy, false);
+    }
+
     **/
+
 }
