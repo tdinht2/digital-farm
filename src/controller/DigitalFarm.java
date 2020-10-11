@@ -67,17 +67,17 @@ public class DigitalFarm extends Application {
 
         Button riceBtn = configScreen.getRiceBtn();
         riceBtn.setOnAction(e -> {
-            startCrop = new Crop(Crop.Type.Rice);
+            startCrop = new Crop(1, Crop.Type.Rice);
         });
 
         Button cornBtn = configScreen.getCornBtn();
         cornBtn.setOnAction(e -> {
-            startCrop = new Crop(Crop.Type.Corn);
+            startCrop = new Crop(1, Crop.Type.Corn);
         });
 
         Button potatoBtn = configScreen.getPotatoBtn();
         potatoBtn.setOnAction(e -> {
-            startCrop = new Crop(Crop.Type.Potato);
+            startCrop = new Crop(1, Crop.Type.Potato);
         });
 
         Button springBtn = configScreen.getSpringBtn();
@@ -123,7 +123,6 @@ public class DigitalFarm extends Application {
     private void goToInitialUIScreen() {
         InitialUIScreen initUIScreen = new InitialUIScreen(width, height, player.getMoney(),
                 farm.getDay(), player.getInventory());
-
         Button marketBtn = initUIScreen.getMarketBtn();
         marketBtn.setOnAction(e -> {
             goToMarketScreen();

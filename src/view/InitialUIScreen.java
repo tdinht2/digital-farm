@@ -128,9 +128,14 @@ public class InitialUIScreen {
         inventoryDisplay.getChildren().add(new Text("Inventory"));
 
         for (Object key : inventory.keySet()) {
+            String cropName;
             if (key.getClass() == Crop.class) {
                 Crop c = (Crop) key;
-                String cropName = c.getSpecies().getName();
+                if (c.getStage() == 3) {
+                    cropName = c.getSpecies().getName();
+                } else {
+                    cropName = c.getSpecies().getName() + " Seed";
+                }
                 Text crop = new Text(cropName + ": " + inventory.get(key));
                 inventoryDisplay.getChildren().add(crop);
             }
