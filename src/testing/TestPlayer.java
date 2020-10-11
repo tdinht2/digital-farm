@@ -21,7 +21,7 @@ public class TestPlayer {
         Player player1 = new Player("player", 0, 4);
         Assert.assertEquals(player1.getMoney(), 1500);
     }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 /*
     @Test //Alec
     public void testFullConstructor() {
