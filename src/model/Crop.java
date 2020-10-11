@@ -3,21 +3,25 @@ import java.util.Random;
 public class Crop {
     private static Random rand = new Random();
     public enum Type {
-        Potato(rand.nextInt(15) + 5),
-        Rice(rand.nextInt(15) + 5),
-        Corn(rand.nextInt(15) + 5)
+        Potato("Potato", rand.nextInt(15) + 5),
+        Rice("Rice", rand.nextInt(15) + 5),
+        Corn("Corn", rand.nextInt(15) + 5)
         ;
 
+        private String name;
         private int basePrice;
         private int growTime;//will need to implement at some point
         /**
          * constructor for the enum
          * @param basePrice the base price of the crop
          */
-        Type(int basePrice) {
+        Type(String name, int basePrice) {
+            this.name = name;
             this.basePrice = basePrice;
             this.growTime = 20;
         }
+
+        public String getName() { return this.name; }
 
         /**
          * getter for the base price of the enum
@@ -54,7 +58,7 @@ public class Crop {
      */
     public Crop(Type species) {
         Random rand = new Random();
-        this.stage = rand.nextInt(4) + 1;
+        this.stage = rand.nextInt(3) + 1;
         this.species = species;
 
     }
