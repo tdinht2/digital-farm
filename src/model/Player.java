@@ -129,7 +129,7 @@ public class Player {
      * @return boolean depending on whether the item was successfully added
      */
     public boolean addItem(Object o, int n) {
-        if (getInventoryCount() + n < maxInventorySpace) {
+        if (getInventoryCount() + n <= maxInventorySpace) {
             if (inventory.containsKey(o)) {
                 inventory.put(o, inventory.get(o) + n);
             } else {

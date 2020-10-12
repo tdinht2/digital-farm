@@ -27,6 +27,7 @@ public class Market {
         //iterate over all crop types, calculate price, and enter into stock
         for (int i = 0; i < crops.length; i++) {
             stock.put(new Crop(1, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
+            stock.put(new Crop(3, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
         }
     }
 

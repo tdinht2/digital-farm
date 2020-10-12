@@ -22,72 +22,7 @@ public class TestPlayer {
         Player player1 = new Player("player", 0, 4);
         Assert.assertEquals(player1.getMoney(), 1500);
     }
-//<<<<<<< HEAD
-/*
-    @Test //Alec
-    public void testFullConstructor() {
-        HashMap<Object, Integer> inv = new HashMap<>();
-        Player player = new Player("Player", 200, inv, 10, 2);
-        Assert.assertEquals(player.getName(), "Player");
-        Assert.assertEquals(player.getMoney(), 1200);
-        Assert.assertEquals(player.getInventory(), new HashMap<Object, Integer>());
-        Assert.assertEquals(player.getMaxInventorySpace(), 10);
-    }
-||||||| 549db80
 
-    @Test //Alec
-    public void testFullConstructor() {
-        HashMap<Object, Integer> inv = new HashMap<>();
-        Player player = new Player("Player", 200, inv, 10, 2);
-        Assert.assertEquals(player.getName(), "Player");
-        Assert.assertEquals(player.getMoney(), 1200);
-        Assert.assertEquals(player.getInventory(), new HashMap<Object, Integer>());
-        Assert.assertEquals(player.getMaxInventorySpace(), 10);
-    }
-=======
-
-<<<<<<< HEAD
-//    @Test //Alec
-//    public void testFullConstructor() {
-//        HashMap<Object, Integer> inv = new HashMap<>();
-//        Player player = new Player("Player", 200, inv, 10, 2);
-//        Assert.assertEquals(player.getName(), "Player");
-//        Assert.assertEquals(player.getMoney(), 1200);
-//        Assert.assertEquals(player.getInventory(), new HashMap<Object, Integer>());
-//        Assert.assertEquals(player.getMaxInventorySpace(), 10);
-//    }
->>>>>>> 8032417e3211661c49807da8cb302d2438f0ee2c
-
-//    @Test //Alec
-//    public void testAddItem() {
-//        HashMap<Object, Integer> inv = new HashMap<>();
-//        Object o = new Object();
-//        Player player = new Player("Player", 0, inv, 10, 1);
-//        player.getInventory().put(o, 0);
-//        player.addItem(o, 3);
-//        Assert.assertEquals((int) player.getInventory().get(o), 3);
-//    }
-||||||| 7d45f6a
-//    @Test //Alec
-//    public void testFullConstructor() {
-//        HashMap<Object, Integer> inv = new HashMap<>();
-//        Player player = new Player("Player", 200, inv, 10, 2);
-//        Assert.assertEquals(player.getName(), "Player");
-//        Assert.assertEquals(player.getMoney(), 1200);
-//        Assert.assertEquals(player.getInventory(), new HashMap<Object, Integer>());
-//        Assert.assertEquals(player.getMaxInventorySpace(), 10);
-//    }
-
-//    @Test //Alec
-//    public void testAddItem() {
-//        HashMap<Object, Integer> inv = new HashMap<>();
-//        Object o = new Object();
-//        Player player = new Player("Player", 0, inv, 10, 1);
-//        player.getInventory().put(o, 0);
-//        player.addItem(o, 3);
-//        Assert.assertEquals((int) player.getInventory().get(o), 3);
-//    }
-=======
     @Test //Alec
     public void testFullConstructor() {
         Player player = new Player("Player", 300, 200, 1, new Market(1));
@@ -106,7 +41,6 @@ public class TestPlayer {
         player.addItem(o, 3);
         Assert.assertEquals((int) player.getInventory().get(o), 3);
     }
->>>>>>> 66ffb98246f639ea307de17e7b16674dfcae19d2
 
     @Test //Robert
     public void testFarmDay() {
@@ -175,12 +109,7 @@ public class TestPlayer {
         player.addItem(Crop.Type.Corn, 20);
         Assert.assertEquals(130, player.getInventoryCount());
     }
-<<<<<<< HEAD
 
- */
-||||||| 7d45f6a
-=======
-    
     @Test
     public void testHarvest() {
         Player player = new Player("Player", 0, 99999,
@@ -212,5 +141,4 @@ public class TestPlayer {
                 player.getMaxInventorySpace() - player.getInventoryCount());
         Assert.assertEquals(canBuy, false);
     }
->>>>>>> 66ffb98246f639ea307de17e7b16674dfcae19d2
 }

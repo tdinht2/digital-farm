@@ -39,7 +39,7 @@ public class InitialUIScreen {
         money = m;
         day = d;
         inventory = inv;
-        marketBtn = new Button("go to market");
+        marketBtn = new Button("Go to Market");
     }
 
     public Button getMarketBtn() {

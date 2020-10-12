@@ -10,7 +10,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="">
       <library name="JUnit4">
@@ -22,11 +22,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-<<<<<<< HEAD
     <orderEntry type="library" exported="" name="lib" level="project" />
-||||||| 7d45f6a
-=======
-    <orderEntry type="library" name="lib" level="project" />
->>>>>>> 66ffb98246f639ea307de17e7b16674dfcae19d2
   </component>
 </module>

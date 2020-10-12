@@ -1,33 +1,13 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-<<<<<<< HEAD
       <root url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2/lib" />
-||||||| 7d45f6a
-      <root url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2 2/lib" />
-=======
-      <root url="file://$PROJECT_DIR$/../Desktop/CS1331/javafx-sdk-11.0.2/lib" />
->>>>>>> 66ffb98246f639ea307de17e7b16674dfcae19d2
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-<<<<<<< HEAD
       <root url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2/lib" />
-||||||| 7d45f6a
-      <root url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2 2/lib" />
-=======
-      <root url="file://$PROJECT_DIR$/../Desktop/CS1331/javafx-sdk-11.0.2/lib" />
->>>>>>> 66ffb98246f639ea307de17e7b16674dfcae19d2
     </SOURCES>
-<<<<<<< HEAD
     <jarDirectory url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
-||||||| 7d45f6a
-    <jarDirectory url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2 2/lib" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../javafx-sdk-11.0.2 2/lib" recursive="false" type="SOURCES" />
-=======
-    <jarDirectory url="file://$PROJECT_DIR$/../Desktop/CS1331/javafx-sdk-11.0.2/lib" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../Desktop/CS1331/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
->>>>>>> 66ffb98246f639ea307de17e7b16674dfcae19d2
   </library>
 </component>
