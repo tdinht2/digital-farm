@@ -99,7 +99,7 @@ public class MarketScreen {
                         sellDisplay.getChildren().addAll(crop, getSellCornBtn());
                     } else if (cropName.equals("Potato")) {
                         sellDisplay.getChildren().addAll(crop, getSellPotatoBtn());
-                    } else if (cropName.equals("Rice")){
+                    } else if (cropName.equals("Rice")) {
                         sellDisplay.getChildren().addAll(crop, getSellRiceBtn());
                     }
                 } else {
@@ -109,7 +109,7 @@ public class MarketScreen {
                         sellDisplay.getChildren().addAll(crop, getSellCornSeedBtn());
                     } else if (cropName.equals("Potato Seed")) {
                         sellDisplay.getChildren().addAll(crop, getSellPotatoSeedBtn());
-                    } else if (cropName.equals("Rice Seed")){
+                    } else if (cropName.equals("Rice Seed")) {
                         sellDisplay.getChildren().addAll(crop, getSellRiceSeedBtn());
                     }
                 }

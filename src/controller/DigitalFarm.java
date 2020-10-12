@@ -181,8 +181,8 @@ public class DigitalFarm extends Application {
             if (key.getSpecies().getName().equals("Potato") && key.getStage() == 1) {
                 Button buyPotatoBtn = marketScreen.getBuyPotatoBtn();
                 buyPotatoBtn.setOnAction(e -> {
-                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace() -
-                            player.getInventoryCount())) {
+                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace()
+                            - player.getInventoryCount())) {
                         player.setMoney(player.getMoney() - stock.get(key));
                         player.addItem(key, 1);
                         mainWindow.setScene(marketScreen.getScene());
@@ -208,8 +208,8 @@ public class DigitalFarm extends Application {
             } else if (key.getSpecies().getName().equals("Corn") && key.getStage() == 1) {
                 Button buyCornBtn = marketScreen.getBuyCornBtn();
                 buyCornBtn.setOnAction(e -> {
-                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace() -
-                            player.getInventoryCount())) {
+                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace()
+                            - player.getInventoryCount())) {
                         player.setMoney(player.getMoney() - stock.get(key));
                         player.addItem(key, 1);
                         mainWindow.setScene(marketScreen.getScene());
@@ -235,8 +235,8 @@ public class DigitalFarm extends Application {
             } else if (key.getSpecies().getName().equals("Rice") && key.getStage() == 1) {
                 Button buyRiceBtn = marketScreen.getBuyRiceBtn();
                 buyRiceBtn.setOnAction(e -> {
-                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace() -
-                            player.getInventoryCount())) {
+                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace()
+                            - player.getInventoryCount())) {
                         player.setMoney(player.getMoney() - stock.get(key));
                         player.addItem(key, 1);
                         mainWindow.setScene(marketScreen.getScene());
