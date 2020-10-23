@@ -68,7 +68,7 @@ public class Farm {
      * @return the new day
      */
     public int nextDay() {
-        this.day = day + 1;
+        this.day += 1;
         return this.day;
     }
 }

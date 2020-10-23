@@ -39,7 +39,7 @@ public class Crop {
     }
     private int stage;
     private Type species;
-    private boolean watered; //need to implement at some point
+    private int waterLevel;
     private boolean fertilized; //need to implement at some point
 
     /**
@@ -50,7 +50,7 @@ public class Crop {
     public Crop(int stage, Type species) {
         this.stage = stage;
         this.species = species;
-        this.watered = false;
+        this.waterLevel = 0;
         this.fertilized = false;
     }
 
@@ -113,7 +113,7 @@ public class Crop {
      * @param stage int stage of growth
      */
     public void setStage(int stage) {
-        if (stage <= 3 && stage > 0) {
+        if (stage <= 3 && stage >= 0) {
             this.stage = stage;
         }
     }
@@ -135,12 +135,17 @@ public class Crop {
     }
 
     /**
-     * advance the stage of this crop
-     * @return if the crop successfully grew a stage
+     * advance the stage of this crop, and decrease water level by 1. If water level is negative, plant is dead
+     * @return if the crop successfully grew a stage and is not dead
      */
     public boolean grow() {
-        if (stage < 3) {
-            stage++;
+        if (this.stage < 3) {
+            this.stage++;
+            this.waterLevel--;
+            if (this.waterLevel < 0) {
+                this.stage = 0;
+                return false;
+            }
             return true;
         }
         return false;
@@ -150,7 +155,10 @@ public class Crop {
      * water this crop
      */
     public void water() {
-        this.watered = true;
+        this.waterLevel += 1;
+        if(waterLevel > 3) {
+            this.stage = 0;
+        }
     }
 
     /**
@@ -164,8 +172,8 @@ public class Crop {
      * getter for watered attribute
      * @return if crop is watered
      */
-    public boolean isWatered() {
-        return this.watered;
+    public int getWaterLevel() {
+        return this.waterLevel;
     }
 
     /**
@@ -191,6 +199,6 @@ public class Crop {
         }
         Crop newO = (Crop) o;
         return this.species == newO.getSpecies() && this.stage == newO.getStage()
-                && this.watered == newO.isWatered() && this.fertilized == newO.isFertilized();
+                && this.waterLevel == newO.getWaterLevel() && this.fertilized == newO.isFertilized();
     }
 }
