@@ -26,15 +26,14 @@ public class Player {
         maxInventorySpace = space;
         farm = new Farm(difficulty);
         this.market = market;
-        initInventory();
     }
 
     public Player(String n, int m, int difficulty) {
-        this(n, m,20, difficulty, new Market(difficulty));
+        this(n, m, 20, difficulty, new Market(difficulty));
     }
 
     public Player(String n, int m) {
-        this(n, m,20, 1, new Market(1));
+        this(n, m, 20, 1, new Market(1));
     }
 
     /**
@@ -99,12 +98,6 @@ public class Player {
         maxInventorySpace = space;
     }
 
-    public void initInventory() {
-        inventory.put(Crop.Type.Potato, 0);
-        inventory.put(Crop.Type.Corn, 0);
-        inventory.put(Crop.Type.Rice, 0);
-    }
-
     /**
      * Getter for the main.Player's maxInventorySpace
      * @return int representing the main.Player's max inventory space
@@ -117,7 +110,9 @@ public class Player {
      * Setter for the main.Player's inventory
      * @param i ArrayList representing the player's inventory
      */
-    public void setInventory(HashMap<Object, Integer> i) { inventory = i; }
+    public void setInventory(HashMap<Object, Integer> i) {
+        inventory = i;
+    }
 
     /**
      * Getter for the main.Player's inventory
@@ -134,7 +129,7 @@ public class Player {
      * @return boolean depending on whether the item was successfully added
      */
     public boolean addItem(Object o, int n) {
-        if (getInventoryCount() + n < maxInventorySpace) {
+        if (getInventoryCount() + n <= maxInventorySpace) {
             if (inventory.containsKey(o)) {
                 inventory.put(o, inventory.get(o) + n);
             } else {

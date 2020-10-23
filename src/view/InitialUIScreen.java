@@ -1,7 +1,6 @@
 package view;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.OverrunStyle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -40,7 +39,7 @@ public class InitialUIScreen {
         money = m;
         day = d;
         inventory = inv;
-        marketBtn = new Button("go to market");
+        marketBtn = new Button("Go to Market");
     }
 
     public Button getMarketBtn() {
@@ -52,47 +51,47 @@ public class InitialUIScreen {
 
     public void setPlant(Button btn, Crop c) {
 
-        switch(c.getSpecies().getName() + " " + c.getStage()) {
-            case "Potato 1":
-                btn.setGraphic(new ImageView(potatoSeed));
-                btn.setText("Potato Seed");
-                break;
-            case "Potato 2":
-                btn.setGraphic(new ImageView(immaturePotato));
-                btn.setText("Immature Potato");
-                break;
-            case "Potato 3":
-                btn.setGraphic(new ImageView(potato));
-                btn.setText("Potato");
-                break;
-            case "Rice 1":
-                btn.setGraphic(new ImageView(riceSeed));
-                btn.setText("Rice Seed");
-                break;
-            case "Rice 2":
-                btn.setGraphic(new ImageView(immatureRice));
-                btn.setText("Immature Rice");
-                break;
-            case "Rice 3":
-                btn.setGraphic(new ImageView(rice));
-                btn.setText("Rice");
-                break;
-            case "Corn 1":
-                btn.setGraphic(new ImageView(cornSeed));
-                btn.setText("Corn Seed");
-                break;
-            case "Corn 2":
-                btn.setGraphic(new ImageView(immatureCorn));
-                btn.setText("Immature Corn");
-                break;
-            case "Corn 3":
-                btn.setGraphic(new ImageView(corn));
-                btn.setText("Corn");
-                break;
-            default:
-                btn.setGraphic(new ImageView(dirt));
-                btn.setText("dirt");
-                break;
+        switch (c.getSpecies().getName() + " " + c.getStage()) {
+        case "Potato 1":
+            btn.setGraphic(new ImageView(potatoSeed));
+            btn.setText("Potato Seed");
+            break;
+        case "Potato 2":
+            btn.setGraphic(new ImageView(immaturePotato));
+            btn.setText("Immature Potato");
+            break;
+        case "Potato 3":
+            btn.setGraphic(new ImageView(potato));
+            btn.setText("Potato");
+            break;
+        case "Rice 1":
+            btn.setGraphic(new ImageView(riceSeed));
+            btn.setText("Rice Seed");
+            break;
+        case "Rice 2":
+            btn.setGraphic(new ImageView(immatureRice));
+            btn.setText("Immature Rice");
+            break;
+        case "Rice 3":
+            btn.setGraphic(new ImageView(rice));
+            btn.setText("Rice");
+            break;
+        case "Corn 1":
+            btn.setGraphic(new ImageView(cornSeed));
+            btn.setText("Corn Seed");
+            break;
+        case "Corn 2":
+            btn.setGraphic(new ImageView(immatureCorn));
+            btn.setText("Immature Corn");
+            break;
+        case "Corn 3":
+            btn.setGraphic(new ImageView(corn));
+            btn.setText("Corn");
+            break;
+        default:
+            btn.setGraphic(new ImageView(dirt));
+            btn.setText("dirt");
+            break;
 
         }
     }
@@ -142,7 +141,8 @@ public class InitialUIScreen {
         }
 
 
-        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2, inventoryDisplay, marketBtn);
+        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2,
+                inventoryDisplay, marketBtn);
         return new Scene(initialFarm, width, height);
     }
 }

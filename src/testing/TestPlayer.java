@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class TestPlayer {
 
-    /**
+
     @Test //Saagar
     public void testDefaultConstructorSetMoney() {
         Player player1 = new Player();
@@ -23,25 +23,24 @@ public class TestPlayer {
         Assert.assertEquals(player1.getMoney(), 1500);
     }
 
-//    @Test //Alec
-//    public void testFullConstructor() {
-//        HashMap<Object, Integer> inv = new HashMap<>();
-//        Player player = new Player("Player", 200, inv, 10, 2);
-//        Assert.assertEquals(player.getName(), "Player");
-//        Assert.assertEquals(player.getMoney(), 1200);
-//        Assert.assertEquals(player.getInventory(), new HashMap<Object, Integer>());
-//        Assert.assertEquals(player.getMaxInventorySpace(), 10);
-//    }
+    @Test //Alec
+    public void testFullConstructor() {
+        Player player = new Player("Player", 300, 200, 1, new Market(1));
+        Assert.assertEquals(player.getName(), "Player");
+        Assert.assertEquals(player.getMoney(), 1800);
+        Assert.assertEquals(player.getInventory(), new HashMap<Object, Integer>());
+        Assert.assertEquals(player.getMaxInventorySpace(), 200);
+    }
 
-//    @Test //Alec
-//    public void testAddItem() {
-//        HashMap<Object, Integer> inv = new HashMap<>();
-//        Object o = new Object();
-//        Player player = new Player("Player", 0, inv, 10, 1);
-//        player.getInventory().put(o, 0);
-//        player.addItem(o, 3);
-//        Assert.assertEquals((int) player.getInventory().get(o), 3);
-//    }
+    @Test //Alec
+    public void testAddItem() {
+        HashMap<Object, Integer> inv = new HashMap<>();
+        Object o = new Object();
+        Player player = new Player("Player", 0, 200, 1, new Market(1));
+        player.getInventory().put(o, 0);
+        player.addItem(o, 3);
+        Assert.assertEquals((int) player.getInventory().get(o), 3);
+    }
 
     @Test //Robert
     public void testFarmDay() {
@@ -78,17 +77,17 @@ public class TestPlayer {
         Assert.assertEquals(farm.getDay(), 2);
     }
 
-//    @Test //Tien
-//    public void testSubtractItem() {
-//        HashMap<Object, Integer> inv = new HashMap<>();
-//        Object test = new Object();
-//        Player player = new Player("Tien", 0, inv, 10, 2);
-//        player.getInventory().put(test, 4);
-//        player.subtractItem(test, 5);
-//        Assert.assertEquals((int) player.getInventory().get(test), 0);
-//    }
+    @Test //Tien
+    public void testSubtractItem() {
+        HashMap<Object, Integer> inv = new HashMap<>();
+        Object test = new Object();
+        Player player = new Player("Tien", 0, 200, 1, new Market(1));
+        player.getInventory().put(test, 4);
+        player.subtractItem(test, 5);
+        Assert.assertEquals((int) player.getInventory().get(test), 0);
+    }
 
-    @Test // Alec
+    @Test
     public void testInventoryCount() {
         Player player = new Player("Player", 0, 99999,
                 1, new Market(1));
@@ -98,7 +97,7 @@ public class TestPlayer {
         Assert.assertEquals(159, player.getInventoryCount());
     }
 
-    @Test //Alec
+    @Test
     public void testInventoryCountCrops() {
         Player player = new Player("Player", 0, 99999,
                 1, new Market(1));
@@ -110,7 +109,7 @@ public class TestPlayer {
         player.addItem(Crop.Type.Corn, 20);
         Assert.assertEquals(130, player.getInventoryCount());
     }
-    
+
     @Test
     public void testHarvest() {
         Player player = new Player("Player", 0, 99999,
@@ -142,7 +141,4 @@ public class TestPlayer {
                 player.getMaxInventorySpace() - player.getInventoryCount());
         Assert.assertEquals(canBuy, false);
     }
-
-    **/
-
 }
