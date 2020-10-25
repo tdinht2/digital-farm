@@ -167,13 +167,13 @@ public class InitialUIScreen {
 
         //Create plots
         for (int i = 0; i < 10; i++) {
-            plotsBtn[i].setMinWidth(216);
+            plotsBtn[i].setMinWidth(234);
             plotsBtn[i].setMinHeight(210);
-            plotsBtn[i].setMaxWidth(216);
+            plotsBtn[i].setMaxWidth(234);
             plotsBtn[i].setMaxHeight(210);
-            waterBtns[i].setMinWidth(216);
+            waterBtns[i].setMinWidth(234);
             waterBtns[i].setMinHeight(57);
-            waterBtns[i].setMaxWidth(216);
+            waterBtns[i].setMaxWidth(234);
             waterBtns[i].setMaxHeight(57);
             if (i < 5) {
                 plotRow1.getChildren().add(plotsBtn[i]);
