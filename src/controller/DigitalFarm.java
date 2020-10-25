@@ -130,6 +130,12 @@ public class DigitalFarm extends Application {
         marketBtn.setOnAction(e -> {
             goToMarketScreen();
         });
+
+        Button timeBtn = initUIScreen.getTimeBtn();
+        timeBtn.setOnAction(e -> {
+
+        });
+
         Button[] plotsBtn = initUIScreen.getPlotsBtn();
         for (int i = 0; i < plotsBtn.length; i++) {
             plotsBtn[i] = new Button();

@@ -20,6 +20,7 @@ public class InitialUIScreen {
     private Button[] plotsBtn = new Button[10];
     private HashMap<Object, Integer> inventory;
     private Button marketBtn;
+    private Button timeBtn;
     private Image dirt = new Image("dirt_plot.png");
     private Image cornSeed = new Image("seed_plot.png");
     private Image potatoSeed = new Image("seed_plot.png");
@@ -40,6 +41,7 @@ public class InitialUIScreen {
         day = d;
         inventory = inv;
         marketBtn = new Button("Go to Market");
+        timeBtn = new Button("Advance Time");
     }
 
     public Button getMarketBtn() {
@@ -48,6 +50,7 @@ public class InitialUIScreen {
     public Button[] getPlotsBtn() {
         return plotsBtn;
     }
+    public Button getTimeBtn() { return timeBtn; }
 
     public void setPlant(Button btn, Crop c) {
 
@@ -140,9 +143,8 @@ public class InitialUIScreen {
             }
         }
 
-
         VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2,
-                inventoryDisplay, marketBtn);
+                inventoryDisplay, marketBtn, timeBtn);
         return new Scene(initialFarm, width, height);
     }
 }
