@@ -18,6 +18,7 @@ public class InitialUIScreen {
     private int money;
     private int day;
     private Button[] plotsBtn = new Button[10];
+    private Button[] waterBtns = new Button[10];
     private HashMap<Object, Integer> inventory;
     private Button marketBtn;
     private Button plantPotatoBtn = new Button("Plant Potato");
@@ -33,7 +34,12 @@ public class InitialUIScreen {
     private Image corn = new Image("corn_plot.png");
     private Image potato = new Image("potato_plot.png");
     private Image rice = new Image("rice_plot.png");
-    //private Image deadPlant = new Image("dead_plant.png");
+    private Image waterLevel0 = new Image("water_level_0.png");
+    private Image waterLevel1 = new Image("water_level_1.png");
+    private Image waterLevel2 = new Image("water_level_2.png");
+    private Image waterLevel3 = new Image("water_level_3.png");
+    private Image waterLevel4 = new Image("water_level_4.png");
+    private Image deadPlant = new Image("dead_plant.png");
 
 
     private InitialUIScreen() { }
@@ -52,16 +58,48 @@ public class InitialUIScreen {
     public Button[] getPlotsBtn() {
         return plotsBtn;
     }
+    public Button[] getWaterBtns() { return waterBtns;}
     public Button getPlantPotatoBtn() { return plantPotatoBtn;}
     public Button getPlantRiceBtn() { return plantRiceBtn;}
     public Button getPlantCornBtn() { return plantCornBtn;}
 
+    public void setWater(Button btn, Crop c) {
+        switch (c.getWaterLevel()) {
+            case 0:
+                btn.setGraphic(new ImageView(waterLevel0));
+                btn.setText("Water 0");
+                break;
+            case 1:
+                btn.setGraphic(new ImageView(waterLevel1));
+                btn.setText("Water 1");
+                break;
+            case 2:
+                btn.setGraphic(new ImageView(waterLevel2));
+                btn.setText("Water 2");
+                break;
+            case 3:
+                btn.setGraphic(new ImageView(waterLevel3));
+                btn.setText("Water 3");
+                break;
+            case 4:
+                btn.setGraphic(new ImageView(waterLevel4));
+                btn.setText("Water 4");
+                break;
+            default:
+                setEmptyWater(btn);
+        }
+    }
+
+    public void setEmptyWater(Button btn) {
+        btn.setGraphic(new ImageView(waterLevel0));
+        btn.setText("Water 0");
+    }
     public void setPlant(Button btn, Crop c) {
-        /**if (c.getStage() == 0) {
+        if (c.getStage() == 0) {
             btn.setGraphic(new ImageView(deadPlant));
             btn.setText("Dead Plant");
             return;
-        }*/
+        }
         switch (c.getSpecies().getName() + " " + c.getStage()) {
         case "Potato 1":
             btn.setGraphic(new ImageView(potatoSeed));
@@ -116,6 +154,8 @@ public class InitialUIScreen {
     public Scene getScene() {
         HBox plotRow1 = new HBox();
         HBox plotRow2 = new HBox();
+        HBox waterRow1 = new HBox();
+        HBox waterRow2 = new HBox();
         HBox plantBtns = new HBox();
         plantBtns.getChildren().add(plantCornBtn);
         plantBtns.getChildren().add(plantRiceBtn);
@@ -131,10 +171,16 @@ public class InitialUIScreen {
             plotsBtn[i].setMinHeight(210);
             plotsBtn[i].setMaxWidth(216);
             plotsBtn[i].setMaxHeight(210);
+            waterBtns[i].setMinWidth(216);
+            waterBtns[i].setMinHeight(57);
+            waterBtns[i].setMaxWidth(216);
+            waterBtns[i].setMaxHeight(57);
             if (i < 5) {
                 plotRow1.getChildren().add(plotsBtn[i]);
+                waterRow1.getChildren().add(waterBtns[i]);
             } else {
                 plotRow2.getChildren().add(plotsBtn[i]);
+                waterRow2.getChildren().add(waterBtns[i]);
             }
         }
         //create inventory
@@ -155,7 +201,7 @@ public class InitialUIScreen {
             }
         }
 
-        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2,
+        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, waterRow1, plotRow2, waterRow2,
                 inventoryDisplay, plantBtns, marketBtn);
         return new Scene(initialFarm, width, height);
     }

@@ -135,13 +135,17 @@ public class DigitalFarm extends Application {
 
 
         Button[] plotsBtn = initUIScreen.getPlotsBtn();
+        Button[] waterBtns = initUIScreen.getWaterBtns();
+        for (int i = 0; i < plotsBtn.length; i++) {
+            plotsBtn[i] = new Button();
+            waterBtns[i] = new Button();
+        }
 
         plantCornBtn.setOnAction(e -> {
             Crop cornSeed = new Crop(1, Crop.Type.Corn);
             if (farm.plant(cornSeed, player.getInventory().get(cornSeed))) {
                 player.subtractItem(cornSeed, 1);
-                refreshPlots(initUIScreen, plotsBtn);
-                mainWindow.setScene(initUIScreen.getScene());
+                refreshPlots(initUIScreen, plotsBtn, waterBtns);
             }
         });
 
@@ -149,8 +153,7 @@ public class DigitalFarm extends Application {
             Crop riceSeed = new Crop(1, Crop.Type.Rice);
             if (farm.plant(riceSeed, player.getInventory().get(riceSeed))) {
                 player.subtractItem(riceSeed, 1);
-                refreshPlots(initUIScreen, plotsBtn);
-                mainWindow.setScene(initUIScreen.getScene());
+                refreshPlots(initUIScreen, plotsBtn, waterBtns);
             }
         });
 
@@ -158,34 +161,41 @@ public class DigitalFarm extends Application {
             Crop potatoSeed = new Crop(1, Crop.Type.Potato);
             if (farm.plant(potatoSeed, player.getInventory().get(potatoSeed))) {
                 player.subtractItem(potatoSeed, 1);
-                refreshPlots(initUIScreen, plotsBtn);
-                mainWindow.setScene(initUIScreen.getScene());
+                refreshPlots(initUIScreen, plotsBtn, waterBtns);
             }
         });
-        refreshPlots(initUIScreen, plotsBtn);
+        refreshPlots(initUIScreen, plotsBtn, waterBtns);
         for (int i = 0; i < plotsBtn.length; i++) {
             int finalI = i;
+            waterBtns[i].setOnAction(e -> {
+                if (farm.getCropArray()[finalI] != null) {
+                    farm.getCropArray()[finalI].water();
+                    refreshPlots(initUIScreen, plotsBtn, waterBtns);
+                }
+            });
+
+
             plotsBtn[i].setOnAction(e -> {
                 switch (plotsBtn[finalI].getText()) {
                 case "Potato":
                     if (player.addItem(new Crop(3, Crop.Type.Potato), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
-                        mainWindow.setScene(initUIScreen.getScene());
+                        refreshPlots(initUIScreen, plotsBtn, waterBtns);
                     }
                     break;
                 case "Corn":
                     if (player.addItem(new Crop(3, Crop.Type.Corn), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
-                        mainWindow.setScene(initUIScreen.getScene());
+                        refreshPlots(initUIScreen, plotsBtn, waterBtns);
                     }
                     break;
                 case "Rice":
                     if (player.addItem(new Crop(3, Crop.Type.Rice), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
-                        mainWindow.setScene(initUIScreen.getScene());
+                        refreshPlots(initUIScreen, plotsBtn, waterBtns);
                     }
                     break;
                 default:
@@ -198,15 +208,19 @@ public class DigitalFarm extends Application {
         }
     }
 
-    private void refreshPlots(InitialUIScreen initUIScreen, Button[] plotsBtn) {
+    private void refreshPlots(InitialUIScreen initUIScreen, Button[] plotsBtn, Button[] waterBtns) {
         for (int i = 0; i < plotsBtn.length; i++) {
-            plotsBtn[i] = new Button();
             if (farm.getCropArray()[i] != null) {
                 initUIScreen.setPlant(plotsBtn[i], farm.getCropArray()[i]);
+                initUIScreen.setWater(waterBtns[i], farm.getCropArray()[i]);
             } else {
                 initUIScreen.setDirt(plotsBtn[i]);
+                initUIScreen.setEmptyWater(waterBtns[i]);
             }
         }
+        Scene scene = initUIScreen.getScene();
+        mainWindow.setScene(scene);
+        mainWindow.show();
     }
 
     private void goToMarketScreen() {
