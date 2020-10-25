@@ -110,6 +110,9 @@ public class DigitalFarm extends Application {
                     && startCrop != null) {
                 player = new Player(inputName, 0, difficulty);
                 player.addItem(startCrop, 1);
+                player.addItem(new Crop(1, Crop.Type.Corn), 0);
+                player.addItem(new Crop(1, Crop.Type.Potato), 0);
+                player.addItem(new Crop(1, Crop.Type.Rice), 0);
                 farm = new Farm(difficulty);
                 goToInitialUIScreen();
             }
@@ -119,28 +122,53 @@ public class DigitalFarm extends Application {
         mainWindow.setScene(scene);
         mainWindow.show();
     }
-
-    private Crop randomCrop() {
-        return new Crop(startCrop.getSpecies());
-    }
     private void goToInitialUIScreen() {
         InitialUIScreen initUIScreen = new InitialUIScreen(width, height, player.getMoney(),
                 farm.getDay(), player.getInventory());
         Button marketBtn = initUIScreen.getMarketBtn();
+        Button plantCornBtn = initUIScreen.getPlantCornBtn();
+        Button plantRiceBtn = initUIScreen.getPlantRiceBtn();
+        Button plantPotatoBtn = initUIScreen.getPlantPotatoBtn();
         marketBtn.setOnAction(e -> {
             goToMarketScreen();
         });
 
+        Button[] plotsBtn = initUIScreen.getPlotsBtn();
+
         Button timeBtn = initUIScreen.getTimeBtn();
         timeBtn.setOnAction(e -> {
-
+            farm.nextDay();
+            refreshPlots(initUIScreen, plotsBtn);
+            mainWindow.setScene(initUIScreen.getScene());
         });
 
-        Button[] plotsBtn = initUIScreen.getPlotsBtn();
-        for (int i = 0; i < plotsBtn.length; i++) {
-            plotsBtn[i] = new Button();
-            initUIScreen.setPlant(plotsBtn[i], randomCrop());
-        }
+        plantCornBtn.setOnAction(e -> {
+            Crop cornSeed = new Crop(1, Crop.Type.Corn);
+            if (farm.plant(cornSeed, player.getInventory().get(cornSeed))) {
+                player.subtractItem(cornSeed, 1);
+                refreshPlots(initUIScreen, plotsBtn);
+                mainWindow.setScene(initUIScreen.getScene());
+            }
+        });
+
+        plantRiceBtn.setOnAction(e -> {
+            Crop riceSeed = new Crop(1, Crop.Type.Rice);
+            if (farm.plant(riceSeed, player.getInventory().get(riceSeed))) {
+                player.subtractItem(riceSeed, 1);
+                refreshPlots(initUIScreen, plotsBtn);
+                mainWindow.setScene(initUIScreen.getScene());
+            }
+        });
+
+        plantPotatoBtn.setOnAction(e -> {
+            Crop potatoSeed = new Crop(1, Crop.Type.Potato);
+            if (farm.plant(potatoSeed, player.getInventory().get(potatoSeed))) {
+                player.subtractItem(potatoSeed, 1);
+                refreshPlots(initUIScreen, plotsBtn);
+                mainWindow.setScene(initUIScreen.getScene());
+            }
+        });
+        refreshPlots(initUIScreen, plotsBtn);
         for (int i = 0; i < plotsBtn.length; i++) {
             int finalI = i;
             plotsBtn[i].setOnAction(e -> {
@@ -148,18 +176,21 @@ public class DigitalFarm extends Application {
                 case "Potato":
                     if (player.addItem(new Crop(3, Crop.Type.Potato), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
+                        farm.setCropArray(null, finalI);
                         mainWindow.setScene(initUIScreen.getScene());
                     }
                     break;
                 case "Corn":
                     if (player.addItem(new Crop(3, Crop.Type.Corn), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
+                        farm.setCropArray(null, finalI);
                         mainWindow.setScene(initUIScreen.getScene());
                     }
                     break;
                 case "Rice":
                     if (player.addItem(new Crop(3, Crop.Type.Rice), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
+                        farm.setCropArray(null, finalI);
                         mainWindow.setScene(initUIScreen.getScene());
                     }
                     break;
@@ -170,6 +201,17 @@ public class DigitalFarm extends Application {
             Scene scene = initUIScreen.getScene();
             mainWindow.setScene(scene);
             mainWindow.show();
+        }
+    }
+
+    private void refreshPlots(InitialUIScreen initUIScreen, Button[] plotsBtn) {
+        for (int i = 0; i < plotsBtn.length; i++) {
+            plotsBtn[i] = new Button();
+            if (farm.getCropArray()[i] != null) {
+                initUIScreen.setPlant(plotsBtn[i], farm.getCropArray()[i]);
+            } else {
+                initUIScreen.setDirt(plotsBtn[i]);
+            }
         }
     }
 
