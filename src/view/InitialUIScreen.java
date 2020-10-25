@@ -20,6 +20,9 @@ public class InitialUIScreen {
     private Button[] plotsBtn = new Button[10];
     private HashMap<Object, Integer> inventory;
     private Button marketBtn;
+    private Button plantPotatoBtn = new Button("Plant Potato");
+    private Button plantRiceBtn= new Button("Plant Rice");
+    private Button plantCornBtn= new Button("Plant Corn");
     private Image dirt = new Image("dirt_plot.png");
     private Image cornSeed = new Image("seed_plot.png");
     private Image potatoSeed = new Image("seed_plot.png");
@@ -30,6 +33,7 @@ public class InitialUIScreen {
     private Image corn = new Image("corn_plot.png");
     private Image potato = new Image("potato_plot.png");
     private Image rice = new Image("rice_plot.png");
+    //private Image deadPlant = new Image("dead_plant.png");
 
 
     private InitialUIScreen() { }
@@ -48,9 +52,16 @@ public class InitialUIScreen {
     public Button[] getPlotsBtn() {
         return plotsBtn;
     }
+    public Button getPlantPotatoBtn() { return plantPotatoBtn;}
+    public Button getPlantRiceBtn() { return plantRiceBtn;}
+    public Button getPlantCornBtn() { return plantCornBtn;}
 
     public void setPlant(Button btn, Crop c) {
-
+        /**if (c.getStage() == 0) {
+            btn.setGraphic(new ImageView(deadPlant));
+            btn.setText("Dead Plant");
+            return;
+        }*/
         switch (c.getSpecies().getName() + " " + c.getStage()) {
         case "Potato 1":
             btn.setGraphic(new ImageView(potatoSeed));
@@ -105,6 +116,10 @@ public class InitialUIScreen {
     public Scene getScene() {
         HBox plotRow1 = new HBox();
         HBox plotRow2 = new HBox();
+        HBox plantBtns = new HBox();
+        plantBtns.getChildren().add(plantCornBtn);
+        plantBtns.getChildren().add(plantRiceBtn);
+        plantBtns.getChildren().add(plantPotatoBtn);
         Text moneyText = new Text("Money: " + money);
         moneyText.setFont(Font.font("Comic Sans MS", FontWeight.BOLD, FontPosture.REGULAR, 30));
         Text dayText = new Text("Day: " + day);
@@ -140,9 +155,8 @@ public class InitialUIScreen {
             }
         }
 
-
         VBox initialFarm = new VBox(moneyText, dayText, plotRow1, plotRow2,
-                inventoryDisplay, marketBtn);
+                inventoryDisplay, plantBtns, marketBtn);
         return new Scene(initialFarm, width, height);
     }
 }

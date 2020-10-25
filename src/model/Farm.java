@@ -4,6 +4,7 @@ public class Farm {
     private int difficulty; //1 is easy, 2 medium, 3 hard
     //will need a Plot object and arraylist of plots when that fucntionality is added
     private int day;
+    private Crop[] cropArray = new Crop[10];
     /**
      * Full constructor for creating a Farm object
      * @param difficulty difficulty for player to play on
@@ -47,6 +48,23 @@ public class Farm {
         }
     }
 
+    public Crop[] getCropArray() { return this.cropArray;}
+
+    public boolean plant(Crop c, int n) {
+        if (n > 0) {
+            for (int i = 0; i < this.cropArray.length; i++) {
+                if (cropArray[i] == null) {
+                    cropArray[i] = c;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void setCropArray(Crop c, int i) {
+        this.cropArray[i] = c;
+    }
     /**
      * getter for the day
      * @return the current day
@@ -70,5 +88,13 @@ public class Farm {
     public int nextDay() {
         this.day += 1;
         return this.day;
+    }
+
+    private void growAllCrops() {
+        for (int i = 0; i < this.cropArray.length; i++) {
+            if (this.cropArray[i] != null) {
+                this.cropArray[i].grow();
+            }
+        }
     }
 }
