@@ -47,7 +47,9 @@ public class Farm {
         }
     }
 
-    public Crop[] getCropArray() { return this.cropArray;}
+    public Crop[] getCropArray() {
+        return this.cropArray;
+    }
 
     public boolean plant(Crop c, int n) {
         if (n > 0) {

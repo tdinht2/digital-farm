@@ -135,7 +135,8 @@ public class Crop {
     }
 
     /**
-     * advance the stage of this crop, and decrease water level by 1. If water level is negative, plant is dead
+     * advance the stage of this crop, and decrease water level by 1. If water level is negative,
+     * plant is dead
      * @return if the crop successfully grew a stage and is not dead
      */
     public boolean grow() {
@@ -203,6 +204,7 @@ public class Crop {
         }
         Crop newO = (Crop) o;
         return this.species == newO.getSpecies() && this.stage == newO.getStage()
-                && this.waterLevel == newO.getWaterLevel() && this.fertilized == newO.isFertilized();
+                && this.waterLevel == newO.getWaterLevel()
+                && this.fertilized == newO.isFertilized();
     }
 }

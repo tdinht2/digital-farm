@@ -23,8 +23,8 @@ public class InitialUIScreen {
     private Button marketBtn;
     private Button timeBtn;
     private Button plantPotatoBtn = new Button("Plant Potato");
-    private Button plantRiceBtn= new Button("Plant Rice");
-    private Button plantCornBtn= new Button("Plant Corn");
+    private Button plantRiceBtn = new Button("Plant Rice");
+    private Button plantCornBtn = new Button("Plant Corn");
 
     private Image dirt = new Image("dirt_plot.png");
     private Image cornSeed = new Image("seed_plot.png");
@@ -65,38 +65,48 @@ public class InitialUIScreen {
         return plotsBtn;
     }
 
-    public Button getTimeBtn() { return timeBtn; }
+    public Button getTimeBtn() {
+        return timeBtn;
+    }
 
-    public Button[] getWaterBtns() { return waterBtns;}
+    public Button[] getWaterBtns() {
+        return waterBtns;
+    }
 
-    public Button getPlantPotatoBtn() { return plantPotatoBtn;}
-    public Button getPlantRiceBtn() { return plantRiceBtn;}
-    public Button getPlantCornBtn() { return plantCornBtn;}
+    public Button getPlantPotatoBtn() {
+        return plantPotatoBtn;
+    }
+    public Button getPlantRiceBtn() {
+        return plantRiceBtn;
+    }
+    public Button getPlantCornBtn() {
+        return plantCornBtn;
+    }
 
     public void setWater(Button btn, Crop c) {
         switch (c.getWaterLevel()) {
-            case 0:
-                btn.setGraphic(new ImageView(waterLevel0));
-                btn.setText("Water 0");
-                break;
-            case 1:
-                btn.setGraphic(new ImageView(waterLevel1));
-                btn.setText("Water 1");
-                break;
-            case 2:
-                btn.setGraphic(new ImageView(waterLevel2));
-                btn.setText("Water 2");
-                break;
-            case 3:
-                btn.setGraphic(new ImageView(waterLevel3));
-                btn.setText("Water 3");
-                break;
-            case 4:
-                btn.setGraphic(new ImageView(waterLevel4));
-                btn.setText("Water 4");
-                break;
-            default:
-                setEmptyWater(btn);
+        case 0:
+            btn.setGraphic(new ImageView(waterLevel0));
+            btn.setText("Water 0");
+            break;
+        case 1:
+            btn.setGraphic(new ImageView(waterLevel1));
+            btn.setText("Water 1");
+            break;
+        case 2:
+            btn.setGraphic(new ImageView(waterLevel2));
+            btn.setText("Water 2");
+            break;
+        case 3:
+            btn.setGraphic(new ImageView(waterLevel3));
+            btn.setText("Water 3");
+            break;
+        case 4:
+            btn.setGraphic(new ImageView(waterLevel4));
+            btn.setText("Water 4");
+            break;
+        default:
+            setEmptyWater(btn);
         }
     }
 

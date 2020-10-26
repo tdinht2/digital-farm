@@ -205,10 +205,11 @@ public class DigitalFarm extends Application {
                         refreshPlots(initUIScreen, plotsBtn, waterBtns);
                     }
                     break;
-                    case "Dead Plant":
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns);
+                case "Dead Plant":
+                    initUIScreen.setDirt(plotsBtn[finalI]);
+                    farm.setCropArray(null, finalI);
+                    refreshPlots(initUIScreen, plotsBtn, waterBtns);
+                    break;
                 default:
                     break;
                 }
