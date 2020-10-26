@@ -139,13 +139,13 @@ public class Crop {
      * @return if the crop successfully grew a stage and is not dead
      */
     public boolean grow() {
+        this.waterLevel--;
+        if (this.waterLevel < 0) {
+            this.stage = 0;
+            return false;
+        }
         if (this.stage < 3) {
             this.stage++;
-            this.waterLevel--;
-            if (this.waterLevel < 0) {
-                this.stage = 0;
-                return false;
-            }
             return true;
         }
         return false;
