@@ -143,6 +143,7 @@ public class DigitalFarm extends Application {
         Button timeBtn = initUIScreen.getTimeBtn();
         timeBtn.setOnAction(e -> {
             farm.nextDay();
+            initUIScreen.incrementDay();
             refreshPlots(initUIScreen, plotsBtn, waterBtns);
             mainWindow.setScene(initUIScreen.getScene());
         });
@@ -208,7 +209,6 @@ public class DigitalFarm extends Application {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
                         refreshPlots(initUIScreen, plotsBtn, waterBtns);
-
                 default:
                     break;
                 }

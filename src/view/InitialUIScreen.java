@@ -52,9 +52,12 @@ public class InitialUIScreen {
         day = d;
         inventory = inv;
         marketBtn = new Button("Go to Market");
-        timeBtn = new Button("Advance Time");
+        timeBtn = new Button("Next Day");
     }
 
+    public void incrementDay() {
+        this.day++;
+    }
     public Button getMarketBtn() {
         return marketBtn;
     }

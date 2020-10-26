@@ -155,10 +155,12 @@ public class Crop {
      * water this crop
      */
     public void water() {
-        if (waterLevel < 4) {
-            this.waterLevel += 1;
-            if (waterLevel > 3) {
-                this.stage = 0;
+        if (stage != 0) {
+            if (waterLevel < 4) {
+                this.waterLevel += 1;
+                if (waterLevel > 3) {
+                    this.stage = 0;
+                }
             }
         }
     }
