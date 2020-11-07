@@ -129,7 +129,7 @@ public class InitialUIScreen {
             btn.setGraphic(new ImageView(immaturePotato));
             btn.setText("Immature Potato");
             break;
-        case "Potato 3":
+        case "Potato 7":
             btn.setGraphic(new ImageView(potato));
             btn.setText("Potato");
             break;
@@ -141,7 +141,7 @@ public class InitialUIScreen {
             btn.setGraphic(new ImageView(immatureRice));
             btn.setText("Immature Rice");
             break;
-        case "Rice 3":
+        case "Rice 7":
             btn.setGraphic(new ImageView(rice));
             btn.setText("Rice");
             break;
@@ -153,7 +153,7 @@ public class InitialUIScreen {
             btn.setGraphic(new ImageView(immatureCorn));
             btn.setText("Immature Corn");
             break;
-        case "Corn 3":
+        case "Corn 7":
             btn.setGraphic(new ImageView(corn));
             btn.setText("Corn");
             break;
@@ -211,7 +211,7 @@ public class InitialUIScreen {
             String cropName;
             if (key.getClass() == Crop.class) {
                 Crop c = (Crop) key;
-                if (c.getStage() == 3) {
+                if (c.getStage() == 7) {
                     cropName = c.getSpecies().getName();
                 } else {
                     cropName = c.getSpecies().getName() + " Seed";

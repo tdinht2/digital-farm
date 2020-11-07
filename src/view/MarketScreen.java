@@ -40,9 +40,9 @@ public class MarketScreen {
         sellPotatoSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Potato), 1));
         sellCornSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Corn), 1));
         sellRiceSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Rice), 1));
-        sellPotatoBtn = new Button("Sell for " + m.sell(new Crop(3, Crop.Type.Potato), 1));
-        sellCornBtn = new Button("Sell for " + m.sell(new Crop(3, Crop.Type.Corn), 1));
-        sellRiceBtn = new Button("Sell for " + m.sell(new Crop(3, Crop.Type.Rice), 1));
+        sellPotatoBtn = new Button("Sell for " + m.sell(new Crop(7, Crop.Type.Potato), 1));
+        sellCornBtn = new Button("Sell for " + m.sell(new Crop(7, Crop.Type.Corn), 1));
+        sellRiceBtn = new Button("Sell for " + m.sell(new Crop(7, Crop.Type.Rice), 1));
         backBtn = new Button("Back");
     }
 
@@ -90,11 +90,11 @@ public class MarketScreen {
             String cropName;
             Text crop;
             HBox sellDisplay = new HBox();
-            if (key.getClass() == Crop.class) {
+            if (key instanceof Crop) {
                 Crop c = (Crop) key;
-                if (c.getStage() == 3) {
+                if (c.getStage() == 7) {
                     cropName = c.getSpecies().getName();
-                    crop = new Text(cropName + ": " + inventory.get(key));
+                    crop = new Text(cropName + ": " + inventory.get(c));
                     if (cropName.equals("Corn")) {
                         sellDisplay.getChildren().addAll(crop, getSellCornBtn());
                     } else if (cropName.equals("Potato")) {
@@ -104,7 +104,7 @@ public class MarketScreen {
                     }
                 } else {
                     cropName = c.getSpecies().getName() + " Seed";
-                    crop = new Text(cropName + ": " + inventory.get(key));
+                    crop = new Text(cropName + ": " + inventory.get(c));
                     if (cropName.equals("Corn Seed")) {
                         sellDisplay.getChildren().addAll(crop, getSellCornSeedBtn());
                     } else if (cropName.equals("Potato Seed")) {
@@ -119,21 +119,24 @@ public class MarketScreen {
 
         //Buy section for crops
         VBox buyBox = new VBox(new Text("Buy Here"));
-        HashMap<Crop, Integer> stock = market.getStock();
-        for (Crop key : stock.keySet()) {
-            String cropName = key.getSpecies().getName();
-            Text cropLabel = new Text(cropName + " Cost: " + stock.get(key));
+        HashMap<Object, Integer> stock = market.getStock();
+        for (Object key : stock.keySet()) {
+            if (key instanceof Crop) {
+                Crop crop = (Crop) key;
+                String cropName = crop.getSpecies().getName();
+                Text cropLabel = new Text(cropName + " Cost: " + stock.get(crop));
 
-            HBox crop;
-            if (key.getStage() == 3) {
-                if (cropName.equals("Potato")) {
-                    crop = new HBox(buyPotatoBtn, cropLabel);
-                } else if (cropName.equals("Corn")) {
-                    crop = new HBox(buyCornBtn, cropLabel);
-                } else {
-                    crop = new HBox(buyRiceBtn, cropLabel);
+                HBox cropBox;
+                if (crop.getStage() == 1) {
+                    if (cropName.equals("Potato")) {
+                        cropBox = new HBox(buyPotatoBtn, cropLabel);
+                    } else if (cropName.equals("Corn")) {
+                        cropBox = new HBox(buyCornBtn, cropLabel);
+                    } else {
+                        cropBox = new HBox(buyRiceBtn, cropLabel);
+                    }
+                    buyBox.getChildren().add(cropBox);
                 }
-                buyBox.getChildren().add(crop);
             }
         }
 
