@@ -186,21 +186,21 @@ public class DigitalFarm extends Application {
             plotsBtn[i].setOnAction(e -> {
                 switch (plotsBtn[finalI].getText()) {
                 case "Potato":
-                    if (player.addItem(new Crop(3, Crop.Type.Potato), 1)) {
+                    if (player.addItem(new Crop(7, Crop.Type.Potato), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
                         refreshPlots(initUIScreen, plotsBtn, waterBtns);
                     }
                     break;
                 case "Corn":
-                    if (player.addItem(new Crop(3, Crop.Type.Corn), 1)) {
+                    if (player.addItem(new Crop(7, Crop.Type.Corn), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
                         refreshPlots(initUIScreen, plotsBtn, waterBtns);
                     }
                     break;
                 case "Rice":
-                    if (player.addItem(new Crop(3, Crop.Type.Rice), 1)) {
+                    if (player.addItem(new Crop(7, Crop.Type.Rice), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
                         refreshPlots(initUIScreen, plotsBtn, waterBtns);
@@ -238,7 +238,7 @@ public class DigitalFarm extends Application {
 
     private void goToMarketScreen() {
         Market market = new Market(difficulty);
-        HashMap<Crop, Integer> stock = market.getStock();
+        HashMap<Object, Integer> stock = market.getStock();
         MarketScreen marketScreen = new MarketScreen(width, height, player, market);
 
         Button backBtn = marketScreen.getBackBtn();
@@ -246,88 +246,91 @@ public class DigitalFarm extends Application {
             goToInitialUIScreen();
         });
 
-        for (Crop key : stock.keySet()) {
-            if (key.getSpecies().getName().equals("Potato") && key.getStage() == 1) {
-                Button buyPotatoBtn = marketScreen.getBuyPotatoBtn();
-                buyPotatoBtn.setOnAction(e -> {
-                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace()
-                            - player.getInventoryCount())) {
-                        player.setMoney(player.getMoney() - stock.get(key));
-                        player.addItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-                Button sellPotatoSeedBtn = marketScreen.getSellPotatoSeedBtn();
-                sellPotatoSeedBtn.setOnAction(e -> {
-                    if (player.getInventory().get(key) > 0) {
-                        player.setMoney(player.getMoney() + market.sell(key, 1));
-                        player.subtractItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-            } else if (key.getSpecies().getName().equals("Potato") && key.getStage() == 3) {
-                Button sellPotatoBtn = marketScreen.getSellPotatoBtn();
-                sellPotatoBtn.setOnAction(e -> {
-                    if (player.getInventory().get(key) > 0) {
-                        player.setMoney(player.getMoney() + market.sell(key, 1));
-                        player.subtractItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-            } else if (key.getSpecies().getName().equals("Corn") && key.getStage() == 1) {
-                Button buyCornBtn = marketScreen.getBuyCornBtn();
-                buyCornBtn.setOnAction(e -> {
-                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace()
-                            - player.getInventoryCount())) {
-                        player.setMoney(player.getMoney() - stock.get(key));
-                        player.addItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-                Button sellCornSeedBtn = marketScreen.getSellCornSeedBtn();
-                sellCornSeedBtn.setOnAction(e -> {
-                    if (player.getInventory().get(key) > 0) {
-                        player.setMoney(player.getMoney() + market.sell(key, 1));
-                        player.subtractItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-            } else if (key.getSpecies().getName().equals("Corn") && key.getStage() == 3) {
-                Button sellCornBtn = marketScreen.getSellCornBtn();
-                sellCornBtn.setOnAction(e -> {
-                    if (player.getInventory().get(key) > 0) {
-                        player.setMoney(player.getMoney() + market.sell(key, 1));
-                        player.subtractItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-            } else if (key.getSpecies().getName().equals("Rice") && key.getStage() == 1) {
-                Button buyRiceBtn = marketScreen.getBuyRiceBtn();
-                buyRiceBtn.setOnAction(e -> {
-                    if (market.buy(player.getMoney(), key, 1, player.getMaxInventorySpace()
-                            - player.getInventoryCount())) {
-                        player.setMoney(player.getMoney() - stock.get(key));
-                        player.addItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-                Button sellRiceSeedBtn = marketScreen.getSellRiceSeedBtn();
-                sellRiceSeedBtn.setOnAction(e -> {
-                    if (player.getInventory().get(key) > 0) {
-                        player.setMoney(player.getMoney() + market.sell(key, 1));
-                        player.subtractItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
-            } else if (key.getSpecies().getName().equals("Rice") && key.getStage() == 3) {
-                Button sellRiceBtn = marketScreen.getSellRiceBtn();
-                sellRiceBtn.setOnAction(e -> {
-                    if (player.getInventory().get(key) > 0) {
-                        player.setMoney(player.getMoney() + market.sell(key, 1));
-                        player.subtractItem(key, 1);
-                        mainWindow.setScene(marketScreen.getScene());
-                    }
-                });
+        for (Object key : stock.keySet()) {
+            if (key instanceof Crop) {
+                Crop crop = (Crop) key;
+                if (crop.getSpecies().getName().equals("Potato") && crop.getStage() == 1) {
+                    Button buyPotatoBtn = marketScreen.getBuyPotatoBtn();
+                    buyPotatoBtn.setOnAction(e -> {
+                        if (market.buy(player.getMoney(), crop, 1, player.getMaxInventorySpace()
+                                - player.getInventoryCount())) {
+                            player.setMoney(player.getMoney() - stock.get(crop));
+                            player.addItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                    Button sellPotatoSeedBtn = marketScreen.getSellPotatoSeedBtn();
+                    sellPotatoSeedBtn.setOnAction(e -> {
+                        if (player.getInventory().get(crop) > 0) {
+                            player.setMoney(player.getMoney() + market.sell(crop, 1));
+                            player.subtractItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                } else if (crop.getSpecies().getName().equals("Potato") && crop.getStage() == 3) {
+                    Button sellPotatoBtn = marketScreen.getSellPotatoBtn();
+                    sellPotatoBtn.setOnAction(e -> {
+                        if (player.getInventory().get(crop) > 0) {
+                            player.setMoney(player.getMoney() + market.sell(crop, 1));
+                            player.subtractItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                } else if (crop.getSpecies().getName().equals("Corn") && crop.getStage() == 1) {
+                    Button buyCornBtn = marketScreen.getBuyCornBtn();
+                    buyCornBtn.setOnAction(e -> {
+                        if (market.buy(player.getMoney(), crop, 1, player.getMaxInventorySpace()
+                                - player.getInventoryCount())) {
+                            player.setMoney(player.getMoney() - stock.get(crop));
+                            player.addItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                    Button sellCornSeedBtn = marketScreen.getSellCornSeedBtn();
+                    sellCornSeedBtn.setOnAction(e -> {
+                        if (player.getInventory().get(crop) > 0) {
+                            player.setMoney(player.getMoney() + market.sell(crop, 1));
+                            player.subtractItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                } else if (crop.getSpecies().getName().equals("Corn") && crop.getStage() == 3) {
+                    Button sellCornBtn = marketScreen.getSellCornBtn();
+                    sellCornBtn.setOnAction(e -> {
+                        if (player.getInventory().get(crop) > 0) {
+                            player.setMoney(player.getMoney() + market.sell(crop, 1));
+                            player.subtractItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                } else if (crop.getSpecies().getName().equals("Rice") && crop.getStage() == 1) {
+                    Button buyRiceBtn = marketScreen.getBuyRiceBtn();
+                    buyRiceBtn.setOnAction(e -> {
+                        if (market.buy(player.getMoney(), crop, 1, player.getMaxInventorySpace()
+                                - player.getInventoryCount())) {
+                            player.setMoney(player.getMoney() - stock.get(crop));
+                            player.addItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                    Button sellRiceSeedBtn = marketScreen.getSellRiceSeedBtn();
+                    sellRiceSeedBtn.setOnAction(e -> {
+                        if (player.getInventory().get(crop) > 0) {
+                            player.setMoney(player.getMoney() + market.sell(crop, 1));
+                            player.subtractItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                } else if (crop.getSpecies().getName().equals("Rice") && crop.getStage() == 3) {
+                    Button sellRiceBtn = marketScreen.getSellRiceBtn();
+                    sellRiceBtn.setOnAction(e -> {
+                        if (player.getInventory().get(crop) > 0) {
+                            player.setMoney(player.getMoney() + market.sell(crop, 1));
+                            player.subtractItem(crop, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                }
             }
         }
 
