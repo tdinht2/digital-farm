@@ -155,48 +155,6 @@ public class InitialUIScreen {
                 }
             }
         }
-//        switch (c.getSpecies().getName() + " " + c.getStage()) {
-//        case "Potato 1":
-//            btn.setGraphic(new ImageView(potatoSeed));
-//            btn.setText("Potato Seed");
-//            break;
-//        case "Potato 2":
-//            btn.setGraphic(new ImageView(immaturePotato));
-//            btn.setText("Immature Potato");
-//            break;
-//        case "Potato 7":
-//            btn.setGraphic(new ImageView(potato));
-//            btn.setText("Potato");
-//            break;
-//        case "Rice 1":
-//            btn.setGraphic(new ImageView(riceSeed));
-//            btn.setText("Rice Seed");
-//            break;
-//        case "Rice 2":
-//            btn.setGraphic(new ImageView(immatureRice));
-//            btn.setText("Immature Rice");
-//            break;
-//        case "Rice 7":
-//            btn.setGraphic(new ImageView(rice));
-//            btn.setText("Rice");
-//            break;
-//        case "Corn 1":
-//            btn.setGraphic(new ImageView(cornSeed));
-//            btn.setText("Corn Seed");
-//            break;
-//        case "Corn 2":
-//            btn.setGraphic(new ImageView(immatureCorn));
-//            btn.setText("Immature Corn");
-//            break;
-//        case "Corn 7":
-//            btn.setGraphic(new ImageView(corn));
-//            btn.setText("Corn");
-//            break;
-//        default:
-//            btn.setGraphic(new ImageView(dirt));
-//            btn.setText("dirt");
-//            break;
-//        }
     }
 
     public void setDirt(Button btn) {
