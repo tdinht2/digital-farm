@@ -3,7 +3,7 @@ import java.util.Random;
 import java.util.HashMap;
 
 public class Market {
-    private HashMap<Crop, Integer> stock;
+    private HashMap<Object, Integer> stock;
     private Random rand = new Random(); //class helper attribute
     private int difficulty; //class helper attribute
 
@@ -20,14 +20,18 @@ public class Market {
      * instantiate the stock of the market with calculated prices of all crops in the game
      */
     private void initStock() {
-        this.stock = new HashMap<Crop, Integer>();
+        this.stock = new HashMap<Object, Integer>();
         Crop.Type[] crops = Crop.Type.values();
         int variance = rand.nextInt(10);
+        Item.MarketItem[] items = Item.MarketItem.values();
 
         //iterate over all crop types, calculate price, and enter into stock
         for (int i = 0; i < crops.length; i++) {
             stock.put(new Crop(1, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
-            stock.put(new Crop(3, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
+            stock.put(new Crop(7, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
+        }
+        for (int i = 0; i < items.length; i++) {
+            stock.put(new Item(items[i]), calculatePrice(items[i].getBasePrice(), variance));
         }
     }
 
@@ -51,7 +55,11 @@ public class Market {
         int income = this.stock.get(crop);
         if (crop.getStage() == 3) {
             // make 2 times the buying price for growing the crop
-            return income * quantity * 2;
+            if (crop.isPesticides()) {
+                return (int)0.75 * income * quantity * 2;
+            } else {
+                return income * quantity * 2;
+            }
         }
         return (int) (income * quantity * 0.5); //only get half for selling back a non mature plant
 
@@ -60,20 +68,20 @@ public class Market {
     /**
      * allows the player to buy an amount of crop
      * @param currMoney current money of the player
-     * @param crop Crop to buy (from stock)
+     * @param item item to buy (from stock)
      * @param quantity amount of buy
      * @param inventorySpaceLeft current inventory space left of player
      * @return if the purchase is legal
      */
-    public boolean buy(int currMoney, Crop crop, int quantity, int inventorySpaceLeft) {
+    public boolean buy(int currMoney, Object item, int quantity, int inventorySpaceLeft) {
         if (quantity > inventorySpaceLeft) {
             return false;
         }
 
-        if (crop.getStage() != 1) { //we only sell seeds here
+        if (!stock.containsKey(item)) {
             return false;
         }
-        int totalCost = this.stock.get(crop) * quantity;
+        int totalCost = this.stock.get(item) * quantity;
         if (totalCost > currMoney) {
             return false;
         }
@@ -84,7 +92,7 @@ public class Market {
      * getter for stock
      * @return the stock of the market
      */
-    public HashMap<Crop, Integer> getStock() {
+    public HashMap<Object, Integer> getStock() {
         return this.stock;
     }
 }

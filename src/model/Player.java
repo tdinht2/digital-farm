@@ -1,8 +1,10 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class Player {
+    private Random rand;
     private String name;
     private int money;
     //will probably initialize with each item having a value of 0
@@ -168,5 +170,22 @@ public class Player {
 
     public Market getMarket() {
         return this.market;
+    }
+
+    /**
+     * harvests a crop and adds it to the player's inventory
+     * @param crop crop to harvest
+     */
+    public void harvest(Crop crop) {
+        if (crop.isFertilized()) {
+            if (rand.nextDouble() > .7 && this.getMaxInventorySpace() - this.getInventoryCount() > 1) {
+                this.addItem(crop, 2);
+            } else {
+                this.addItem(crop, 1);
+            }
+        } else {
+            this.addItem(crop, 1);
+        }
+
     }
 }
