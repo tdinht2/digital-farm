@@ -143,6 +143,7 @@ public class DigitalFarm extends Application {
         Button timeBtn = initUIScreen.getTimeBtn();
         timeBtn.setOnAction(e -> {
             farm.nextDay();
+
             initUIScreen.incrementDay();
             refreshPlots(initUIScreen, plotsBtn, waterBtns);
             mainWindow.setScene(initUIScreen.getScene());

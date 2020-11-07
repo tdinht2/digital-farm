@@ -1,9 +1,35 @@
 package model;
+import java.util.Random;
 
 public class Farm {
+    private static Random rand = new Random();
+    public enum RandomEvent {
+        Nothing("Nothing", 80.0),
+        Rain("Rain", 30.0),
+        Locust("Locust", 10.0),
+        Drought("Drought", 10.0);
+
+        private String name;
+        private double baseChance;
+
+        /**
+         * constructor for the enum
+         * @param name string representing the name of the random event
+         */
+        RandomEvent(String name, double baseChance) {
+            this.name = name;
+            this.baseChance = baseChance;
+        }
+
+        public String getName() { return this.name; }
+
+        public double getChance() { return this.baseChance; }
+    }
+
     private int difficulty; //1 is easy, 2 medium, 3 hard
     private int day;
     private Crop[] cropArray = new Crop[10];
+
     /**
      * Full constructor for creating a Farm object
      * @param difficulty difficulty for player to play on
@@ -88,8 +114,67 @@ public class Farm {
      */
     public int nextDay() {
         this.day += 1;
+        RandomEvent event = this.getRandomEvent();
+        if (event.getName().equals("Rain")) {
+            rain();
+        } else if (event.getName().equals("Drought")) {
+            drought();
+        } else if (event.getName().equals("Locust")) {
+            locust();
+        }
+
         growAllCrops();
         return this.day;
+    }
+
+    /**
+     * returns a random event using weights and current difficulty
+     * @return random event
+     */
+    private RandomEvent getRandomEvent() {
+        double totalWeight = 0.0;
+        for (RandomEvent event : RandomEvent.values()) {
+            totalWeight += event.getChance() + this.difficulty * 10;
+        }
+
+        RandomEvent randomEvent = RandomEvent.Nothing;
+        double random = Math.random() * totalWeight;
+        for (RandomEvent event : RandomEvent.values()) {
+            random -= event.getChance() + this.difficulty * 10;
+            if (random <= 0.0) {
+                randomEvent = event;
+                break;
+            }
+        }
+        return randomEvent;
+    }
+
+    private void rain() {
+        for (int i = 0; i < this.cropArray.length; i++) {
+            if (this.cropArray[i] != null) {
+                this.cropArray[i].setWaterLevel(this.cropArray[i].getWaterLevel() + rand.nextInt(3) + 1);
+            }
+        }
+    }
+
+    private void drought() {
+        for (int i = 0; i < this.cropArray.length; i++) {
+            if (this.cropArray[i] != null) {
+                this.cropArray[i].setWaterLevel(this.cropArray[i].getWaterLevel() - rand.nextInt(3) + 1);
+            }
+        }
+    }
+
+    private void locust() {
+        for (int i = 0; i < this.cropArray.length; i++) {
+            if (this.cropArray[i] != null) {
+                //chance of each crop dying increases with higher difficulty
+                int deathChance = rand.nextInt(3) + 1 - difficulty;
+                if (deathChance <= 0) {
+                    this.cropArray[i].setStage(0);
+                }
+            }
+        }
     }
 
     private void growAllCrops() {

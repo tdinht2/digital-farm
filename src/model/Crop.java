@@ -195,6 +195,20 @@ public class Crop {
     }
 
     /**
+     * setter for watered attribute
+     */
+    public void setWaterLevel(int level) {
+        if (stage != 0) {
+            if (waterLevel < 4) {
+                this.waterLevel = level;
+                if (waterLevel > 3) {
+                    this.stage = 0;
+                }
+            }
+        }
+    }
+
+    /**
      * getter for fertlize attribute
      * @return if crop is fertlized
      */
