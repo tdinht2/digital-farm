@@ -1,9 +1,13 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.Crop;
 import model.Market;
@@ -147,7 +151,28 @@ public class DigitalFarm extends Application {
         Button timeBtn = initUIScreen.getTimeBtn();
         timeBtn.setOnAction(e -> {
             farm.nextDay();
-
+            refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+            Alert event = new Alert(Alert.AlertType.INFORMATION);
+            event.setTitle("Event");
+            switch (farm.getEventGenerated().name()) {
+                case "Rain":
+                    event.setHeaderText("It has rained!");
+                    event.setGraphic(new ImageView(new Image("rain.jpg")));
+                    event.show();
+                    break;
+                case "Locust":
+                    event.setHeaderText("Locusts have attacked your crops!");
+                    event.setGraphic(new ImageView(new Image("locust.jpg")));
+                    event.show();
+                    break;
+                case "Drought":
+                    event.setHeaderText("A drought has occurred!");
+                    event.setGraphic(new ImageView(new Image("drought.jpg")));
+                    event.show();
+                    break;
+                default:
+                    break;
+            }
             initUIScreen.incrementDay();
             refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
             mainWindow.setScene(initUIScreen.getScene());

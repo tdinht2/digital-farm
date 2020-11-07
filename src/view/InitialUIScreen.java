@@ -240,9 +240,9 @@ public class InitialUIScreen {
             plotsBtn[i].setMaxWidth(234);
             plotsBtn[i].setMaxHeight(210);
             waterBtns[i].setMinWidth(234);
-            waterBtns[i].setMinHeight(57);
+            waterBtns[i].setMinHeight(29);
             waterBtns[i].setMaxWidth(234);
-            waterBtns[i].setMaxHeight(57);
+            waterBtns[i].setMaxHeight(29);
             fertBtns[i].setMinWidth(234);
             fertBtns[i].setMinHeight(28);
             fertBtns[i].setMaxWidth(234);

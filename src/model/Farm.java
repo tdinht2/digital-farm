@@ -5,12 +5,13 @@ public class Farm {
     private static Random rand = new Random();
     public enum RandomEvent {
         Nothing("Nothing", 80.0),
-        Rain("Rain", 30.0),
-        Locust("Locust", 10.0),
-        Drought("Drought", 10.0);
+        Rain("Rain", 10.0),
+        Locust("Locust", 5.0),
+        Drought("Drought", 5.0);
 
         private String name;
         private double baseChance;
+
 
         /**
          * constructor for the enum
@@ -28,6 +29,7 @@ public class Farm {
 
     private int difficulty; //1 is easy, 2 medium, 3 hard
     private int day;
+    private RandomEvent eventGenerated;
     private Crop[] cropArray = new Crop[10];
 
     /**
@@ -115,6 +117,7 @@ public class Farm {
     public int nextDay() {
         this.day += 1;
         RandomEvent event = this.getRandomEvent();
+        eventGenerated = event;
         if (event.getName().equals("Rain")) {
             rain();
         } else if (event.getName().equals("Drought")) {
@@ -127,6 +130,9 @@ public class Farm {
         return this.day;
     }
 
+    public RandomEvent getEventGenerated() {
+        return eventGenerated;
+    }
     /**
      * returns a random event using weights and current difficulty
      * @return random event
@@ -134,13 +140,13 @@ public class Farm {
     private RandomEvent getRandomEvent() {
         double totalWeight = 0.0;
         for (RandomEvent event : RandomEvent.values()) {
-            totalWeight += event.getChance() + this.difficulty * 10;
+            totalWeight += event.getChance() + this.difficulty * 2;
         }
 
         RandomEvent randomEvent = RandomEvent.Nothing;
         double random = Math.random() * totalWeight;
         for (RandomEvent event : RandomEvent.values()) {
-            random -= event.getChance() + this.difficulty * 10;
+            random -= event.getChance();
             if (random <= 0.0) {
                 randomEvent = event;
                 break;
@@ -153,7 +159,9 @@ public class Farm {
         for (int i = 0; i < this.cropArray.length; i++) {
             if (this.cropArray[i] != null) {
                 int rainCount = rand.nextInt(3) + 1;
+                for (int x = 0; x < rainCount; x++) {
                     this.cropArray[i].water();
+                }
             }
         }
     }
