@@ -2,11 +2,20 @@
 <project version="4">
 <<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8.0_261" project-jdk-type="JavaSDK">
+<<<<<<< HEAD
 ||||||| parent of 8b37fef... change some code to work with new stages of 1-7, still broken
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11.0.4" project-jdk-type="JavaSDK">
 =======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
 >>>>>>> 8b37fef... change some code to work with new stages of 1-7, still broken
+||||||| 5b0c483
+=======
+||||||| 667bc49
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11.0.4" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+>>>>>>> alec
+>>>>>>> ceab5ca04b6b2efdf4b5ccd5c02dabd00b6042bf
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
