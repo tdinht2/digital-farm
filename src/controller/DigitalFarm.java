@@ -266,7 +266,7 @@ public class DigitalFarm extends Application {
                             mainWindow.setScene(marketScreen.getScene());
                         }
                     });
-                } else if (crop.getSpecies().getName().equals("Potato") && crop.getStage() == 3) {
+                } else if (crop.getSpecies().getName().equals("Potato") && crop.getStage() == 7) {
                     Button sellPotatoBtn = marketScreen.getSellPotatoBtn();
                     sellPotatoBtn.setOnAction(e -> {
                         if (player.getInventory().get(crop) > 0) {
@@ -293,7 +293,7 @@ public class DigitalFarm extends Application {
                             mainWindow.setScene(marketScreen.getScene());
                         }
                     });
-                } else if (crop.getSpecies().getName().equals("Corn") && crop.getStage() == 3) {
+                } else if (crop.getSpecies().getName().equals("Corn") && crop.getStage() == 7) {
                     Button sellCornBtn = marketScreen.getSellCornBtn();
                     sellCornBtn.setOnAction(e -> {
                         if (player.getInventory().get(crop) > 0) {
@@ -320,7 +320,7 @@ public class DigitalFarm extends Application {
                             mainWindow.setScene(marketScreen.getScene());
                         }
                     });
-                } else if (crop.getSpecies().getName().equals("Rice") && crop.getStage() == 3) {
+                } else if (crop.getSpecies().getName().equals("Rice") && crop.getStage() == 7) {
                     Button sellRiceBtn = marketScreen.getSellRiceBtn();
                     sellRiceBtn.setOnAction(e -> {
                         if (player.getInventory().get(crop) > 0) {
