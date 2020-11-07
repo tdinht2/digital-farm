@@ -149,7 +149,7 @@ public class Crop {
             this.stage = 0;
             return false;
         }
-        if (this.stage < 7) {
+        if (this.stage < 7 && this.stage != 0) {
             if(isFertilized()) {
                 this.fertLevel--;
                 setStage(this.stage + 2); //account for edge where stage goes too high from growing twice
@@ -179,11 +179,14 @@ public class Crop {
      * fertilize this crop up to max of 3 times
      */
     public boolean fertilize() {
-        if (this.fertLevel > 3) {
-            return false;
+        if (stage!= 0) {
+            if (this.fertLevel > 3) {
+                return false;
+            }
+            this.fertLevel += 1;
+            return true;
         }
-        this.fertLevel += 1;
-        return true;
+        return false;
     }
 
     /**
@@ -225,7 +228,9 @@ public class Crop {
     }
 
     public void addPesticide() {
-        this.pesticides = true;
+        if (stage != 0) {
+            this.pesticides = true;
+        }
     }
     public boolean isPesticides() {
         return this.pesticides;

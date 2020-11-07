@@ -152,7 +152,8 @@ public class Farm {
     private void rain() {
         for (int i = 0; i < this.cropArray.length; i++) {
             if (this.cropArray[i] != null) {
-                this.cropArray[i].setWaterLevel(this.cropArray[i].getWaterLevel() + rand.nextInt(3) + 1);
+                int rainCount = rand.nextInt(3) + 1;
+                    this.cropArray[i].water();
             }
         }
     }
@@ -170,8 +171,10 @@ public class Farm {
             if (this.cropArray[i] != null) {
                 //chance of each crop dying increases with higher difficulty
                 int deathChance = rand.nextInt(3) + 1 - difficulty;
-                if (deathChance <= 0) {
-                    this.cropArray[i].setStage(0);
+                if (!this.cropArray[i].isPesticides()) {
+                    if (deathChance <= 0) {
+                        this.cropArray[i].setStage(0);
+                    }
                 }
             }
         }

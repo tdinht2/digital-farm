@@ -19,6 +19,8 @@ public class InitialUIScreen {
     private int day;
     private Button[] plotsBtn = new Button[10];
     private Button[] waterBtns = new Button[10];
+    private Button[] fertBtns = new Button[10];
+    private Button[] pestBtns = new Button[10];
     private HashMap<Object, Integer> inventory;
     private Button marketBtn;
     private Button timeBtn;
@@ -42,6 +44,12 @@ public class InitialUIScreen {
     private Image waterLevel3 = new Image("water_level_3.png");
     private Image waterLevel4 = new Image("water_level_4.png");
     private Image deadPlant = new Image("dead_plant.png");
+    private Image fertLevel0 = new Image("fert_level_0.png");
+    private Image fertLevel1 = new Image("fert_level_1.png");
+    private Image fertLevel2 = new Image("fert_level_2.png");
+    private Image fertLevel3 = new Image("fert_level_3.png");
+    private Image pestOn = new Image("pest_on.png");
+    private Image pestOff = new Image("pest_off.png");
 
 
     private InitialUIScreen() { }
@@ -72,6 +80,8 @@ public class InitialUIScreen {
     public Button[] getWaterBtns() {
         return waterBtns;
     }
+    public Button[] getFertBtns() {return fertBtns;}
+    public Button[] getPestBtns() {return pestBtns;}
 
     public Button getPlantPotatoBtn() {
         return plantPotatoBtn;
@@ -110,9 +120,51 @@ public class InitialUIScreen {
         }
     }
 
+    public void setFert(Button btn, Crop c) {
+        switch (c.getFertLevel()) {
+            case 0:
+                btn.setGraphic(new ImageView(fertLevel0));
+                btn.setText("Fertilizer 0");
+                break;
+            case 1:
+                btn.setGraphic(new ImageView(fertLevel1));
+                btn.setText("Fertilizer 1");
+                break;
+            case 2:
+                btn.setGraphic(new ImageView(fertLevel2));
+                btn.setText("Fertilizer 2");
+                break;
+            case 3:
+                btn.setGraphic(new ImageView(fertLevel3));
+                btn.setText("Fertilizer 3");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void setPest(Button btn, Crop c) {
+        if (c.isPesticides()) {
+            btn.setGraphic(new ImageView(pestOn));
+            btn.setText("pestOn");
+        } else {
+            btn.setGraphic(new ImageView(pestOff));
+            btn.setText("pestOff");
+        }
+    }
+    public void setEmptyPest(Button btn) {
+        btn.setGraphic(new ImageView(pestOff));
+        btn.setText("pestOff");
+    }
+
     public void setEmptyWater(Button btn) {
         btn.setGraphic(new ImageView(waterLevel0));
         btn.setText("Water 0");
+    }
+
+    public void setEmptyFert(Button btn) {
+        btn.setGraphic(new ImageView(fertLevel0));
+        btn.setText("Fertilizer 0");
     }
     public void setPlant(Button btn, Crop c) {
         if (c.getStage() == 0) {
@@ -168,6 +220,10 @@ public class InitialUIScreen {
         HBox plotRow2 = new HBox();
         HBox waterRow1 = new HBox();
         HBox waterRow2 = new HBox();
+        HBox fertRow1 = new HBox();
+        HBox fertRow2 = new HBox();
+        HBox pestRow1 = new HBox();
+        HBox pestRow2 = new HBox();
         HBox plantBtns = new HBox();
         plantBtns.getChildren().add(plantCornBtn);
         plantBtns.getChildren().add(plantRiceBtn);
@@ -187,12 +243,24 @@ public class InitialUIScreen {
             waterBtns[i].setMinHeight(57);
             waterBtns[i].setMaxWidth(234);
             waterBtns[i].setMaxHeight(57);
+            fertBtns[i].setMinWidth(234);
+            fertBtns[i].setMinHeight(28);
+            fertBtns[i].setMaxWidth(234);
+            fertBtns[i].setMaxHeight(28);
+            pestBtns[i].setMinWidth(234);
+            pestBtns[i].setMinHeight(28);
+            pestBtns[i].setMaxWidth(234);
+            pestBtns[i].setMaxHeight(28);
             if (i < 5) {
                 plotRow1.getChildren().add(plotsBtn[i]);
                 waterRow1.getChildren().add(waterBtns[i]);
+                fertRow1.getChildren().add(fertBtns[i]);
+                pestRow1.getChildren().add(pestBtns[i]);
             } else {
                 plotRow2.getChildren().add(plotsBtn[i]);
                 waterRow2.getChildren().add(waterBtns[i]);
+                fertRow2.getChildren().add(fertBtns[i]);
+                pestRow2.getChildren().add(pestBtns[i]);
             }
         }
         //create inventory
@@ -213,8 +281,8 @@ public class InitialUIScreen {
             }
         }
 
-        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, waterRow1, plotRow2, waterRow2,
-                inventoryDisplay, plantBtns, marketBtn, timeBtn);
+        VBox initialFarm = new VBox(moneyText, dayText, plotRow1,pestRow1,fertRow1, waterRow1, plotRow2,
+                pestRow2,fertRow2, waterRow2, inventoryDisplay, plantBtns, marketBtn, timeBtn);
 
         return new Scene(initialFarm, width, height);
     }
