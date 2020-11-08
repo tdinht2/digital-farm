@@ -6,6 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.Crop;
+import model.Item;
 import model.Market;
 import model.Player;
 
@@ -19,6 +20,8 @@ public class MarketScreen {
     private Button buyPotatoBtn;
     private Button buyCornBtn;
     private Button buyRiceBtn;
+    private Button buyFertBtn;
+    private Button buyPestBtn;
     private Button sellPotatoSeedBtn;
     private Button sellCornSeedBtn;
     private Button sellRiceSeedBtn;
@@ -37,6 +40,8 @@ public class MarketScreen {
         buyPotatoBtn = new Button("Buy");
         buyCornBtn = new Button("Buy");
         buyRiceBtn = new Button("Buy");
+        buyFertBtn = new Button("Buy");
+        buyPestBtn = new Button("Buy");
         sellPotatoSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Potato), 1));
         sellCornSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Corn), 1));
         sellRiceSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Rice), 1));
@@ -76,6 +81,8 @@ public class MarketScreen {
     public Button getBackBtn() {
         return backBtn;
     }
+    public Button getBuyFertBtn() {return buyFertBtn;}
+    public Button getBuyPestBtn() {return buyPestBtn;}
 
     public Scene getScene() {
         Text marketTitle = new Text("Market");
@@ -90,6 +97,12 @@ public class MarketScreen {
             String cropName;
             Text crop;
             HBox sellDisplay = new HBox();
+            if (key instanceof Item) {
+                Item item = (Item) key;
+                Text itemCount = new Text(item.getName() +": " + inventory.get(key));
+                sellDisplay.getChildren().add(itemCount);
+                inventoryDisplay.getChildren().add(sellDisplay);
+            }
             if (key instanceof Crop) {
                 Crop c = (Crop) key;
                 if (c.getStage() == 7) {
@@ -121,6 +134,19 @@ public class MarketScreen {
         VBox buyBox = new VBox(new Text("Buy Here"));
         HashMap<Object, Integer> stock = market.getStock();
         for (Object key : stock.keySet()) {
+            if (key instanceof Item) {
+                Item item = (Item) key;
+                String itemName = item.getName();
+                Text itemLabel = new Text(itemName + " Cost: " + stock.get(item));
+
+                HBox itemBox;
+                if (itemName.equals("Fertilizer")) {
+                    itemBox = new HBox(buyFertBtn, itemLabel);
+                } else {
+                    itemBox = new HBox(buyPestBtn, itemLabel);
+                }
+                buyBox.getChildren().add(itemBox);
+            }
             if (key instanceof Crop) {
                 Crop crop = (Crop) key;
                 String cropName = crop.getSpecies().getName();

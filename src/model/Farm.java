@@ -25,6 +25,10 @@ public class Farm {
         public String getName() { return this.name; }
 
         public double getChance() { return this.baseChance; }
+
+        public double newBaseChance(int difficulty) {
+            return this.baseChance * difficulty;
+        }
     }
 
     private int difficulty; //1 is easy, 2 medium, 3 hard
@@ -140,7 +144,11 @@ public class Farm {
     private RandomEvent getRandomEvent() {
         double totalWeight = 0.0;
         for (RandomEvent event : RandomEvent.values()) {
-            totalWeight += event.getChance() + this.difficulty * 2;
+            if(!event.getName().equals("Nothing")) {
+                totalWeight += event.newBaseChance(this.difficulty);
+            } else {
+                totalWeight += event.getChance();
+            }
         }
 
         RandomEvent randomEvent = RandomEvent.Nothing;

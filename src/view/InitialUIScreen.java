@@ -10,6 +10,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import model.Crop;
+import model.Item;
+
 import java.util.HashMap;
 
 public class InitialUIScreen {
@@ -269,6 +271,11 @@ public class InitialUIScreen {
 
         for (Object key : inventory.keySet()) {
             String cropName;
+            if (key instanceof Item) {
+                Item item = (Item) key;
+                Text itemTag = new Text(item.getName() + ": " + inventory.get(key));
+                inventoryDisplay.getChildren().add(itemTag);
+            }
             if (key.getClass() == Crop.class) {
                 Crop c = (Crop) key;
                 if (c.getStage() == 7) {

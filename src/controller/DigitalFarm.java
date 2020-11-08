@@ -9,10 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import model.Crop;
-import model.Market;
-import model.Player;
-import model.Farm;
+import model.*;
 import view.MarketScreen;
 import view.StartScreen;
 import view.ConfigScreen;
@@ -212,16 +209,27 @@ public class DigitalFarm extends Application {
             });
 
             fertBtns[i].setOnAction(e -> {
+                Item fertilizer = new Item(Item.MarketItem.Fertilizer);
                 if (farm.getCropArray()[finalI] != null) {
-                    farm.getCropArray()[finalI].fertilize();
-                    refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                    if (player.getInventory().get(fertilizer) > 0) {
+                        if (farm.getCropArray()[finalI].fertilize()) {
+                            player.subtractItem(fertilizer, 1);
+                            refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                        }
+                    }
                 }
             });
 
             pestBtns[i].setOnAction(e -> {
+                Item pesticide = new Item(Item.MarketItem.Pesticides);
                 if (farm.getCropArray()[finalI] != null) {
-                    farm.getCropArray()[finalI].addPesticide();
-                    refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                    if (player.getInventory().get(pesticide) > 0) {
+                        if (!farm.getCropArray()[finalI].isPesticides()) {
+                            farm.getCropArray()[finalI].addPesticide();
+                            player.subtractItem(pesticide, 1);
+                            refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                        }
+                    }
                 }
             });
 
@@ -294,6 +302,32 @@ public class DigitalFarm extends Application {
         });
 
         for (Object key : stock.keySet()) {
+            if (key instanceof Item) {
+                Item item = (Item) key;
+                Button buyFertBtn = marketScreen.getBuyFertBtn();
+                Button buyPestBtn = marketScreen.getBuyPestBtn();
+                if (item.getName().equals("Fertilizer")) {
+                    buyFertBtn.setOnAction(e -> {
+                        if (market.buy(player.getMoney(), item, 1,
+                                player.getMaxInventorySpace() - player.getInventoryCount())) {
+                            player.setMoney(player.getMoney() - stock.get(item));
+                            player.addItem(item, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                }
+
+                if (item.getName().equals("Pesticide")) {
+                    buyPestBtn.setOnAction(e -> {
+                        if (market.buy(player.getMoney(), item, 1,
+                                player.getMaxInventorySpace() - player.getInventoryCount())) {
+                            player.setMoney(player.getMoney() - stock.get(item));
+                            player.addItem(item, 1);
+                            mainWindow.setScene(marketScreen.getScene());
+                        }
+                    });
+                }
+            }
             if (key instanceof Crop) {
                 Crop crop = (Crop) key;
                 if (crop.getSpecies().getName().equals("Potato") && crop.getStage() == 1) {
