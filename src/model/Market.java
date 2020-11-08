@@ -56,7 +56,7 @@ public class Market {
         if (crop.getStage() == 3) {
             // make 2 times the buying price for growing the crop
             if (crop.isPesticides()) {
-                return (int) 0.75 * income * quantity * 2;
+                return (int) 1.5 * income * quantity * 2;
             } else {
                 return income * quantity * 2;
             }
