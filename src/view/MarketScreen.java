@@ -194,7 +194,7 @@ public class MarketScreen {
                     } else if (cropName.equals("Corn")) {
                         cropBox = new HBox(buyCornBtn, cropLabel);
                         buyBox.getChildren().add(cropBox);
-                    } else if (cropName.equals("Rice")){
+                    } else if (cropName.equals("Rice")) {
                         cropBox = new HBox(buyRiceBtn, cropLabel);
                         buyBox.getChildren().add(cropBox);
                     }

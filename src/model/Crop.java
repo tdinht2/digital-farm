@@ -56,8 +56,9 @@ public class Crop {
         this.species = species;
         this.waterLevel = 0;
         this.fertLevel = 0;
-        if (species.getName().equals("Pesticided Corn") || species.getName().equals("Pesticided Rice") ||
-        species.getName().equals("Pesticided Potato")) {
+        if (species.getName().equals("Pesticided Corn")
+                || species.getName().equals("Pesticided Rice")
+                || species.getName().equals("Pesticided Potato")) {
             this.pesticides = true;
         } else {
             this.pesticides = false;
@@ -125,7 +126,7 @@ public class Crop {
      * @param stage int stage of growth
      */
     public void setStage(int stage) {
-        if (stage > 7) {
+        if (stage >= 7) {
             this.stage = 7;
         } else if (stage < 7 && stage >= 0) {
             this.stage = stage;

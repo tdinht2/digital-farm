@@ -41,7 +41,8 @@ public class Market {
      * @param variance an additive number to change the price
      * @return the price of the crop
      */
-    private Integer calculatePrice(int basePrice, int variance) { return basePrice * (4 - difficulty) + variance;
+    private Integer calculatePrice(int basePrice, int variance) {
+        return basePrice * (4 - difficulty) + variance;
     }
 
     /**

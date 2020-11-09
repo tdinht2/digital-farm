@@ -44,10 +44,10 @@ public class TestCrop {
 
     @Test
     public void testGrowAlreadyMaturePlant() {
-        Crop rice = new Crop(3, Crop.Type.Rice);
+        Crop rice = new Crop(7, Crop.Type.Rice);
         rice.water();
         rice.grow();
-        Assert.assertEquals(3, rice.getStage());
+        Assert.assertEquals(7, rice.getStage());
         Assert.assertEquals(0, rice.getWaterLevel());
     }
 

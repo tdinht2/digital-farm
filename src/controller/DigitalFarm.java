@@ -234,63 +234,69 @@ public class DigitalFarm extends Application {
                 }
             });
 
-
             plotsBtn[i].setOnAction(e -> {
-                switch (plotsBtn[finalI].getText()) {
-                case "Potato":
-                    if (player.addItem(new Crop(7, Crop.Type.Potato), 1)) {
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-                    }
-                    break;
-                case "Pesticided Potato":
-                    if (player.addItem(new Crop(7, Crop.Type.PesticidedPotato), 1)) {
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-                    }
-                    break;
-                case "Corn":
-                    if (player.addItem(new Crop(7, Crop.Type.Corn), 1)) {
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-                    }
-                    break;
-                case "Pesticided Corn":
-                    if (player.addItem(new Crop(7, Crop.Type.PesticidedCorn), 1)) {
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-                    }
-                    break;
-                case "Rice":
-                    if (player.addItem(new Crop(7, Crop.Type.Rice), 1)) {
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-                    }
-                    break;
-                case "Pesticided Rice":
-                    if (player.addItem(new Crop(7, Crop.Type.PesticidedRice), 1)) {
-                        initUIScreen.setDirt(plotsBtn[finalI]);
-                        farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-                    }
-                    break;
-                case "Dead Plant":
-                    initUIScreen.setDirt(plotsBtn[finalI]);
-                    farm.setCropArray(null, finalI);
-                    refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-                    break;
-                default:
-                    break;
-                }
+                clickOnPlotAction(initUIScreen, plotsBtn, waterBtns, pestBtns, fertBtns, finalI);
             });
+
             Scene scene = initUIScreen.getScene();
             mainWindow.setScene(scene);
             mainWindow.show();
+        }
+    }
+
+    private void clickOnPlotAction(InitialUIScreen initUIScreen, Button[] plotsBtn,
+                                   Button[] waterBtns, Button[] pestBtns, Button[] fertBtns,
+                                   int finalI) {
+        switch (plotsBtn[finalI].getText()) {
+        case "Potato":
+            if (player.addItem(new Crop(7, Crop.Type.Potato), 1)) {
+                initUIScreen.setDirt(plotsBtn[finalI]);
+                farm.setCropArray(null, finalI);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            }
+            break;
+        case "Pesticided Potato":
+            if (player.addItem(new Crop(7, Crop.Type.PesticidedPotato), 1)) {
+                initUIScreen.setDirt(plotsBtn[finalI]);
+                farm.setCropArray(null, finalI);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            }
+            break;
+        case "Corn":
+            if (player.addItem(new Crop(7, Crop.Type.Corn), 1)) {
+                initUIScreen.setDirt(plotsBtn[finalI]);
+                farm.setCropArray(null, finalI);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            }
+            break;
+        case "Pesticided Corn":
+            if (player.addItem(new Crop(7, Crop.Type.PesticidedCorn), 1)) {
+                initUIScreen.setDirt(plotsBtn[finalI]);
+                farm.setCropArray(null, finalI);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            }
+            break;
+        case "Rice":
+            if (player.addItem(new Crop(7, Crop.Type.Rice), 1)) {
+                initUIScreen.setDirt(plotsBtn[finalI]);
+                farm.setCropArray(null, finalI);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            }
+            break;
+        case "Pesticided Rice":
+            if (player.addItem(new Crop(7, Crop.Type.PesticidedRice), 1)) {
+                initUIScreen.setDirt(plotsBtn[finalI]);
+                farm.setCropArray(null, finalI);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            }
+            break;
+        case "Dead Plant":
+            initUIScreen.setDirt(plotsBtn[finalI]);
+            farm.setCropArray(null, finalI);
+            refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            break;
+        default:
+            break;
         }
     }
 
@@ -326,30 +332,7 @@ public class DigitalFarm extends Application {
 
         for (Object key : stock.keySet()) {
             if (key instanceof Item) {
-                Item item = (Item) key;
-                Button buyFertBtn = marketScreen.getBuyFertBtn();
-                Button buyPestBtn = marketScreen.getBuyPestBtn();
-                if (item.getName().equals("Fertilizer")) {
-                    buyFertBtn.setOnAction(e -> {
-                        if (market.buy(player.getMoney(), item, 1,
-                                player.getMaxInventorySpace() - player.getInventoryCount())) {
-                            player.setMoney(player.getMoney() - stock.get(item));
-                            player.addItem(item, 1);
-                            mainWindow.setScene(marketScreen.getScene());
-                        }
-                    });
-                }
-
-                if (item.getName().equals("Pesticide")) {
-                    buyPestBtn.setOnAction(e -> {
-                        if (market.buy(player.getMoney(), item, 1,
-                                player.getMaxInventorySpace() - player.getInventoryCount())) {
-                            player.setMoney(player.getMoney() - stock.get(item));
-                            player.addItem(item, 1);
-                            mainWindow.setScene(marketScreen.getScene());
-                        }
-                    });
-                }
+                createAndHandleItemBtns(market, stock, marketScreen, (Item) key);
             }
             if (key instanceof Crop) {
                 Crop crop = (Crop) key;
@@ -471,6 +454,34 @@ public class DigitalFarm extends Application {
         Scene scene = marketScreen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
+    }
+
+    private void createAndHandleItemBtns(Market market, HashMap<Object, Integer> stock,
+                                         MarketScreen marketScreen, Item key) {
+        Item item = key;
+        Button buyFertBtn = marketScreen.getBuyFertBtn();
+        Button buyPestBtn = marketScreen.getBuyPestBtn();
+        if (item.getName().equals("Fertilizer")) {
+            buyFertBtn.setOnAction(e -> {
+                if (market.buy(player.getMoney(), item, 1,
+                        player.getMaxInventorySpace() - player.getInventoryCount())) {
+                    player.setMoney(player.getMoney() - stock.get(item));
+                    player.addItem(item, 1);
+                    mainWindow.setScene(marketScreen.getScene());
+                }
+            });
+        }
+
+        if (item.getName().equals("Pesticide")) {
+            buyPestBtn.setOnAction(e -> {
+                if (market.buy(player.getMoney(), item, 1,
+                        player.getMaxInventorySpace() - player.getInventoryCount())) {
+                    player.setMoney(player.getMoney() - stock.get(item));
+                    player.addItem(item, 1);
+                    mainWindow.setScene(marketScreen.getScene());
+                }
+            });
+        }
     }
 
 }
