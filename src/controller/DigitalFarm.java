@@ -21,7 +21,7 @@ public class DigitalFarm extends Application {
     private Player player;
     private Farm farm;
     private final int width = 1200;
-    private final int height = 900;
+    private final int height = 1000;
     private int difficulty;
     private Crop startCrop;
 

@@ -5,7 +5,7 @@ import java.util.Random;
 public class Item {
     private static Random rand = new Random();
     public enum MarketItem {
-        Fertilizer("Fertilizer", rand.nextInt(25) + 5),
+        Fertilizer("Fertilizer", rand.nextInt(10) + 5),
         Pesticides("Pesticide", rand.nextInt(10) + 5);
 
         private String name;

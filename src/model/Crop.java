@@ -6,9 +6,9 @@ public class Crop {
         Potato("Potato", rand.nextInt(15) + 5),
         Rice("Rice", rand.nextInt(15) + 5),
         Corn("Corn", rand.nextInt(15) + 5),
-        PesticidedPotato("Pesticided Potato", rand.nextInt(15) + 5),
-        PesticidedRice("Pesticided Rice", rand.nextInt(15) + 5),
-        PesticidedCorn("Pesticided Corn", rand.nextInt(15) + 5);
+        PesticidedPotato("Pesticided Potato", Potato.getBasePrice()),
+        PesticidedRice("Pesticided Rice", Rice.getBasePrice()),
+        PesticidedCorn("Pesticided Corn", Corn.getBasePrice());
 
         private String name;
         private int basePrice;
@@ -56,7 +56,12 @@ public class Crop {
         this.species = species;
         this.waterLevel = 0;
         this.fertLevel = 0;
-        this.pesticides = false;
+        if (species.getName().equals("Pesticided Corn") || species.getName().equals("Pesticided Rice") ||
+        species.getName().equals("Pesticided Potato")) {
+            this.pesticides = true;
+        } else {
+            this.pesticides = false;
+        }
     }
 
 
@@ -149,19 +154,22 @@ public class Crop {
      * @return if the crop successfully grew a stage and is not dead
      */
     public boolean grow() {
-        this.waterLevel--;
-        if (this.waterLevel < 0) {
-            this.stage = 0;
-            return false;
-        }
-        if (this.stage < 7 && this.stage != 0) {
-            if (isFertilized()) {
-                this.fertLevel--;
-                setStage(this.stage + 2);
-                return true;
-            } else {
-                this.stage++;
+        if (this.stage != 0) {
+            this.waterLevel--;
+            if (this.waterLevel < 0) {
+                this.stage = 0;
+                return false;
             }
+            if (this.stage < 7) {
+                if (isFertilized()) {
+                    this.fertLevel--;
+                    setStage(this.stage + 2);
+                    return true;
+                } else {
+                    this.stage++;
+                }
+            }
+            return false;
         }
         return false;
     }
