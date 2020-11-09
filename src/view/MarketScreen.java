@@ -29,6 +29,9 @@ public class MarketScreen {
     private Button sellCornBtn;
     private Button sellRiceBtn;
     private Button backBtn;
+    private Button sellPestCornBtn;
+    private Button sellPestRiceBtn;
+    private Button sellPestPotatoBtn;
 
     private MarketScreen() { }
 
@@ -49,6 +52,16 @@ public class MarketScreen {
         sellCornBtn = new Button("Sell for " + m.sell(new Crop(7, Crop.Type.Corn), 1));
         sellRiceBtn = new Button("Sell for " + m.sell(new Crop(7, Crop.Type.Rice), 1));
         backBtn = new Button("Back");
+
+        Crop pestPotato = new Crop(7, Crop.Type.PesticidedPotato);
+        pestPotato.fertilize();
+        Crop pestCorn = new Crop(7, Crop.Type.PesticidedCorn);
+        pestCorn.fertilize();
+        Crop pestRice = new Crop(7, Crop.Type.PesticidedRice);
+        pestRice.fertilize();
+        sellPestPotatoBtn = new Button("Sell for " + m.sell(pestPotato, 1));
+        sellPestCornBtn = new Button("Sell for " + m.sell(pestCorn, 1));
+        sellPestRiceBtn = new Button("Sell for " + m.sell(pestRice, 1));
     }
 
     public Button getBuyPotatoBtn() {
@@ -87,6 +100,17 @@ public class MarketScreen {
     public Button getBuyPestBtn() {
         return buyPestBtn;
     }
+    public Button getSellPestCornBtn() {
+        return sellPestCornBtn;
+    }
+
+    public Button getSellPestPotatoBtn() {
+        return sellPestPotatoBtn;
+    }
+
+    public Button getSellPestRiceBtn() {
+        return sellPestRiceBtn;
+    }
 
     public Scene getScene() {
         Text marketTitle = new Text("Market");
@@ -118,6 +142,12 @@ public class MarketScreen {
                         sellDisplay.getChildren().addAll(crop, getSellPotatoBtn());
                     } else if (cropName.equals("Rice")) {
                         sellDisplay.getChildren().addAll(crop, getSellRiceBtn());
+                    } else if (cropName.equals("Pesticided Corn")) {
+                        sellDisplay.getChildren().addAll(crop, getSellPestCornBtn());
+                    } else if (cropName.equals("Pesticided Potato")) {
+                        sellDisplay.getChildren().addAll(crop, getSellPestPotatoBtn());
+                    } else if (cropName.equals("Pesticided Rice")) {
+                        sellDisplay.getChildren().addAll(crop, getSellPestRiceBtn());
                     }
                 } else {
                     cropName = c.getSpecies().getName() + " Seed";
@@ -160,12 +190,14 @@ public class MarketScreen {
                 if (crop.getStage() == 1) {
                     if (cropName.equals("Potato")) {
                         cropBox = new HBox(buyPotatoBtn, cropLabel);
+                        buyBox.getChildren().add(cropBox);
                     } else if (cropName.equals("Corn")) {
                         cropBox = new HBox(buyCornBtn, cropLabel);
-                    } else {
+                        buyBox.getChildren().add(cropBox);
+                    } else if (cropName.equals("Rice")){
                         cropBox = new HBox(buyRiceBtn, cropLabel);
+                        buyBox.getChildren().add(cropBox);
                     }
-                    buyBox.getChildren().add(cropBox);
                 }
             }
         }

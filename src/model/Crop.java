@@ -5,7 +5,10 @@ public class Crop {
     public enum Type {
         Potato("Potato", rand.nextInt(15) + 5),
         Rice("Rice", rand.nextInt(15) + 5),
-        Corn("Corn", rand.nextInt(15) + 5);
+        Corn("Corn", rand.nextInt(15) + 5),
+        PesticidedPotato("Pesticided Potato", rand.nextInt(15) + 5),
+        PesticidedRice("Pesticided Rice", rand.nextInt(15) + 5),
+        PesticidedCorn("Pesticided Corn", rand.nextInt(15) + 5);
 
         private String name;
         private int basePrice;

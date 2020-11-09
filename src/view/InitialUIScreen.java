@@ -187,7 +187,11 @@ public class InitialUIScreen {
                     btn.setText("Immature Potato");
                 } else {    // 7, mature
                     btn.setGraphic(new ImageView(potato));
-                    btn.setText("Potato");
+                    if (c.isPesticides()) {
+                        btn.setText("Pesticided Potato");
+                    } else {
+                        btn.setText("Potato");
+                    }
                 }
             } else if (c.getSpecies().getName().equals("Rice")) {
                 if (c.getStage() == 1) {
@@ -198,7 +202,11 @@ public class InitialUIScreen {
                     btn.setText("Immature Rice");
                 } else {    // 7, mature
                     btn.setGraphic(new ImageView(rice));
-                    btn.setText("Rice");
+                    if (c.isPesticides()) {
+                        btn.setText("Pesticided Rice");
+                    } else {
+                        btn.setText("Rice");
+                    }
                 }
             } else if (c.getSpecies().getName().equals("Corn")) {
                 if (c.getStage() == 1) {
@@ -209,7 +217,11 @@ public class InitialUIScreen {
                     btn.setText("Immature Corn");
                 } else {    // 7, mature
                     btn.setGraphic(new ImageView(corn));
-                    btn.setText("Corn");
+                    if (c.isPesticides()) {
+                        btn.setText("Pesticided Corn");
+                    } else {
+                        btn.setText("Corn");
+                    }
                 }
             }
         }

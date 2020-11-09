@@ -53,10 +53,10 @@ public class Market {
      */
     public int sell(Crop crop, int quantity) {
         int income = this.stock.get(crop);
-        if (crop.getStage() == 3) {
+        if (crop.getStage() == 7) {
             // make 2 times the buying price for growing the crop
             if (crop.isPesticides()) {
-                return (int) 1.5 * income * quantity * 2;
+                return (int) (1.5 * income * quantity);
             } else {
                 return income * quantity * 2;
             }
