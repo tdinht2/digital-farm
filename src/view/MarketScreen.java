@@ -81,8 +81,12 @@ public class MarketScreen {
     public Button getBackBtn() {
         return backBtn;
     }
-    public Button getBuyFertBtn() {return buyFertBtn;}
-    public Button getBuyPestBtn() {return buyPestBtn;}
+    public Button getBuyFertBtn() {
+        return buyFertBtn;
+    }
+    public Button getBuyPestBtn() {
+        return buyPestBtn;
+    }
 
     public Scene getScene() {
         Text marketTitle = new Text("Market");
@@ -99,7 +103,7 @@ public class MarketScreen {
             HBox sellDisplay = new HBox();
             if (key instanceof Item) {
                 Item item = (Item) key;
-                Text itemCount = new Text(item.getName() +": " + inventory.get(key));
+                Text itemCount = new Text(item.getName() + ": " + inventory.get(key));
                 sellDisplay.getChildren().add(itemCount);
                 inventoryDisplay.getChildren().add(sellDisplay);
             }

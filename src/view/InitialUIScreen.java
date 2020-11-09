@@ -82,8 +82,12 @@ public class InitialUIScreen {
     public Button[] getWaterBtns() {
         return waterBtns;
     }
-    public Button[] getFertBtns() {return fertBtns;}
-    public Button[] getPestBtns() {return pestBtns;}
+    public Button[] getFertBtns() {
+        return fertBtns;
+    }
+    public Button[] getPestBtns() {
+        return pestBtns;
+    }
 
     public Button getPlantPotatoBtn() {
         return plantPotatoBtn;
@@ -124,24 +128,24 @@ public class InitialUIScreen {
 
     public void setFert(Button btn, Crop c) {
         switch (c.getFertLevel()) {
-            case 0:
-                btn.setGraphic(new ImageView(fertLevel0));
-                btn.setText("Fertilizer 0");
-                break;
-            case 1:
-                btn.setGraphic(new ImageView(fertLevel1));
-                btn.setText("Fertilizer 1");
-                break;
-            case 2:
-                btn.setGraphic(new ImageView(fertLevel2));
-                btn.setText("Fertilizer 2");
-                break;
-            case 3:
-                btn.setGraphic(new ImageView(fertLevel3));
-                btn.setText("Fertilizer 3");
-                break;
-            default:
-                break;
+        case 0:
+            btn.setGraphic(new ImageView(fertLevel0));
+            btn.setText("Fertilizer 0");
+            break;
+        case 1:
+            btn.setGraphic(new ImageView(fertLevel1));
+            btn.setText("Fertilizer 1");
+            break;
+        case 2:
+            btn.setGraphic(new ImageView(fertLevel2));
+            btn.setText("Fertilizer 2");
+            break;
+        case 3:
+            btn.setGraphic(new ImageView(fertLevel3));
+            btn.setText("Fertilizer 3");
+            break;
+        default:
+            break;
         }
     }
 
@@ -288,8 +292,9 @@ public class InitialUIScreen {
             }
         }
 
-        VBox initialFarm = new VBox(moneyText, dayText, plotRow1,pestRow1,fertRow1, waterRow1, plotRow2,
-                pestRow2,fertRow2, waterRow2, inventoryDisplay, plantBtns, marketBtn, timeBtn);
+        VBox initialFarm = new VBox(moneyText, dayText, plotRow1, pestRow1, fertRow1,
+                waterRow1, plotRow2, pestRow2, fertRow2, waterRow2, inventoryDisplay,
+                plantBtns, marketBtn, timeBtn);
 
         return new Scene(initialFarm, width, height);
     }

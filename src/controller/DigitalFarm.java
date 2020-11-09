@@ -1,7 +1,6 @@
 package controller;
 
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -148,30 +147,30 @@ public class DigitalFarm extends Application {
         Button timeBtn = initUIScreen.getTimeBtn();
         timeBtn.setOnAction(e -> {
             farm.nextDay();
-            refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+            refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             Alert event = new Alert(Alert.AlertType.INFORMATION);
             event.setTitle("Event");
             switch (farm.getEventGenerated().name()) {
-                case "Rain":
-                    event.setHeaderText("It has rained!");
-                    event.setGraphic(new ImageView(new Image("rain.jpg")));
-                    event.show();
-                    break;
-                case "Locust":
-                    event.setHeaderText("Locusts have attacked your crops!");
-                    event.setGraphic(new ImageView(new Image("locust.jpg")));
-                    event.show();
-                    break;
-                case "Drought":
-                    event.setHeaderText("A drought has occurred!");
-                    event.setGraphic(new ImageView(new Image("drought.jpg")));
-                    event.show();
-                    break;
-                default:
-                    break;
+            case "Rain":
+                event.setHeaderText("It has rained!");
+                event.setGraphic(new ImageView(new Image("rain.jpg")));
+                event.show();
+                break;
+            case "Locust":
+                event.setHeaderText("Locusts have attacked your crops!");
+                event.setGraphic(new ImageView(new Image("locust.jpg")));
+                event.show();
+                break;
+            case "Drought":
+                event.setHeaderText("A drought has occurred!");
+                event.setGraphic(new ImageView(new Image("drought.jpg")));
+                event.show();
+                break;
+            default:
+                break;
             }
             initUIScreen.incrementDay();
-            refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+            refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             mainWindow.setScene(initUIScreen.getScene());
         });
 
@@ -179,7 +178,7 @@ public class DigitalFarm extends Application {
             Crop cornSeed = new Crop(1, Crop.Type.Corn);
             if (farm.plant(cornSeed, player.getInventory().get(cornSeed))) {
                 player.subtractItem(cornSeed, 1);
-                refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             }
         });
 
@@ -187,7 +186,7 @@ public class DigitalFarm extends Application {
             Crop riceSeed = new Crop(1, Crop.Type.Rice);
             if (farm.plant(riceSeed, player.getInventory().get(riceSeed))) {
                 player.subtractItem(riceSeed, 1);
-                refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             }
         });
 
@@ -195,16 +194,16 @@ public class DigitalFarm extends Application {
             Crop potatoSeed = new Crop(1, Crop.Type.Potato);
             if (farm.plant(potatoSeed, player.getInventory().get(potatoSeed))) {
                 player.subtractItem(potatoSeed, 1);
-                refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             }
         });
-        refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
         for (int i = 0; i < plotsBtn.length; i++) {
             int finalI = i;
             waterBtns[i].setOnAction(e -> {
                 if (farm.getCropArray()[finalI] != null) {
                     farm.getCropArray()[finalI].water();
-                    refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                    refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
                 }
             });
 
@@ -214,7 +213,7 @@ public class DigitalFarm extends Application {
                     if (player.getInventory().get(fertilizer) > 0) {
                         if (farm.getCropArray()[finalI].fertilize()) {
                             player.subtractItem(fertilizer, 1);
-                            refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                            refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
                         }
                     }
                 }
@@ -227,7 +226,7 @@ public class DigitalFarm extends Application {
                         if (!farm.getCropArray()[finalI].isPesticides()) {
                             farm.getCropArray()[finalI].addPesticide();
                             player.subtractItem(pesticide, 1);
-                            refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                            refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
                         }
                     }
                 }
@@ -240,27 +239,27 @@ public class DigitalFarm extends Application {
                     if (player.addItem(new Crop(7, Crop.Type.Potato), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
                     }
                     break;
                 case "Corn":
                     if (player.addItem(new Crop(7, Crop.Type.Corn), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
                     }
                     break;
                 case "Rice":
                     if (player.addItem(new Crop(7, Crop.Type.Rice), 1)) {
                         initUIScreen.setDirt(plotsBtn[finalI]);
                         farm.setCropArray(null, finalI);
-                        refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                        refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
                     }
                     break;
                 case "Dead Plant":
                     initUIScreen.setDirt(plotsBtn[finalI]);
                     farm.setCropArray(null, finalI);
-                    refreshPlots(initUIScreen, plotsBtn, waterBtns,fertBtns,pestBtns);
+                    refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
                     break;
                 default:
                     break;
@@ -272,7 +271,8 @@ public class DigitalFarm extends Application {
         }
     }
 
-    private void refreshPlots(InitialUIScreen initUIScreen, Button[] plotsBtn, Button[] waterBtns, Button[] fertBtns, Button[] pestBtns) {
+    private void refreshPlots(InitialUIScreen initUIScreen, Button[] plotsBtn,
+                              Button[] waterBtns, Button[] fertBtns, Button[] pestBtns) {
         for (int i = 0; i < plotsBtn.length; i++) {
             if (farm.getCropArray()[i] != null) {
                 initUIScreen.setPlant(plotsBtn[i], farm.getCropArray()[i]);
