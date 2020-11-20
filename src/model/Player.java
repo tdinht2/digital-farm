@@ -12,6 +12,10 @@ public class Player {
     private int maxInventorySpace;
     private Farm farm;
     private Market market;
+    private int maxHarvest;
+    private int dailyHarvest;
+    private int maxWater;
+    private int dailyWater;
 
     /**
      * Full constructor to create a new main.Player
@@ -28,6 +32,10 @@ public class Player {
         maxInventorySpace = space;
         farm = new Farm(difficulty);
         this.market = market;
+        this.maxHarvest = 5;
+        this.maxWater = 7;
+        this.dailyHarvest = 0;
+        this.dailyWater = 0;
     }
 
     public Player(String n, int m, int difficulty) {
@@ -176,7 +184,10 @@ public class Player {
      * harvests a crop and adds it to the player's inventory
      * @param crop crop to harvest
      */
-    public void harvest(Crop crop) {
+    public boolean harvest(Crop crop) {
+        if (dailyHarvest >= maxHarvest) {
+            return false;
+        }
         if (crop.isFertilized()) {
             if (rand.nextDouble() > .7 && this.getMaxInventorySpace() - this.getInventoryCount() > 1) {
                 this.addItem(crop, 2);
@@ -186,6 +197,72 @@ public class Player {
         } else {
             this.addItem(crop, 1);
         }
+        dailyHarvest++;
+        return true;
 
+    }
+
+    /**
+     * setter for maxharvest
+     * @param harvest new max
+     */
+    public void setMaxHarvest(int harvest) {
+        this.maxHarvest = harvest;
+    }
+
+    /**
+     * getter for max harvest
+     * @return max harvest amount
+     */
+    public int getMaxHarvest() {
+        return maxHarvest;
+    }
+
+    /**
+     * getter for daily harvest
+     * @return amount harvested today
+     */
+    public int getDailyHarvest () {
+        return dailyHarvest;
+    }
+
+    /**
+     * setter for daily harvest
+     * @param harvest new daily harvest amount
+     */
+    public void setDailyHarvest(int harvest) {
+        this.dailyHarvest = harvest;
+    }
+
+    /**
+     * getter for max water amount
+     * @return max water per day amount
+     */
+    public int getMaxWater() {
+        return this.maxWater;
+    }
+
+    /**
+     * setter for max water
+     * @param water new max water amount
+     */
+    public void setMaxWater (int water) {
+        this.maxWater = water;
+    }
+
+    /**
+     * getter for amount watered today
+     * @return amount watered today
+     */
+    public int getDailyWater() {
+        return this.dailyWater;
+    }
+
+    /**
+     * setter for daily water
+     * @param water amount watered today
+     */
+    public void setDailyWater(int water) {
+        this.dailyWater = water;
     }
 }
