@@ -85,6 +85,9 @@ public class Market {
         if (totalCost > currMoney) {
             return false;
         }
+        if (item.equals(new Item(Item.MarketItem.Plot))) { //increase price on every plot purchase
+            stock.put(new Item(Item.MarketItem.Plot), stock.get(new Item(Item.MarketItem.Plot)) + 10);
+        }
         return true;
     }
 
