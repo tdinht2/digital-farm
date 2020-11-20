@@ -189,7 +189,8 @@ public class Player {
             return false;
         }
         if (crop.isFertilized()) {
-            if (rand.nextDouble() > .7 && this.getMaxInventorySpace() - this.getInventoryCount() > 1) {
+            if (rand.nextDouble() > .7 && this.getMaxInventorySpace()
+                    - this.getInventoryCount() > 1) {
                 this.addItem(crop, 2);
             } else {
                 this.addItem(crop, 1);

@@ -16,15 +16,20 @@ public class Farm {
         /**
          * constructor for the enum
          * @param name string representing the name of the random event
+         * @param baseChance double representing the base chance of the event
          */
         RandomEvent(String name, double baseChance) {
             this.name = name;
             this.baseChance = baseChance;
         }
 
-        public String getName() { return this.name; }
+        public String getName() {
+            return this.name;
+        }
 
-        public double getChance() { return this.baseChance; }
+        public double getChance() {
+            return this.baseChance;
+        }
 
         public double newBaseChance(int difficulty) {
             return this.baseChance * difficulty;
@@ -144,7 +149,7 @@ public class Farm {
     private RandomEvent getRandomEvent() {
         double totalWeight = 0.0;
         for (RandomEvent event : RandomEvent.values()) {
-            if(!event.getName().equals("Nothing")) {
+            if (!event.getName().equals("Nothing")) {
                 totalWeight += event.newBaseChance(this.difficulty);
             } else {
                 totalWeight += event.getChance();
@@ -177,7 +182,8 @@ public class Farm {
     private void drought() {
         for (int i = 0; i < this.cropArray.length; i++) {
             if (this.cropArray[i] != null) {
-                this.cropArray[i].setWaterLevel(this.cropArray[i].getWaterLevel() - rand.nextInt(3) + 1);
+                this.cropArray[i].setWaterLevel(this.cropArray[i].getWaterLevel()
+                        - rand.nextInt(3) + 1);
             }
         }
     }

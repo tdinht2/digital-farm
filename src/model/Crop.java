@@ -5,7 +5,10 @@ public class Crop {
     public enum Type {
         Potato("Potato", rand.nextInt(15) + 5),
         Rice("Rice", rand.nextInt(15) + 5),
-        Corn("Corn", rand.nextInt(15) + 5);
+        Corn("Corn", rand.nextInt(15) + 5),
+        PesticidedPotato("Pesticided Potato", Potato.getBasePrice()),
+        PesticidedRice("Pesticided Rice", Rice.getBasePrice()),
+        PesticidedCorn("Pesticided Corn", Corn.getBasePrice());
 
         private String name;
         private int basePrice;
@@ -53,7 +56,13 @@ public class Crop {
         this.species = species;
         this.waterLevel = 0;
         this.fertLevel = 0;
-        this.pesticides = false;
+        if (species.getName().equals("Pesticided Corn")
+                || species.getName().equals("Pesticided Rice")
+                || species.getName().equals("Pesticided Potato")) {
+            this.pesticides = true;
+        } else {
+            this.pesticides = false;
+        }
     }
 
 
@@ -117,7 +126,9 @@ public class Crop {
      * @param stage int stage of growth
      */
     public void setStage(int stage) {
-        if (stage <= 7 && stage >= 0) {
+        if (stage >= 7) {
+            this.stage = 7;
+        } else if (stage < 7 && stage >= 0) {
             this.stage = stage;
         }
     }
@@ -144,19 +155,22 @@ public class Crop {
      * @return if the crop successfully grew a stage and is not dead
      */
     public boolean grow() {
-        this.waterLevel--;
-        if (this.waterLevel < 0) {
-            this.stage = 0;
-            return false;
-        }
-        if (this.stage < 7 && this.stage != 0) {
-            if(isFertilized()) {
-                this.fertLevel--;
-                setStage(this.stage + 2); //account for edge where stage goes too high from growing twice
-                return true;
-            } else {
-                this.stage++;
+        if (this.stage != 0) {
+            this.waterLevel--;
+            if (this.waterLevel < 0) {
+                this.stage = 0;
+                return false;
             }
+            if (this.stage < 7) {
+                if (isFertilized()) {
+                    this.fertLevel--;
+                    setStage(this.stage + 2);
+                    return true;
+                } else {
+                    this.stage++;
+                }
+            }
+            return false;
         }
         return false;
     }
@@ -177,10 +191,11 @@ public class Crop {
 
     /**
      * fertilize this crop up to max of 3 times
+     * @return if crop gets fertilized
      */
     public boolean fertilize() {
-        if (stage!= 0) {
-            if (this.fertLevel > 3) {
+        if (stage != 0) {
+            if (this.fertLevel >= 3) {
                 return false;
             }
             this.fertLevel += 1;
@@ -199,6 +214,7 @@ public class Crop {
 
     /**
      * setter for watered attribute
+     * @param level int representing water level
      */
     public void setWaterLevel(int level) {
         if (stage != 0) {
@@ -238,7 +254,7 @@ public class Crop {
 
     @Override
     public int hashCode() {
-        return 7 * this.getBasePrice() * this.stage + (this.isPesticides()?1:0);
+        return 7 * this.getBasePrice() * this.stage + (this.isPesticides() ? 1 : 0);
     }
 
     @Override

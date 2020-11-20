@@ -11,6 +11,7 @@ public class Item {
         Tractor("Tractor", rand.nextInt(100) + 50),
         Irrigation("Irrigation", rand.nextInt(100) + 50);
 
+
         private String name;
         private int basePrice;
         /**
@@ -43,8 +44,12 @@ public class Item {
         this.item = item;
     }
 
-    public int getBasePrice() { return this.item.getBasePrice(); }
-    public String getName() { return this.item.getName(); }
+    public int getBasePrice() {
+        return this.item.getBasePrice();
+    }
+    public String getName() {
+        return this.item.getName();
+    }
 
     @Override
     public int hashCode() {
@@ -60,8 +65,8 @@ public class Item {
             return false;
         }
         Item newO = (Item) o;
-        return this.getBasePrice() == newO.getBasePrice() &&
-                this.getName() == newO.getName();
+        return this.getBasePrice() == newO.getBasePrice()
+                && this.getName() == newO.getName();
     }
 
 
