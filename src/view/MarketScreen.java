@@ -22,6 +22,9 @@ public class MarketScreen {
     private Button buyRiceBtn;
     private Button buyFertBtn;
     private Button buyPestBtn;
+    private Button buyPlotBtn;
+    private Button buyTractorBtn;
+    private Button buyIrrigationBtn;
     private Button sellPotatoSeedBtn;
     private Button sellCornSeedBtn;
     private Button sellRiceSeedBtn;
@@ -45,6 +48,9 @@ public class MarketScreen {
         buyRiceBtn = new Button("Buy");
         buyFertBtn = new Button("Buy");
         buyPestBtn = new Button("Buy");
+        buyPlotBtn = new Button("Buy");
+        buyTractorBtn = new Button("Buy");
+        buyIrrigationBtn = new Button("Buy");
         sellPotatoSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Potato), 1));
         sellCornSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Corn), 1));
         sellRiceSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Rice), 1));
@@ -100,6 +106,9 @@ public class MarketScreen {
     public Button getBuyPestBtn() {
         return buyPestBtn;
     }
+    public Button getBuyPlotBtn() { return buyPlotBtn; }
+    public Button getBuyTractorBtn() { return buyTractorBtn; }
+    public Button getBuyIrrigationBtn() { return buyIrrigationBtn; }
     public Button getSellPestCornBtn() {
         return sellPestCornBtn;
     }
@@ -176,8 +185,14 @@ public class MarketScreen {
                 HBox itemBox;
                 if (itemName.equals("Fertilizer")) {
                     itemBox = new HBox(buyFertBtn, itemLabel);
-                } else {
+                } else if (itemName.equals("Pesticide")){
                     itemBox = new HBox(buyPestBtn, itemLabel);
+                } else if (itemName.equals("Plot")) {
+                    itemBox = new HBox(buyPlotBtn, itemLabel);
+                } else if (itemName.equals("Tractor")) {
+                    itemBox = new HBox(buyTractorBtn, itemLabel);
+                } else {
+                    itemBox = new HBox(buyIrrigationBtn, itemLabel);
                 }
                 buyBox.getChildren().add(itemBox);
             }

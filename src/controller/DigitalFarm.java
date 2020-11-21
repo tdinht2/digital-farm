@@ -149,6 +149,8 @@ public class DigitalFarm extends Application {
         Button timeBtn = initUIScreen.getTimeBtn();
         timeBtn.setOnAction(e -> {
             farm.nextDay();
+            player.setDailyWater(0);
+            player.setDailyHarvest(0);
             refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             Alert event = new Alert(Alert.AlertType.INFORMATION);
             event.setTitle("Event");
@@ -203,9 +205,14 @@ public class DigitalFarm extends Application {
         for (int i = 0; i < plotsBtn.length; i++) {
             int finalI = i;
             waterBtns[i].setOnAction(e -> {
-                if (farm.getCropArray()[finalI] != null) {
+                if (farm.getCropArray()[finalI] != null && player.getDailyWater() < player.getMaxWater()) {
                     farm.getCropArray()[finalI].water();
+                    player.setDailyWater(player.getDailyWater() + 1);
                     refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+                } else if (player.getDailyWater() >= player.getMaxWater()) {
+                    Alert warning = new Alert(Alert.AlertType.INFORMATION);
+                    warning.setHeaderText("Cannot water more");
+                    warning.show();
                 }
             });
 
@@ -249,45 +256,69 @@ public class DigitalFarm extends Application {
                                    int finalI) {
         switch (plotsBtn[finalI].getText()) {
         case "Potato":
-            if (player.addItem(new Crop(7, Crop.Type.Potato), 1)) {
+            if (player.harvest(new Crop(7, Crop.Type.Potato))) {
                 initUIScreen.setDirt(plotsBtn[finalI]);
                 farm.setCropArray(null, finalI);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            } else {
+                Alert warning = new Alert(Alert.AlertType.INFORMATION);
+                warning.setHeaderText("Cannot harvest more");
+                warning.show();
             }
             break;
         case "Pesticided Potato":
-            if (player.addItem(new Crop(7, Crop.Type.PesticidedPotato), 1)) {
+            if (player.harvest(new Crop(7, Crop.Type.PesticidedPotato))) {
                 initUIScreen.setDirt(plotsBtn[finalI]);
                 farm.setCropArray(null, finalI);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            } else {
+                Alert warning = new Alert(Alert.AlertType.INFORMATION);
+                warning.setHeaderText("Cannot harvest more");
+                warning.show();
             }
             break;
         case "Corn":
-            if (player.addItem(new Crop(7, Crop.Type.Corn), 1)) {
+            if (player.harvest(new Crop(7, Crop.Type.Corn))) {
                 initUIScreen.setDirt(plotsBtn[finalI]);
                 farm.setCropArray(null, finalI);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            } else {
+                Alert warning = new Alert(Alert.AlertType.INFORMATION);
+                warning.setHeaderText("Cannot harvest more");
+                warning.show();
             }
             break;
         case "Pesticided Corn":
-            if (player.addItem(new Crop(7, Crop.Type.PesticidedCorn), 1)) {
+            if (player.harvest(new Crop(7, Crop.Type.PesticidedCorn))) {
                 initUIScreen.setDirt(plotsBtn[finalI]);
                 farm.setCropArray(null, finalI);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            } else {
+                Alert warning = new Alert(Alert.AlertType.INFORMATION);
+                warning.setHeaderText("Cannot harvest more");
+                warning.show();
             }
             break;
         case "Rice":
-            if (player.addItem(new Crop(7, Crop.Type.Rice), 1)) {
+            if (player.harvest(new Crop(7, Crop.Type.Rice))) {
                 initUIScreen.setDirt(plotsBtn[finalI]);
                 farm.setCropArray(null, finalI);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            } else {
+                Alert warning = new Alert(Alert.AlertType.INFORMATION);
+                warning.setHeaderText("Cannot harvest more");
+                warning.show();
             }
             break;
         case "Pesticided Rice":
-            if (player.addItem(new Crop(7, Crop.Type.PesticidedRice), 1)) {
+            if (player.harvest(new Crop(7, Crop.Type.PesticidedRice))) {
                 initUIScreen.setDirt(plotsBtn[finalI]);
                 farm.setCropArray(null, finalI);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+            } else {
+                Alert warning = new Alert(Alert.AlertType.INFORMATION);
+                warning.setHeaderText("Cannot harvest more");
+                warning.show();
             }
             break;
         case "Dead Plant":
@@ -461,6 +492,10 @@ public class DigitalFarm extends Application {
         Item item = key;
         Button buyFertBtn = marketScreen.getBuyFertBtn();
         Button buyPestBtn = marketScreen.getBuyPestBtn();
+        Button buyPlotBtn = marketScreen.getBuyPlotBtn();
+        Button buyTractorBtn = marketScreen.getBuyTractorBtn();
+        Button buyIrrigationBtn = marketScreen.getBuyIrrigationBtn();
+
         if (item.getName().equals("Fertilizer")) {
             buyFertBtn.setOnAction(e -> {
                 if (market.buy(player.getMoney(), item, 1,
@@ -478,6 +513,41 @@ public class DigitalFarm extends Application {
                         player.getMaxInventorySpace() - player.getInventoryCount())) {
                     player.setMoney(player.getMoney() - stock.get(item));
                     player.addItem(item, 1);
+                    mainWindow.setScene(marketScreen.getScene());
+                }
+            });
+        }
+
+        if (item.getName().equals("Plot")) {
+            buyPlotBtn.setOnAction(e -> {
+                if (market.buy(player.getMoney(), item, 1,
+                        player.getMaxInventorySpace() - player.getInventoryCount())) {
+                    player.setMoney(player.getMoney() - stock.get(item));
+                    player.addItem(item, 1);
+                    mainWindow.setScene(marketScreen.getScene());
+                }
+            });
+        }
+
+        if (item.getName().equals("Tractor")) {
+            buyTractorBtn.setOnAction(e -> {
+                if (market.buy(player.getMoney(), item, 1,
+                        player.getMaxInventorySpace() - player.getInventoryCount())) {
+                    player.setMoney(player.getMoney() - stock.get(item));
+                    player.addItem(item, 1);
+                    player.setMaxHarvest(player.getMaxHarvest() + 2);
+                    mainWindow.setScene(marketScreen.getScene());
+                }
+            });
+        }
+
+        if (item.getName().equals("Irrigation")) {
+            buyIrrigationBtn.setOnAction(e -> {
+                if (market.buy(player.getMoney(), item, 1,
+                        player.getMaxInventorySpace() - player.getInventoryCount())) {
+                    player.setMoney(player.getMoney() - stock.get(item));
+                    player.addItem(item, 1);
+                    player.setMaxWater(player.getMaxWater() + 2);
                     mainWindow.setScene(marketScreen.getScene());
                 }
             });

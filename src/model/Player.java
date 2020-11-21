@@ -32,7 +32,7 @@ public class Player {
         maxInventorySpace = space;
         farm = new Farm(difficulty);
         this.market = market;
-        this.maxHarvest = 5;
+        this.maxHarvest = 3;
         this.maxWater = 7;
         this.dailyHarvest = 0;
         this.dailyWater = 0;
