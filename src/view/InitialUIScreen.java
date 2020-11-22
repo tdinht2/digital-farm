@@ -29,7 +29,6 @@ public class InitialUIScreen {
     private Button plantPotatoBtn = new Button("Plant Potato");
     private Button plantRiceBtn = new Button("Plant Rice");
     private Button plantCornBtn = new Button("Plant Corn");
-
     private Image dirt = new Image("dirt_plot.png");
     private Image cornSeed = new Image("seed_plot.png");
     private Image potatoSeed = new Image("seed_plot.png");

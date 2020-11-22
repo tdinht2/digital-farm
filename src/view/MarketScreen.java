@@ -120,6 +120,7 @@ public class MarketScreen {
     public Button getSellPestRiceBtn() {
         return sellPestRiceBtn;
     }
+    public Market getMarket() {return market;}
 
     public Scene getScene() {
         Text marketTitle = new Text("Market");

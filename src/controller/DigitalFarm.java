@@ -7,19 +7,23 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import junit.framework.Test;
 import model.*;
-import view.MarketScreen;
-import view.StartScreen;
-import view.ConfigScreen;
-import view.InitialUIScreen;
+import view.*;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 
 public class DigitalFarm extends Application {
     private Stage mainWindow;
     private Player player;
     private Farm farm;
+    private Market market;
     private final int width = 1200;
     private final int height = 1000;
     private int difficulty;
@@ -33,12 +37,18 @@ public class DigitalFarm extends Application {
     public void start(Stage primaryStage) {
         mainWindow = primaryStage;
         primaryStage.setTitle("Digital Farm");
+        File file = new File("farm_music.mp3");
+        Media music = new Media(file.toURI().toString());
+        MediaPlayer player = new MediaPlayer(music);
+        player.stop();
+        player.play();
         showStartScreen();
     }
 
     private void showStartScreen() {
         StartScreen startScreen = new StartScreen(width, height);
         Button startButton = startScreen.getStartButton();
+
         startButton.setOnAction(e -> {
             goToConfigScreen();
         });
@@ -117,6 +127,7 @@ public class DigitalFarm extends Application {
                 player.addItem(new Item(Item.MarketItem.Fertilizer), 0);
                 player.addItem(new Item(Item.MarketItem.Plot), 0);
                 farm = new Farm(difficulty);
+                market = new Market(difficulty);
                 goToInitialUIScreen();
             }
         });
@@ -135,7 +146,7 @@ public class DigitalFarm extends Application {
         marketBtn.setOnAction(e -> {
             goToMarketScreen();
         });
-
+        int size = 5 + player.getInventory().get(new Item(Item.MarketItem.Plot));
         Button[] plotsBtn = initUIScreen.getPlotsBtn();
         Button[] waterBtns = initUIScreen.getWaterBtns();
         Button[] pestBtns = initUIScreen.getPestBtns();
@@ -150,35 +161,44 @@ public class DigitalFarm extends Application {
         Button timeBtn = initUIScreen.getTimeBtn();
         timeBtn.setOnAction(e -> {
             farm.nextDay();
-            player.setDailyWater(0);
-            player.setDailyHarvest(0);
-            refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-            Alert event = new Alert(Alert.AlertType.INFORMATION);
-            event.setTitle("Event");
-            switch (farm.getEventGenerated().name()) {
-            case "Rain":
-                event.setHeaderText("It has rained!");
-                event.setGraphic(new ImageView(new Image("rain.jpg")));
-                event.show();
-                break;
-            case "Locust":
-                event.setHeaderText("Locusts have attacked your crops!");
-                event.setGraphic(new ImageView(new Image("locust.jpg")));
-                event.show();
-                break;
-            case "Drought":
-                event.setHeaderText("A drought has occurred!");
-                event.setGraphic(new ImageView(new Image("drought.jpg")));
-                event.show();
-                break;
-            default:
-                break;
+            int deathCount = 0;
+            for (int i = 0; i < size; i++) {
+                if (plotsBtn[i].getText().equals("Dead Plant") || plotsBtn[i].getText().equals("dirt")) {
+                    deathCount++;
+                }
             }
-            initUIScreen.incrementDay();
-            refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
-            mainWindow.setScene(initUIScreen.getScene());
+            if ((deathCount == size) && (player.getMoney() < market.lowestPrice())) {
+                goToEndGameScreen();
+            } else {
+                player.setDailyWater(0);
+                player.setDailyHarvest(0);
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+                Alert event = new Alert(Alert.AlertType.INFORMATION);
+                event.setTitle("Event");
+                switch (farm.getEventGenerated().name()) {
+                    case "Rain":
+                        event.setHeaderText("It has rained!");
+                        event.setGraphic(new ImageView(new Image("rain.jpg")));
+                        event.show();
+                        break;
+                    case "Locust":
+                        event.setHeaderText("Locusts have attacked your crops!");
+                        event.setGraphic(new ImageView(new Image("locust.jpg")));
+                        event.show();
+                        break;
+                    case "Drought":
+                        event.setHeaderText("A drought has occurred!");
+                        event.setGraphic(new ImageView(new Image("drought.jpg")));
+                        event.show();
+                        break;
+                    default:
+                        break;
+                }
+                initUIScreen.incrementDay();
+                refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
+                mainWindow.setScene(initUIScreen.getScene());
+            }
         });
-        int size = 5 + player.getInventory().get(new Item(Item.MarketItem.Plot));
         plantCornBtn.setOnAction(e -> {
             Crop cornSeed = new Crop(1, Crop.Type.Corn);
             if (farm.plant(cornSeed, player.getInventory().get(cornSeed), size)) {
@@ -354,7 +374,6 @@ public class DigitalFarm extends Application {
     }
 
     private void goToMarketScreen() {
-        Market market = new Market(difficulty);
         HashMap<Object, Integer> stock = market.getStock();
         MarketScreen marketScreen = new MarketScreen(width, height, player, market);
 
@@ -554,6 +573,16 @@ public class DigitalFarm extends Application {
                 }
             });
         }
+    }
+    private void goToEndGameScreen() {
+        EndGameScreen endGameScreen = new EndGameScreen(width, height);
+        Button startOver = endGameScreen.getStartOverBtn();
+        startOver.setOnAction(e -> {
+            goToConfigScreen();
+        });
+        Scene scene = endGameScreen.getScene();
+        mainWindow.setScene(scene);
+        mainWindow.show();
     }
 
 }

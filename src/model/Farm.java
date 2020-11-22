@@ -134,7 +134,6 @@ public class Farm {
         } else if (event.getName().equals("Locust")) {
             locust();
         }
-
         growAllCrops();
         return this.day;
     }

@@ -6,6 +6,7 @@ public class Market {
     private HashMap<Object, Integer> stock;
     private Random rand = new Random(); //class helper attribute
     private int difficulty; //class helper attribute
+    private int variance = rand.nextInt(10);
 
     /**
      * public constructor to create a market
@@ -22,7 +23,6 @@ public class Market {
     private void initStock() {
         this.stock = new HashMap<Object, Integer>();
         Crop.Type[] crops = Crop.Type.values();
-        int variance = rand.nextInt(10);
         Item.MarketItem[] items = Item.MarketItem.values();
 
         //iterate over all crop types, calculate price, and enter into stock
@@ -89,6 +89,20 @@ public class Market {
             stock.put(new Item(Item.MarketItem.Plot), stock.get(new Item(Item.MarketItem.Plot)) + 10);
         }
         return true;
+    }
+
+    public int lowestPrice() {
+        int lowestPrice = 100;
+        for (Object key : stock.keySet()) {
+            if (key instanceof Crop) {
+                Crop crop = (Crop) key;
+                int testVal = calculatePrice(crop.getBasePrice(), variance);
+                if (testVal < lowestPrice) {
+                    lowestPrice = testVal;
+                }
+            }
+        }
+        return lowestPrice;
     }
 
     /**
