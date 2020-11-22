@@ -35,6 +35,7 @@ public class MarketScreen {
     private Button sellPestCornBtn;
     private Button sellPestRiceBtn;
     private Button sellPestPotatoBtn;
+    private Button buyAirplaneTicketBtn;
 
     private MarketScreen() { }
 
@@ -49,6 +50,7 @@ public class MarketScreen {
         buyFertBtn = new Button("Buy");
         buyPestBtn = new Button("Buy");
         buyPlotBtn = new Button("Buy");
+        buyAirplaneTicketBtn = new Button("Buy");
         buyTractorBtn = new Button("Buy");
         buyIrrigationBtn = new Button("Buy");
         sellPotatoSeedBtn = new Button("Sell for " + m.sell(new Crop(1, Crop.Type.Potato), 1));
@@ -112,11 +114,10 @@ public class MarketScreen {
     public Button getSellPestCornBtn() {
         return sellPestCornBtn;
     }
-
+    public Button getBuyAirplaneTicketBtn() {return buyAirplaneTicketBtn;}
     public Button getSellPestPotatoBtn() {
         return sellPestPotatoBtn;
     }
-
     public Button getSellPestRiceBtn() {
         return sellPestRiceBtn;
     }
@@ -192,8 +193,10 @@ public class MarketScreen {
                     itemBox = new HBox(buyPlotBtn, itemLabel);
                 } else if (itemName.equals("Tractor")) {
                     itemBox = new HBox(buyTractorBtn, itemLabel);
+                } else if (itemName.equals("Irrigation")) {
+                        itemBox = new HBox(buyIrrigationBtn, itemLabel);
                 } else {
-                    itemBox = new HBox(buyIrrigationBtn, itemLabel);
+                    itemBox = new HBox(buyAirplaneTicketBtn, itemLabel);
                 }
                 buyBox.getChildren().add(itemBox);
             }

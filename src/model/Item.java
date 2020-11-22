@@ -9,7 +9,8 @@ public class Item {
         Pesticides("Pesticide", rand.nextInt(10) + 5),
         Plot("Plot", rand.nextInt(150)+ 50),
         Tractor("Tractor", rand.nextInt(100) + 50),
-        Irrigation("Irrigation", rand.nextInt(100) + 50);
+        Irrigation("Irrigation", rand.nextInt(100) + 50),
+        AirplaneTicket("Airplane Ticket", 2000);
 
 
         private String name;

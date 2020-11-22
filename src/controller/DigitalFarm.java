@@ -516,7 +516,16 @@ public class DigitalFarm extends Application {
         Button buyPlotBtn = marketScreen.getBuyPlotBtn();
         Button buyTractorBtn = marketScreen.getBuyTractorBtn();
         Button buyIrrigationBtn = marketScreen.getBuyIrrigationBtn();
+        Button buyAirplaneTicketBtn = marketScreen.getBuyAirplaneTicketBtn();
 
+        if (item.getName().equals("Airplane Ticket")) {
+            buyAirplaneTicketBtn.setOnAction(e -> {
+                if (market.buy(player.getMoney(), item, 1,
+                        player.getMaxInventorySpace() - player.getInventoryCount())) {
+                    goToWinScreen();
+                }
+            });
+        }
         if (item.getName().equals("Fertilizer")) {
             buyFertBtn.setOnAction(e -> {
                 if (market.buy(player.getMoney(), item, 1,
@@ -581,6 +590,13 @@ public class DigitalFarm extends Application {
             goToConfigScreen();
         });
         Scene scene = endGameScreen.getScene();
+        mainWindow.setScene(scene);
+        mainWindow.show();
+    }
+
+    private void goToWinScreen() {
+        WinScreen winGameScreen = new WinScreen(width, height);
+        Scene scene = winGameScreen.getScene();
         mainWindow.setScene(scene);
         mainWindow.show();
     }

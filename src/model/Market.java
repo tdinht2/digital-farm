@@ -24,14 +24,17 @@ public class Market {
         this.stock = new HashMap<Object, Integer>();
         Crop.Type[] crops = Crop.Type.values();
         Item.MarketItem[] items = Item.MarketItem.values();
-
         //iterate over all crop types, calculate price, and enter into stock
         for (int i = 0; i < crops.length; i++) {
             stock.put(new Crop(1, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
             stock.put(new Crop(7, crops[i]), calculatePrice(crops[i].getBasePrice(), variance));
         }
         for (int i = 0; i < items.length; i++) {
-            stock.put(new Item(items[i]), calculatePrice(items[i].getBasePrice(), variance));
+            if (items[i].getName().equals("Airplane Ticket")) {
+                stock.put(new Item(items[i]), items[i].getBasePrice());
+            } else {
+                stock.put(new Item(items[i]), calculatePrice(items[i].getBasePrice(), variance));
+            }
         }
     }
 
