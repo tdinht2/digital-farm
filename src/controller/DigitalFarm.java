@@ -115,6 +115,7 @@ public class DigitalFarm extends Application {
                 player.addItem(new Crop(1, Crop.Type.Rice), 0);
                 player.addItem(new Item(Item.MarketItem.Pesticides), 0);
                 player.addItem(new Item(Item.MarketItem.Fertilizer), 0);
+                player.addItem(new Item(Item.MarketItem.Plot), 0);
                 farm = new Farm(difficulty);
                 goToInitialUIScreen();
             }
@@ -177,10 +178,10 @@ public class DigitalFarm extends Application {
             refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             mainWindow.setScene(initUIScreen.getScene());
         });
-
+        int size = 5 + player.getInventory().get(new Item(Item.MarketItem.Plot));
         plantCornBtn.setOnAction(e -> {
             Crop cornSeed = new Crop(1, Crop.Type.Corn);
-            if (farm.plant(cornSeed, player.getInventory().get(cornSeed))) {
+            if (farm.plant(cornSeed, player.getInventory().get(cornSeed), size)) {
                 player.subtractItem(cornSeed, 1);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             }
@@ -188,7 +189,7 @@ public class DigitalFarm extends Application {
 
         plantRiceBtn.setOnAction(e -> {
             Crop riceSeed = new Crop(1, Crop.Type.Rice);
-            if (farm.plant(riceSeed, player.getInventory().get(riceSeed))) {
+            if (farm.plant(riceSeed, player.getInventory().get(riceSeed), size)) {
                 player.subtractItem(riceSeed, 1);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             }
@@ -196,7 +197,7 @@ public class DigitalFarm extends Application {
 
         plantPotatoBtn.setOnAction(e -> {
             Crop potatoSeed = new Crop(1, Crop.Type.Potato);
-            if (farm.plant(potatoSeed, player.getInventory().get(potatoSeed))) {
+            if (farm.plant(potatoSeed, player.getInventory().get(potatoSeed), size)) {
                 player.subtractItem(potatoSeed, 1);
                 refreshPlots(initUIScreen, plotsBtn, waterBtns, fertBtns, pestBtns);
             }
@@ -333,7 +334,8 @@ public class DigitalFarm extends Application {
 
     private void refreshPlots(InitialUIScreen initUIScreen, Button[] plotsBtn,
                               Button[] waterBtns, Button[] fertBtns, Button[] pestBtns) {
-        for (int i = 0; i < plotsBtn.length; i++) {
+        Item plot = new Item(Item.MarketItem.Plot);
+        for (int i = 0; i < 5 + player.getInventory().get(plot); i++) {
             if (farm.getCropArray()[i] != null) {
                 initUIScreen.setPlant(plotsBtn[i], farm.getCropArray()[i]);
                 initUIScreen.setWater(waterBtns[i], farm.getCropArray()[i]);

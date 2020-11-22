@@ -88,9 +88,9 @@ public class Farm {
         return this.cropArray;
     }
 
-    public boolean plant(Crop c, int n) {
+    public boolean plant(Crop c, int n, int size) {
         if (n > 0) {
-            for (int i = 0; i < this.cropArray.length; i++) {
+            for (int i = 0; i < size; i++) {
                 if (cropArray[i] == null) {
                     cropArray[i] = c;
                     return true;
