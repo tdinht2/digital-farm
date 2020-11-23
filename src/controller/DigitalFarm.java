@@ -28,6 +28,7 @@ public class DigitalFarm extends Application {
     private final int height = 1000;
     private int difficulty;
     private Crop startCrop;
+    private MediaPlayer mediaPlayer;
 
     public static void main(String[] args) {
         launch(args);
@@ -39,9 +40,10 @@ public class DigitalFarm extends Application {
         primaryStage.setTitle("Digital Farm");
         File file = new File("farm_music.mp3");
         Media music = new Media(file.toURI().toString());
-        MediaPlayer player = new MediaPlayer(music);
-        player.stop();
-        player.play();
+        mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.setVolume(0.25);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
         showStartScreen();
     }
 
